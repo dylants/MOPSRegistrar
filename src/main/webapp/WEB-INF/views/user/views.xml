@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+    "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+    
+<tiles-definitions>
+    
+    <definition name="user/home" extends="standardLayout">
+        <put-attribute name="title" value="MOPS Registration Home"/>
+        <put-attribute name="body" value="/WEB-INF/views/user/home.jsp" />
+    </definition>
+
+    <definition name="user/registerUser" extends="standardLayout">
+        <put-attribute name="title" value="Register for MOPS"/>
+        <put-attribute name="body" value="/WEB-INF/views/user/registerUser.jsp" />
+    </definition>
+
+    <definition name="user/registrationSuccess" extends="standardLayout">
+        <put-attribute name="title" value="Registration Success"/>
+        <put-attribute name="body" value="/WEB-INF/views/user/registrationSuccess.jsp" />
+    </definition>
+
+    <definition name="user/listUsers" extends="standardLayout">
+        <put-attribute name="title" value="MOPS Registration List"/>
+        <put-attribute name="body" value="/WEB-INF/views/user/listUsers.jsp" />
+    </definition>
+    
+</tiles-definitions>

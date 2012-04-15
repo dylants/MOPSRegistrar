@@ -31,40 +31,40 @@ public class UserWebController {
      *            Contains information used by the view
      * @return The JSP used to display the home view
      */
-    @RequestMapping(value = "home", method = RequestMethod.GET)
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(Model model) {
         return "user/home";
     }
 
     /**
-     * Displays a view used to add a {@link User}
+     * Displays a view used to register a {@link User}
      * 
      * @param model
      *            Contains information used by the view
-     * @return The JSP used to add the user
+     * @return The JSP used to register the user
      */
-    @RequestMapping(value = "/addUser", method = RequestMethod.GET)
-    public String addUser(Model model) {
+    @RequestMapping(value = "/registerUser", method = RequestMethod.GET)
+    public String registerUser(Model model) {
         User user = new User();
         model.addAttribute("user", user);
-        return "user/addUser";
+        return "user/registerUser";
     }
 
     /**
-     * Processes the add user request, adding the user and displaying a view based on the result of the add.
+     * Processes the register user request, registering the user and displaying a view based on the result.
      * 
      * @param user
-     *            The {@link User} to add
+     *            The {@link User} to register
      * @param model
      *            Contains information used by the view
      * @return The JSP used to display the next page
      */
-    @RequestMapping(value = "/processAddUser", method = RequestMethod.PUT)
+    @RequestMapping(value = "/processRegisterUser", method = RequestMethod.PUT)
     public String processAddUser(@ModelAttribute("user") User user, Model model) {
         // TODO what happens if this fails?
         this.userService.addUser(user);
         model.addAttribute("user", user);
-        return "user/userAddSuccess";
+        return "user/registrationSuccess";
     }
 
     /**
