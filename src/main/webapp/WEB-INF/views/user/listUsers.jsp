@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-    <div id="main">
+    <div id="list">
     	<div>
     
     		<c:if test="${empty users}">

@@ -7,32 +7,37 @@
 </head>
 
 <body>
-    <!-- header -->
-    <div id="menu">
-        <div id="menu_list">
-            <a href="home">Home</a>
-            <a href="registerUser">Register</a> 
-            <a href="listUsers">Listing</a> 
-            <a href="#">Search</a>
-            <a href="#">Contact Us</a>
+    <div id="container">
+        <!-- header -->
+        <div id="header">
+            <strong><tiles:getAsString name="title"/></strong>
+            <div id="toc">
+                <div id="toc_items">
+                    <span id="toc_item"> <a href="home">Home</a> </span>
+                    <span id="toc_item"> <a href="registerUser">Register</a> </span>
+                    <span id="toc_item"> <a href="listUsers">Listing</a> </span>
+                    <span id="toc_item"> <a href="#">Search</a> </span>
+                    <span id="toc_item"> <a href="#">Contact Us</a> </span>
+                </div>
+            </div>
         </div>
+        <!--end header -->
+    
+        <!-- main -->
+        <div id="main">
+            <tiles:insertAttribute name="body"/>
+        </div>
+        <!-- end main -->
+    
+        <!-- footer -->
+        <div id="footer">
+            <div id="left_footer">
+            </div>
+            <div id="right_footer">
+            </div>
+        </div>
+        <!-- end footer -->
     </div>
-    <!--end header -->
-
-    <!-- main -->
-    <tiles:insertAttribute name="body"/>
-    <!-- end main -->
-
-    <!-- footer -->
-    <div id="footer">
-        <div id="left_footer">
-            MOPS Registrar
-        </div>
-        <div id="right_footer">
-            &copy; Copyright 2009 <b>Your Website</b>
-        </div>
-    </div>
-    <!-- end footer -->
 
 </body>
 </html>

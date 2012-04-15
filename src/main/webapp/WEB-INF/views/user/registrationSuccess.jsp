@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page session="false"%>
 
-    <div id="main">
+    <div id="registerSuccess">
         <div>
     
         	<h1>Congratulations ${user.firstName}, you have signed up!</h1>
