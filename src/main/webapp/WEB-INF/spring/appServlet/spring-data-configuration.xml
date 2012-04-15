@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p" xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd">
+
+    <!-- Default bean name is 'mongo' -->
+    <mongo:mongo host="localhost" port="27017" />
+
+    <!-- MongoDB template used to interact with the database -->
+    <bean id="usersDBMongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg ref="mongo" />
+        <constructor-arg name="databaseName" value="usersdb" />
+    </bean>
+
+    <!-- The user repository -->
+    <mongo:repositories base-package="com.mops.registrar.repositories.user" mongo-template-ref="usersDBMongoTemplate"
+        create-query-indexes="true">
+        <mongo:repository id="userRepository" custom-impl-ref="customUserRepository"
+            mongo-template-ref="usersDBMongoTemplate" create-query-indexes="true" />
+    </mongo:repositories>
+
+    <!-- Additional custom queries for the user repository -->
+    <bean id="customUserRepository" class="com.mops.registrar.repositories.user.impl.CustomUserRepositoryImpl" />
+
+</beans>
