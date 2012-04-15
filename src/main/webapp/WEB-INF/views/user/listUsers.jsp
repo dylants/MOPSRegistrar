@@ -32,5 +32,8 @@
 
 	</div>
 
+
+    <a href="home">Return to Registration Home</a>
+
 </body>
 </html>

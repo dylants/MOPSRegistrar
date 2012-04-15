@@ -3,10 +3,10 @@
 <%@ page session="false"%>
 <html>
 <head>
-<title>User</title>
+<title>Register</title>
 </head>
 <body>
-	<h1>Welcome! Please sign up</h1>
+	<h1>Welcome! Please register</h1>
 
 	<form:form modelAttribute="user" action="processAddUser" method="put">
 		<table>
@@ -23,10 +23,11 @@
 				<td><form:input path="lastName" /></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="Save Changes" /></td>
+				<td colspan="2"><input type="submit" value="Register" /></td>
 			</tr>
 		</table>
 	</form:form>
 
+	<a href="home">Cancel Registration</a>
 </body>
 </html>

@@ -25,6 +25,18 @@ public class UserWebController {
     private UserService userService = null;
 
     /**
+     * Displays the {@link User} home page
+     * 
+     * @param model
+     *            Contains information used by the view
+     * @return The JSP used to display the home view
+     */
+    @RequestMapping(value = "home", method = RequestMethod.GET)
+    public String home(Model model) {
+        return "user/home";
+    }
+
+    /**
      * Displays a view used to add a {@link User}
      * 
      * @param model

@@ -6,5 +6,8 @@
 </head>
 <body>
 	<h1>Congratulations ${user.firstName}, you have signed up!</h1>
+
+    <a href="home">Return to Registration Home</a>
+
 </body>
 </html>
