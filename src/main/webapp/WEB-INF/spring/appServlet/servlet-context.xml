@@ -22,7 +22,6 @@
     <beans:bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
 
     <beans:import resource="spring-webmvc-context.xml"/>
-    <beans:import resource="spring-data-configuration.xml" />
     <beans:import resource="spring-app-configuration.xml" />
 
 </beans:beans>
