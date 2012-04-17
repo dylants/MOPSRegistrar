@@ -60,7 +60,7 @@ public class UserWebController {
      * @return The JSP used to display the next page
      */
     @RequestMapping(value = "/processRegisterUser", method = RequestMethod.PUT)
-    public String processAddUser(@ModelAttribute("user") User user, Model model) {
+    public String processRegisterUser(@ModelAttribute("user") User user, Model model) {
         // TODO what happens if this fails?
         this.userService.addUser(user);
         model.addAttribute("user", user);
