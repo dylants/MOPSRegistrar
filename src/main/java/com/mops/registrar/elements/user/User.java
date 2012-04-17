@@ -3,15 +3,19 @@ package com.mops.registrar.elements.user;
 import org.springframework.data.annotation.Id;
 
 /**
- * Represents a simple user
+ * A User contains one unique ID field (the email address) along with a password, and first and last name. The User also
+ * has an associated RegistrationInformation object, which contains additional data collected during the registration
+ * process.
  * 
  */
 public class User {
 
     @Id
-    private String userName = null;
+    private String emailAddress = null;
+    private String password = null;
     private String firstName = null;
     private String lastName = null;
+    private RegistrationInformation registrationInformation = null;
 
     /**
      * Constructs an empty {@link User}
@@ -22,32 +26,52 @@ public class User {
     /**
      * Constructs a {@link User}
      * 
-     * @param userName
-     *            The user's uniquely identifiable "user name"
+     * @param emailAddress
+     *            The user's uniquely identifiable email address
+     * @param password
+     *            The user's password to this site
      * @param firstName
      *            The user's first name
      * @param lastName
      *            The user's last name
      */
-    public User(String userName, String firstName, String lastName) {
-        this.userName = userName;
+    public User(String emailAddress, String password, String firstName, String lastName) {
+        this.emailAddress = emailAddress;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
     /**
-     * @return the userName
+     * @return the emailAddress
      */
-    public String getUserName() {
-        return userName;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
     /**
-     * @param userName
-     *            the userName to set
+     * @param emailAddress
+     *            the emailAddress to set
      */
-    public void setUserName(String userId) {
-        this.userName = userId;
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    /**
+     * Returns the password, encoded
+     * 
+     * @return The password encoded.
+     */
+    public String getPassword() {
+        return this.password;
+    }
+
+    /**
+     * @param password
+     *            the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     /**
@@ -80,8 +104,24 @@ public class User {
         this.lastName = lastName;
     }
 
+    /**
+     * @return the registrationInformation
+     */
+    public RegistrationInformation getRegistrationInformation() {
+        return registrationInformation;
+    }
+
+    /**
+     * @param registrationInformation
+     *            the registrationInformation to set
+     */
+    public void setRegistrationInformation(RegistrationInformation registrationInformation) {
+        this.registrationInformation = registrationInformation;
+    }
+
     @Override
     public String toString() {
-        return "User userName: " + this.userName + " firstName: " + this.firstName + " lastName: " + this.lastName;
+        return "User emailAddress: " + this.emailAddress + " firstName: " + this.firstName + " lastName: "
+                + this.lastName;
     }
 }

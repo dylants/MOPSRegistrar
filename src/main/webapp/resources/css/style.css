@@ -24,17 +24,12 @@ a:active {
 
 body {
     font-family: 'Tahoma', sans-serif;
+    background-image: url(../img/bg_header.png);
+    background-repeat: repeat-x;
 }
 
 #header {
-    background: url(../img/bg_header.png) repeat-x center;
     text-align: center;
-    font-family: 'Tahoma', sans-serif;
-    height: 100px;
-    margin-top: -20px;
-    margin-right: -20px;
-    margin-left: -30px;
-    padding: 20px;
 }
 
 #header strong {
@@ -59,7 +54,24 @@ body {
     text-align: center;
 }
 
+#main th,td {
+    padding: 10px;
+}
+
 #main li {
     list-style: none;
     padding-right:20px;
+}
+
+/* page specific css */
+#home_links a {
+    padding: 10px;
+}
+
+#register_form {
+    padding-left: 500px;
+}
+
+#register_form .longText {
+    width: 210px;
 }

@@ -10,6 +10,12 @@ import org.springframework.data.mongodb.core.query.Query;
 import com.mops.registrar.elements.user.User;
 import com.mops.registrar.repositories.user.CustomUserRepository;
 
+/**
+ * Implements the {@link CustomUserRepository}
+ * 
+ * @author dylants
+ * 
+ */
 public class CustomUserRepositoryImpl implements CustomUserRepository {
 
     @Autowired

@@ -9,6 +9,8 @@ import com.mops.registrar.services.user.UserService;
 /**
  * Local in-memory {@link UserService} using a simple {@link ArrayList} to store the {@link User}s
  * 
+ * @author dylants
+ * 
  */
 public class LocalUserService implements UserService {
 
@@ -18,11 +20,11 @@ public class LocalUserService implements UserService {
         return this.users;
     }
 
-    public User getUser(String userName) {
+    public User getUser(String emailAddress) {
         User returnUser = null;
 
         for (User user : this.users) {
-            if (user.getUserName().equals(userName)) {
+            if (user.getEmailAddress().equals(emailAddress)) {
                 returnUser = user;
             }
         }
