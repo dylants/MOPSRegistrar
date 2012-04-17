@@ -2,12 +2,6 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-    <!-- <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
-    <!-- <beans:property name="prefix" value="/WEB-INF/views/" /> -->
-    <!-- <beans:property name="suffix" value=".jsp" /> -->
-    <!-- </beans:bean> -->
-
     <!-- Resolves logical view names returned by Controllers to Tiles; a view name to resolve is treated as the name of a 
         tiles definition -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
@@ -23,4 +17,12 @@
         </property>
     </bean>
 
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename">
+            <list>
+                <value>messages/errors</value>
+            </list>
+        </property>
+    </bean>
+    
 </beans>
