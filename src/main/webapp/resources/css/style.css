@@ -75,3 +75,15 @@ body {
 #register_form .longText {
     width: 210px;
 }
+
+#register_form a:hover {
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+
+#register_form a:active {
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}

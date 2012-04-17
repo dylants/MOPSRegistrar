@@ -2,7 +2,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
     <div id="register">
-        <div>
     
     	<h1>Welcome! Please register</h1>
 
@@ -46,14 +45,15 @@
                         <td><form:input path="registrationInformation.address.zipCode" cssClass="longText" /></td>
                     </tr>
         			<tr>
-        				<td colspan="2"><input type="submit" value="Register" /></td>
+        				<td><input type="submit" value="Register" /></td>
+        				<td>
+	                        <a href="home">
+	                           <input type="button" value="Cancel"/>
+	                        </a>
+	                    </td>
         			</tr>
         		</table>
         	</form:form>
         </div>
     
-        </div>
-
-    	<a href="home">Cancel Registration</a>
-
     </div>
