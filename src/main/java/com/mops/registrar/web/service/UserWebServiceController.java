@@ -43,7 +43,7 @@ public class UserWebServiceController {
      *            The {@link User}'s email address
      * @return The {@link User} found, else {@literal null}
      */
-    @RequestMapping(value = "/user/{emailAddress}", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/{emailAddress:.+}", method = RequestMethod.GET)
     @ResponseBody
     public User getUser(@PathVariable("emailAddress") String userName) {
         return this.userService.getUser(userName);
