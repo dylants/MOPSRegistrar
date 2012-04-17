@@ -6,19 +6,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mops.registrar.elements.user.User;
 import com.mops.registrar.repositories.user.UserRepository;
+import com.mops.registrar.security.CryptUtil;
 import com.mops.registrar.services.user.UserService;
 
+/**
+ * Persistent based {@link UserService} which utilizes the {@link UserRepository}
+ * 
+ * @author dylants
+ * 
+ */
 public class DatabaseUserService implements UserService {
 
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private CryptUtil cryptUtil;
+
     public List<User> getUsers() {
         return this.userRepository.findAll();
     }
 
-    public User getUser(String userName) {
-        return this.userRepository.findByUserName(userName);
+    public User getUser(String emailAddress) {
+        return this.userRepository.findByEmailAddress(emailAddress);
     }
 
     public User getUser(String firstName, String lastName) {
@@ -33,6 +43,11 @@ public class DatabaseUserService implements UserService {
     }
 
     public void addUser(User user) {
+        // always remember to encode the password prior to writing it to the database
+        String password = user.getPassword();
+        String encodedPassword = this.cryptUtil.encode(password);
+        user.setPassword(encodedPassword);
+
         this.userRepository.save(user);
     }
 
@@ -49,5 +64,20 @@ public class DatabaseUserService implements UserService {
      */
     public void setUserRepository(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    /**
+     * @return the cryptUtil
+     */
+    public CryptUtil getCryptUtil() {
+        return cryptUtil;
+    }
+
+    /**
+     * @param cryptUtil
+     *            the cryptUtil to set
+     */
+    public void setCryptUtil(CryptUtil cryptUtil) {
+        this.cryptUtil = cryptUtil;
     }
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,16 +19,16 @@ import com.mops.registrar.services.user.UserService;
  * 
  * @author dylants
  */
-@RequestMapping(value = "service/user")
+@RequestMapping(value = "/service")
 @Controller
 public class UserWebServiceController {
     @Autowired
     private UserService userService = null;
 
     /**
-     * Returns all users available
+     * Returns all {@link User}s available
      * 
-     * @return all users available
+     * @return all {@link User}s available
      */
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     @ResponseBody
@@ -35,15 +37,15 @@ public class UserWebServiceController {
     }
 
     /**
-     * Returns the {@link User} found by <code>userName</code>
+     * Returns the {@link User} found by <code>emailAddress</code>
      * 
-     * @param userName
-     *            The {@link User}s user name
+     * @param emailAddress
+     *            The {@link User}'s email address
      * @return The {@link User} found, else {@literal null}
      */
-    @RequestMapping(value = "/userName", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/{emailAddress}", method = RequestMethod.GET)
     @ResponseBody
-    public User getUser(@RequestParam("userName") String userName) {
+    public User getUser(@PathVariable("emailAddress") String userName) {
         return this.userService.getUser(userName);
     }
 
@@ -65,19 +67,13 @@ public class UserWebServiceController {
     /**
      * Adds a {@link User} to our {@link UserService}
      * 
-     * @param userName
-     *            The user's user name
-     * @param firstName
-     *            The user's first name
-     * @param lastName
-     *            The user's last name
+     * @param user
+     *            The {@link User} to add
      * @return The constructed {@link User}
      */
-    @RequestMapping(value = "/add", method = RequestMethod.PUT)
+    @RequestMapping(value = "/user", method = RequestMethod.PUT)
     @ResponseBody
-    public User addUser(@RequestParam("userName") String userName, @RequestParam("firstName") String firstName,
-            @RequestParam("lastName") String lastName) {
-        User user = new User(userName, firstName, lastName);
+    public User addUser(@RequestBody User user) {
         this.userService.addUser(user);
         return user;
     }

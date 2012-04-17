@@ -3,16 +3,14 @@
     <div id="home">
     
         <h1>
-            <strong>MOPS Registration</strong>
+            <strong>Welcome to MOPS registration!</strong>
         </h1>
     
-        <p>Welcome to the MOPS registration page. Here you can register as a new user, list existing users, and more.</p>
-    
-        <h1>What would you like to do?</h1>
-    
-        <ul>
-            <li><a href="registerUser">Register a User</a></li>
-            <li><a href="listUsers">List Users</a></li>
-        </ul>
+        <p>If you're an existing user, please login by clicking the link below.  Otherwise please register as a new user.</p>
+
+        <div id="home_links">    
+            <a href="#">Login as an Existing User</a>
+            <a href="registerUser">New User Registration</a>
+        </div>
     
     </div>

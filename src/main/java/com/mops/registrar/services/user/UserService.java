@@ -3,9 +3,12 @@ package com.mops.registrar.services.user;
 import java.util.List;
 
 import com.mops.registrar.elements.user.User;
+import com.mops.registrar.repositories.user.UserRepository;
 
 /**
- * Simple service for accessing {@link User}s
+ * Provides methods for interacting with the {@link User} through the {@link UserRepository}
+ * 
+ * @author dylants
  * 
  */
 public interface UserService {
@@ -18,13 +21,13 @@ public interface UserService {
     public List<User> getUsers();
 
     /**
-     * Returns the {@link User} with the given <code>userName</code>, or {@literal null} if none found.
+     * Returns the {@link User} with the given <code>emailAddress</code>, or {@literal null} if none found.
      * 
-     * @param userName
-     *            The {@link User}s user name
+     * @param emailAddress
+     *            The {@link User}'s email address
      * @return The {@link User} if found, else {@literal null}
      */
-    public User getUser(String userName);
+    public User getUser(String emailAddress);
 
     /**
      * Returns the {@link User} specified by the <code>firstName</code> and <code>lastName</code>, or {@literal null} if

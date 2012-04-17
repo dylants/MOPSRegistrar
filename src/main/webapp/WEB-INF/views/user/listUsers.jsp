@@ -10,13 +10,13 @@
     		<c:if test="${not empty users}">
     			<table>
     				<tr>
-    					<th>User Name</th>
+    					<th>Email Address</th>
     					<th>First Name</th>
     					<th>Last Name</th>
     				</tr>
     				<c:forEach var="user" items="${users}">
     					<tr>
-    						<td>${user.userName}</td>
+    						<td>${user.emailAddress}</td>
     						<td>${user.firstName}</td>
     						<td>${user.lastName}</td>
     					</tr>
