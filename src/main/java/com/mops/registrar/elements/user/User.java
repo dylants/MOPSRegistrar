@@ -15,6 +15,7 @@ public class User {
     private String password = null;
     private String firstName = null;
     private String lastName = null;
+    private RegistrationInformation registrationInformation = null;
 
     /**
      * Constructs an empty {@link User}
@@ -101,6 +102,21 @@ public class User {
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    /**
+     * @return the registrationInformation
+     */
+    public RegistrationInformation getRegistrationInformation() {
+        return registrationInformation;
+    }
+
+    /**
+     * @param registrationInformation
+     *            the registrationInformation to set
+     */
+    public void setRegistrationInformation(RegistrationInformation registrationInformation) {
+        this.registrationInformation = registrationInformation;
     }
 
     @Override

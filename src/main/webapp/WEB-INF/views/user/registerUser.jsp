@@ -25,6 +25,26 @@
                         <td>Password:</td>
                         <td><form:password path="password" cssClass="longText" /></td>
                     </tr>
+                    <tr>
+                        <td>Home Address:</td>
+                        <td><form:input path="registrationInformation.address.homeAddress1" cssClass="longText" /></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><form:input path="registrationInformation.address.homeAddress2" cssClass="longText" /></td>
+                    </tr>
+                    <tr>
+                        <td>City:</td>
+                        <td><form:input path="registrationInformation.address.city" cssClass="longText" /></td>
+                    </tr>
+                    <tr>
+                        <td>State:</td>
+                        <td><form:input path="registrationInformation.address.state" cssClass="longText" /></td>
+                    </tr>
+                    <tr>
+                        <td>Zip Code:</td>
+                        <td><form:input path="registrationInformation.address.zipCode" cssClass="longText" /></td>
+                    </tr>
         			<tr>
         				<td colspan="2"><input type="submit" value="Register" /></td>
         			</tr>
