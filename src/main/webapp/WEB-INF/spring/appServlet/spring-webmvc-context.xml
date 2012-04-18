@@ -19,10 +19,8 @@
 
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename">
-            <list>
-                <value>messages/errors</value>
-            </list>
+            <value>messages/errors</value>
         </property>
     </bean>
-    
+
 </beans>

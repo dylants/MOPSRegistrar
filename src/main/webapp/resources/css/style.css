@@ -69,11 +69,23 @@ body {
 }
 
 #register_form {
-    padding-left: 500px;
+    padding-left: 430px;
+}
+
+#register_form .error {
+    color: #ff0000;
+}
+
+#register_form .registerButton {
+    text-align: right;
+}
+
+#register_form .cancelButton {
+    text-align: center;
 }
 
 #register_form .longText {
-    width: 210px;
+    width: 180px;
 }
 
 #register_form a:hover {

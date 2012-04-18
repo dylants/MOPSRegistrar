@@ -1,6 +1,10 @@
 package com.mops.registrar.elements.user;
 
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 
 /**
  * A User contains one unique ID field (the email address) along with a password, and first and last name. The User also
@@ -11,36 +15,19 @@ import org.springframework.data.annotation.Id;
 public class User {
 
     @Id
+    @NotBlank
+    @Pattern(regexp = ".+@.+\\.[a-z]+")
     private String emailAddress = null;
+    @NotBlank
     private String password = null;
+    @Transient
+    @NotBlank
+    private String confirmPassword = null;
+    @NotBlank
     private String firstName = null;
+    @NotBlank
     private String lastName = null;
     private RegistrationInformation registrationInformation = null;
-
-    /**
-     * Constructs an empty {@link User}
-     */
-    public User() {
-    }
-
-    /**
-     * Constructs a {@link User}
-     * 
-     * @param emailAddress
-     *            The user's uniquely identifiable email address
-     * @param password
-     *            The user's password to this site
-     * @param firstName
-     *            The user's first name
-     * @param lastName
-     *            The user's last name
-     */
-    public User(String emailAddress, String password, String firstName, String lastName) {
-        this.emailAddress = emailAddress;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
 
     /**
      * @return the emailAddress
@@ -72,6 +59,21 @@ public class User {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    /**
+     * @return the confirmPassword
+     */
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    /**
+     * @param confirmPassword
+     *            the confirmPassword to set
+     */
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     /**

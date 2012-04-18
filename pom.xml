@@ -71,6 +71,18 @@
             </exclusions>           
         </dependency>
 
+        <!-- Validator -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>${validation-api-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate-validator-version}</version>
+        </dependency>
+
         <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -153,6 +165,8 @@
         <jsp-api-version>2.1</jsp-api-version>
         <jstl-version>1.2</jstl-version>
         <junit-version>4.7</junit-version>
+        <validation-api-version>1.0.0.GA</validation-api-version>
+        <hibernate-validator-version>4.2.0.Final</hibernate-validator-version>
     </properties>
 
 </project>
