@@ -9,7 +9,7 @@
 <body>
     <!-- header -->
     <div id="header">
-        <strong><tiles:getAsString name="title"/></strong>
+        <strong>MOPS Registration</strong>
         <div id="toc">
             <div id="toc_items">
                 <span id="toc_item"> <a href="home">Home</a> </span>

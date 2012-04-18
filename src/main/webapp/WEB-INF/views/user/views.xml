@@ -11,7 +11,6 @@
     </definition>
 
     <definition name="user/userForm" extends="standardLayout">
-        <put-attribute name="title" value="Register for MOPS"/>
         <put-attribute name="body" value="/WEB-INF/views/user/userForm.jsp" />
     </definition>
 

@@ -2,8 +2,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <c:choose>
-    <c:when test="${user['new']}"><c:set var="method" value="post"/></c:when>
-    <c:otherwise><c:set var="method" value="put"/></c:otherwise>
+    <c:when test="${user['new']}">
+        <c:set var="method" value="post"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var="method" value="put"/>
+    </c:otherwise>
 </c:choose>
 
 	<div id="userForm">

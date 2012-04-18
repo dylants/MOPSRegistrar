@@ -72,6 +72,9 @@ public class RegisterUserController {
         // first cover binding errors (invalid input)
         if (bindingResult.hasErrors()) {
             // return them back to the registration page
+            model.addAttribute("user", user);
+            model.addAttribute("heading", "Welcome! Please register");
+            model.addAttribute("submitButtonText", "Register");
             return "user/userForm";
         }
 
