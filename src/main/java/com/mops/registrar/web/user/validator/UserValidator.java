@@ -1,10 +1,10 @@
-package com.mops.registrar.web.validator;
+package com.mops.registrar.web.user.validator;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.beanvalidation.CustomValidatorBean;
 
-import com.mops.registrar.elements.user.User;
+import com.mops.registrar.entities.user.User;
 
 /**
  * A custom validator used to validate the {@link User} object. This validator runs the JSR 303 validation logic first,

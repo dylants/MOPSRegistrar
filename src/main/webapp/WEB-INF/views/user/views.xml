@@ -10,9 +10,9 @@
         <put-attribute name="body" value="/WEB-INF/views/user/home.jsp" />
     </definition>
 
-    <definition name="user/registerUser" extends="standardLayout">
+    <definition name="user/userForm" extends="standardLayout">
         <put-attribute name="title" value="Register for MOPS"/>
-        <put-attribute name="body" value="/WEB-INF/views/user/registerUser.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/user/userForm.jsp" />
     </definition>
 
     <definition name="user/registrationSuccess" extends="standardLayout">

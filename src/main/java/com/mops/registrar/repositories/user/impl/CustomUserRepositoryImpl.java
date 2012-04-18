@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
-import com.mops.registrar.elements.user.User;
+import com.mops.registrar.entities.user.User;
 import com.mops.registrar.repositories.user.CustomUserRepository;
 
 /**

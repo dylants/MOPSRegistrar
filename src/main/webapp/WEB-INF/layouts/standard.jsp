@@ -13,8 +13,8 @@
         <div id="toc">
             <div id="toc_items">
                 <span id="toc_item"> <a href="home">Home</a> </span>
-                <span id="toc_item"> <a href="registerUser">Register</a> </span>
-                <span id="toc_item"> <a href="listUsers">Listing</a> </span>
+                <span id="toc_item"> <a href="register">Register</a> </span>
+                <span id="toc_item"> <a href="list">Listing</a> </span>
                 <span id="toc_item"> <a href="#">Search</a> </span>
                 <span id="toc_item"> <a href="#">Contact Us</a> </span>
             </div>

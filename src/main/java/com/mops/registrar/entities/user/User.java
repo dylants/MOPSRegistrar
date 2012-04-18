@@ -1,20 +1,19 @@
-package com.mops.registrar.elements.user;
+package com.mops.registrar.entities.user;
 
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 
+import com.mops.registrar.entities.BaseEntity;
+
 /**
- * A User contains one unique ID field (the email address) along with a password, and first and last name. The User also
- * has an associated RegistrationInformation object, which contains additional data collected during the registration
- * process.
+ * A User contains an email address along with a password, and first and last name. The User also has an associated
+ * RegistrationInformation object, which contains additional data collected during the registration process.
  * 
  */
-public class User {
+public class User extends BaseEntity {
 
-    @Id
     @NotBlank
     @Pattern(regexp = ".+@.+\\.[a-z]+")
     private String emailAddress = null;

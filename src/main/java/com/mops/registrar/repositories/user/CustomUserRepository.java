@@ -2,7 +2,7 @@ package com.mops.registrar.repositories.user;
 
 import java.util.List;
 
-import com.mops.registrar.elements.user.User;
+import com.mops.registrar.entities.user.User;
 
 /**
  * A custom user repository used to define custom queries.

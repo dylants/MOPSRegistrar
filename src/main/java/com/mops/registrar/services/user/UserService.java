@@ -2,7 +2,7 @@ package com.mops.registrar.services.user;
 
 import java.util.List;
 
-import com.mops.registrar.elements.user.User;
+import com.mops.registrar.entities.user.User;
 import com.mops.registrar.repositories.user.UserRepository;
 
 /**
@@ -21,13 +21,22 @@ public interface UserService {
     public List<User> getUsers();
 
     /**
+     * Returns the {@link User} with the given <code>entityId</code>, or {@literal null} if none found.
+     * 
+     * @param entityId
+     *            The {@link User}'s entity ID (unique ID)
+     * @return The {@link User} if found, else {@literal null}
+     */
+    public User getUserByEntityId(String entityId);
+
+    /**
      * Returns the {@link User} with the given <code>emailAddress</code>, or {@literal null} if none found.
      * 
      * @param emailAddress
      *            The {@link User}'s email address
      * @return The {@link User} if found, else {@literal null}
      */
-    public User getUser(String emailAddress);
+    public User getUserByEmailAddress(String emailAddress);
 
     /**
      * Returns the {@link User} specified by the <code>firstName</code> and <code>lastName</code>, or {@literal null} if
@@ -39,7 +48,7 @@ public interface UserService {
      *            The {@link User}s last name
      * @return The {@link User} if found, else {@literal null}.
      */
-    public User getUser(String firstName, String lastName);
+    public User getUserByFirstNameLastName(String firstName, String lastName);
 
     /**
      * Adds a {@link User}

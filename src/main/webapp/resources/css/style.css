@@ -68,33 +68,33 @@ body {
     padding: 10px;
 }
 
-#register_form {
+#user_form {
     padding-left: 430px;
 }
 
-#register_form .error {
+#user_form .error {
     color: #ff0000;
 }
 
-#register_form .registerButton {
+#user_form .submitButton {
     text-align: right;
 }
 
-#register_form .cancelButton {
+#user_form .cancelButton {
     text-align: center;
 }
 
-#register_form .longText {
+#user_form .longText {
     width: 180px;
 }
 
-#register_form a:hover {
+#user_form a:hover {
     text-decoration: none;
     font-weight: bold;
     color: black;
 }
 
-#register_form a:active {
+#user_form a:active {
     text-decoration: none;
     font-weight: bold;
     color: black;

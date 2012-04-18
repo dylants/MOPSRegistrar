@@ -1,4 +1,4 @@
-package com.mops.registrar.web.service;
+package com.mops.registrar.web.user.service;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mops.registrar.elements.user.User;
+import com.mops.registrar.entities.user.User;
 import com.mops.registrar.services.user.UserService;
 
 /**
@@ -37,16 +37,16 @@ public class UserWebServiceController {
     }
 
     /**
-     * Returns the {@link User} found by <code>emailAddress</code>
+     * Returns the {@link User} found by the unique <code>entityId</code>
      * 
-     * @param emailAddress
-     *            The {@link User}'s email address
+     * @param entityId
+     *            The {@link User}'s unique entity ID
      * @return The {@link User} found, else {@literal null}
      */
-    @RequestMapping(value = "/user/{emailAddress:.+}", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/{entityId}", method = RequestMethod.GET)
     @ResponseBody
-    public User getUser(@PathVariable("emailAddress") String userName) {
-        return this.userService.getUser(userName);
+    public User getUser(@PathVariable("entityId") String entityId) {
+        return this.userService.getUserByEntityId(entityId);
     }
 
     /**
@@ -61,7 +61,7 @@ public class UserWebServiceController {
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     @ResponseBody
     public User getUser(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
-        return this.userService.getUser(firstName, lastName);
+        return this.userService.getUserByFirstNameLastName(firstName, lastName);
     }
 
     /**
