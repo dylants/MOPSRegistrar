@@ -1,5 +1,6 @@
 package com.mops.registrar.web.user.page.admin;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,10 @@ public class ListUsersController {
     @RequestMapping(method = RequestMethod.GET)
     public String listUsers(Model model) {
         List<User> users = this.userService.getUsers();
+
+        // by default, sort the list by last name
+        Collections.sort(users);
+
         model.addAttribute("users", users);
         return "user/admin/list";
     }

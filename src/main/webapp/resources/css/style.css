@@ -77,16 +77,26 @@ body {
     padding-left: 480px;
 }
 
+#user_form .errorblock {
+    color: #000;
+    background-color: #ffEEEE;
+    border: 3px solid #ff0000;
+    padding: 8px;
+    margin: 16px;
+    width: 400px;
+}
+
 #user_form .error {
     color: #ff0000;
 }
 
-#user_form .submitButton {
-    text-align: right;
+#user_form .submitButtons {
+    text-align: left;
+    padding-left: 80px;
 }
 
-#user_form .cancelButton {
-    text-align: center;
+#user_form .submitButton {
+    padding: 30px;
 }
 
 #user_form .longText {
@@ -107,6 +117,18 @@ body {
 }
 
 /* ADMIN LIST */
+#admin_list_table tr.column_names {
+    background-color: #B5BDFE
+}
+
+#admin_list_table tr.odd {
+    background-color: #E5E5E5
+}
+
+#admin_list_table tr.even {
+    background-color: #C1C1C1
+}
+
 #admin_list_table a:link {
     color: blue;
 }

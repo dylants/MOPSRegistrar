@@ -28,6 +28,10 @@ public class UserValidator extends CustomValidatorBean {
         super.validate(target, errors);
 
         performCustomValidation((User) target, errors);
+        
+        if (errors.hasErrors()) {
+            errors.reject("global.user.form");
+        }
     }
 
     @Override
@@ -35,6 +39,10 @@ public class UserValidator extends CustomValidatorBean {
         super.validate(target, errors, validationHints);
 
         performCustomValidation((User) target, errors);
+        
+        if (errors.hasErrors()) {
+            errors.reject("global.user.form");
+        }
     }
 
     /**

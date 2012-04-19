@@ -16,6 +16,7 @@
 	
 		<div id="user_form">
 			<form:form modelAttribute="user" method="${method}">
+                <form:errors cssClass="errorblock" element="div" />
 				<table>
 					<tr>
 						<td>First Name:</td>
@@ -45,28 +46,47 @@
 					<tr>
 						<td>Home Address:</td>
 						<td><form:input	path="registrationInformation.address.homeAddress1"	cssClass="longText" /></td>
+                        <td><form:errors path="registrationInformation.address.homeAddress1" cssClass="error" /></td>
 					</tr>
 					<tr>
 						<td></td>
 						<td><form:input	path="registrationInformation.address.homeAddress2"	cssClass="longText" /></td>
+                        <td><form:errors path="registrationInformation.address.homeAddress2" cssClass="error" /></td>
 					</tr>
 					<tr>
 						<td>City:</td>
 						<td><form:input path="registrationInformation.address.city"	cssClass="longText" /></td>
+                        <td><form:errors path="registrationInformation.address.city" cssClass="error" /></td>
 					</tr>
 					<tr>
 						<td>State:</td>
 						<td><form:input path="registrationInformation.address.state" cssClass="longText" /></td>
+                        <td><form:errors path="registrationInformation.address.state" cssClass="error" /></td>
 					</tr>
 					<tr>
 						<td>Zip Code:</td>
 						<td><form:input path="registrationInformation.address.zipCode" cssClass="longText" /></td>
+                        <td><form:errors path="registrationInformation.address.zipCode" cssClass="error" /></td>
 					</tr>
-					<tr>
-						<td class="submitButton"><input type="submit" value="${submitButtonText}" /></td>
-						<td class="cancelButton"><a href="${homeUrl}"> <input type="button" value="Cancel" /></a></td>
-					</tr>
+                    <tr>
+                        <td>Phone Number:</td>
+                        <td><form:input path="registrationInformation.phoneNumber" cssClass="longText" /></td>
+                        <td><form:errors path="registrationInformation.phoneNumber" cssClass="error" /></td>
+                    </tr>
+                    <tr>
+                        <td>Date of Birth:<br/>(MM/DD/YYYY)</td>
+                        <td><form:input path="registrationInformation.dateOfBirth" cssClass="longText" /></td>
+                        <td><form:errors path="registrationInformation.dateOfBirth" cssClass="error" /></td>
+                    </tr>
+<!-- 					<tr> -->
+<!-- 						<td class="submitButton"></td> -->
+<!-- 						<td class="cancelButton"></td> -->
+<!-- 					</tr> -->
 				</table>
+                <div class="submitButtons">
+                    <span class="submitButton"><input type="submit" value="${submitButtonText}"/></span>
+                    <span class="submitButton"><a href="${homeUrl}"> <input type="button" value="Cancel"/></a></span>
+                </div>
 			</form:form>
 		</div>
 	

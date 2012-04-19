@@ -3,6 +3,9 @@ package com.mops.registrar.entities.user;
 import java.util.Date;
 import java.util.Set;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 /**
  * Represents the information filled out during registration
  * 
@@ -12,8 +15,9 @@ import java.util.Set;
 public class RegistrationInformation {
 
     private Address address;
-    private String phoneNumer;
-    private Date birthDate;
+    private String phoneNumber;
+    @DateTimeFormat(iso=ISO.DATE)
+    private Date dateOfBirth;
     private Set<Child> children;
 
     /**
@@ -42,33 +46,33 @@ public class RegistrationInformation {
     }
 
     /**
-     * @return the phoneNumer
+     * @return the phoneNumber
      */
-    public String getPhoneNumer() {
-        return phoneNumer;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     /**
-     * @param phoneNumer
-     *            the phoneNumer to set
+     * @param phoneNumber
+     *            the phoneNumber to set
      */
-    public void setPhoneNumer(String phoneNumer) {
-        this.phoneNumer = phoneNumer;
+    public void setPhoneNumber(String phoneNumer) {
+        this.phoneNumber = phoneNumer;
     }
 
     /**
-     * @return the birthDate
+     * @return the dateOfBirth
      */
-    public Date getBirthDate() {
-        return birthDate;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
     /**
-     * @param birthDate
-     *            the birthDate to set
+     * @param dateOfBirth
+     *            the dateOfBirth to set
      */
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setDateOfBirth(Date birthDate) {
+        this.dateOfBirth = birthDate;
     }
 
     /**

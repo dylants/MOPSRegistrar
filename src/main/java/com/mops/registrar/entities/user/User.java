@@ -12,7 +12,7 @@ import com.mops.registrar.entities.BaseEntity;
  * RegistrationInformation object, which contains additional data collected during the registration process.
  * 
  */
-public class User extends BaseEntity {
+public class User extends BaseEntity implements Comparable<User> {
 
     @NotBlank
     @Pattern(regexp = ".+@.+\\.[a-z]+")
@@ -124,5 +124,14 @@ public class User extends BaseEntity {
     public String toString() {
         return "User emailAddress: " + this.emailAddress + " firstName: " + this.firstName + " lastName: "
                 + this.lastName;
+    }
+
+    @Override
+    public int compareTo(User user) {
+        // sort based off last name
+        String myLastName = this.lastName;
+        String yourLastName = user.getLastName();
+
+        return myLastName.compareTo(yourLastName);
     }
 }
