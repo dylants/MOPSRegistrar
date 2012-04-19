@@ -1,4 +1,4 @@
-package com.mops.registrar.entities.user;
+package com.mops.registrar.entities;
 
 /**
  * Represents a {@link User}'s address

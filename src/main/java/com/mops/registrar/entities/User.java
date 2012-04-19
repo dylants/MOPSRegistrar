@@ -1,4 +1,4 @@
-package com.mops.registrar.entities.user;
+package com.mops.registrar.entities;
 
 import javax.validation.constraints.Pattern;
 

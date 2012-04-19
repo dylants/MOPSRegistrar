@@ -5,19 +5,19 @@
     
 <tiles-definitions>
     
-    <definition name="user/admin/home" extends="standardLayout">
+    <definition name="admin/home" extends="standardLayout">
         <put-attribute name="title" value="MOPS Registration Admin Home"/>
-        <put-attribute name="body" value="/WEB-INF/views/user/admin/home.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/admin/home.jsp" />
     </definition>
 
-    <definition name="user/admin/list" extends="standardLayout">
+    <definition name="admin/user/list" extends="standardLayout">
         <put-attribute name="title" value="MOPS Registration User List"/>
-        <put-attribute name="body" value="/WEB-INF/views/user/admin/list.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/admin/user/list.jsp" />
     </definition>
 
-    <definition name="user/admin/editSuccess" extends="standardLayout">
+    <definition name="admin/user/editSuccess" extends="standardLayout">
         <put-attribute name="title" value="Registration Information Updated"/>
-        <put-attribute name="body" value="/WEB-INF/views/user/admin/editSuccess.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/admin/user/editSuccess.jsp" />
     </definition>
 
 </tiles-definitions>

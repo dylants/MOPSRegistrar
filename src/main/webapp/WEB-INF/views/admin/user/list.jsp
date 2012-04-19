@@ -1,9 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<!-- no need to supply context root, it's automatically used in URL generation below -->
-<c:set var="userRoot" value="/page/user"/>
-<c:set var="adminRoot" value="${userRoot}/admin"/>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<c:set var="adminRoot" value="${contextPath}/page/admin"/>
 
     <div id="admin_list">
 
@@ -29,7 +28,7 @@
                     <th><a href="#">Children</a></th>
 				</tr>
 				<c:forEach var="user" items="${users}" varStatus="loopStatus">
-                    <c:url value="${adminRoot}/edit/${user.entityId}" var="editUrl"/>
+                    <c:url value="/page/admin/user/edit/${user.entityId}" var="editUrl"/>
 					<tr class="${loopStatus.index % 2 == 0 ? 'odd' : 'even'}">
 						<td><a href="${editUrl}">${user.emailAddress}</a></td>
 						<td>${user.firstName}</td>
@@ -48,7 +47,7 @@
 		</c:if>
     
         <br/>
-        <a href="home">Return to Registration Home</a>
+        <a href="${adminRoot}home">Return to Admin Home</a>
 
     </div>
 

@@ -1,10 +1,11 @@
-package com.mops.registrar.web.user.validator.admin;
+package com.mops.registrar.web.validator.admin;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import com.mops.registrar.entities.user.User;
+import com.mops.registrar.entities.User;
+import com.mops.registrar.web.validator.user.UserValidator;
 
 /**
  * The {@link Validator} that should be used when validating the {@link User} on Admin pages
@@ -13,7 +14,7 @@ import com.mops.registrar.entities.user.User;
  * 
  */
 @Component
-public class UserValidatorForAdmin extends com.mops.registrar.web.user.validator.UserValidator {
+public class UserValidatorForAdmin extends UserValidator {
 
     @Override
     protected void performCustomValidation(User user, Errors errors) {

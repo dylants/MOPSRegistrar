@@ -3,7 +3,7 @@ package com.mops.registrar.services.user.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mops.registrar.entities.user.User;
+import com.mops.registrar.entities.User;
 import com.mops.registrar.services.user.UserService;
 
 /**

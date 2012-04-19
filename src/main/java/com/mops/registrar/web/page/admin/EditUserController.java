@@ -1,4 +1,4 @@
-package com.mops.registrar.web.user.page.admin;
+package com.mops.registrar.web.page.admin;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mops.registrar.entities.user.User;
+import com.mops.registrar.entities.User;
 import com.mops.registrar.security.CryptUtil;
 import com.mops.registrar.services.user.UserService;
-import com.mops.registrar.web.user.validator.UserValidator;
-import com.mops.registrar.web.user.validator.admin.UserValidatorForAdmin;
+import com.mops.registrar.web.validator.admin.UserValidatorForAdmin;
+import com.mops.registrar.web.validator.user.UserValidator;
 
 /**
  * Web controller responsible for editing an existing {@link User}
@@ -29,7 +29,7 @@ import com.mops.registrar.web.user.validator.admin.UserValidatorForAdmin;
  * 
  */
 @Controller
-@RequestMapping(value = "/user/admin/edit/{entityId}")
+@RequestMapping(value = "/admin/user/edit/{entityId}")
 public class EditUserController {
     @Autowired
     private UserService userService = null;
@@ -138,6 +138,6 @@ public class EditUserController {
         model.addAttribute("user", user);
         model.addAttribute("heading", "Edit Registration Information");
         model.addAttribute("submitButtonText", "Submit");
-        model.addAttribute("homeUrl", request.getContextPath() + "/page/user/admin/home");
+        model.addAttribute("homeUrl", request.getContextPath() + "/page/admin/home");
     }
 }

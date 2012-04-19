@@ -1,4 +1,4 @@
-package com.mops.registrar.entities.user;
+package com.mops.registrar.entities;
 
 import java.util.Date;
 import java.util.Set;

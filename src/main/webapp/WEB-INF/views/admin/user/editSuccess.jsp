@@ -1,8 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page session="false"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<c:set var="userRoot" value="${contextPath}/page/user"/>
-<c:set var="adminRoot" value="${userRoot}/admin"/>
+<c:set var="adminRoot" value="${contextPath}/page/admin"/>
 
     <div id="admin_editSuccess">
         <div>

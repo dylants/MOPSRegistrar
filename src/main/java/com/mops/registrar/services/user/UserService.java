@@ -2,7 +2,7 @@ package com.mops.registrar.services.user;
 
 import java.util.List;
 
-import com.mops.registrar.entities.user.User;
+import com.mops.registrar.entities.User;
 import com.mops.registrar.repositories.user.UserRepository;
 
 /**

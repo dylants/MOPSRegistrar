@@ -9,7 +9,7 @@
 
 <body>
 
-    <a href="${contextPath}/page/user/home">MOPS Registration Home</a>
+    <a href="${contextPath}/page/home">MOPS Registration Home</a>
     <br />
 
 </body>

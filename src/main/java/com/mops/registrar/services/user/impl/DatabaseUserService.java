@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.mops.registrar.entities.user.User;
+import com.mops.registrar.entities.User;
 import com.mops.registrar.repositories.user.UserRepository;
 import com.mops.registrar.security.CryptUtil;
 import com.mops.registrar.services.user.UserService;

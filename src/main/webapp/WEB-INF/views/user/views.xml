@@ -5,11 +5,6 @@
     
 <tiles-definitions>
     
-    <definition name="user/home" extends="standardLayout">
-        <put-attribute name="title" value="MOPS Registration Home"/>
-        <put-attribute name="body" value="/WEB-INF/views/user/home.jsp" />
-    </definition>
-
     <definition name="user/userForm" extends="standardLayout">
         <put-attribute name="body" value="/WEB-INF/views/user/userForm.jsp" />
     </definition>

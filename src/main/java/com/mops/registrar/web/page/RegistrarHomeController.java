@@ -1,24 +1,22 @@
-package com.mops.registrar.web.user.page;
+package com.mops.registrar.web.page;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mops.registrar.entities.user.User;
-
 /**
- * A web controller used to interact with the {@link User}s
+ * MOPS Registrar Home Page Controller
  * 
  * @author dylants
  * 
  */
 @Controller
-@RequestMapping(value = "/user/home")
+@RequestMapping(value = "/home")
 public class RegistrarHomeController {
 
     /**
-     * Displays the {@link User} home page
+     * Displays the MOPS registrar home page
      * 
      * @param model
      *            Contains information used by the view
@@ -26,6 +24,6 @@ public class RegistrarHomeController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public String home(Model model) {
-        return "user/home";
+        return "home";
     }
 }

@@ -1,4 +1,4 @@
-package com.mops.registrar.web.user.service;
+package com.mops.registrar.web.service;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mops.registrar.entities.user.User;
+import com.mops.registrar.entities.User;
 import com.mops.registrar.services.user.UserService;
 
 /**

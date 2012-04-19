@@ -1,4 +1,4 @@
-package com.mops.registrar.web.user.page.admin;
+package com.mops.registrar.web.page.admin;
 
 import java.util.Collections;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mops.registrar.entities.user.User;
+import com.mops.registrar.entities.User;
 import com.mops.registrar.services.user.UserService;
 
 /**
@@ -19,7 +19,7 @@ import com.mops.registrar.services.user.UserService;
  * 
  */
 @Controller
-@RequestMapping(value = "/user/admin/list")
+@RequestMapping(value = "/admin/user/list")
 public class ListUsersController {
     @Autowired
     private UserService userService = null;
@@ -39,7 +39,7 @@ public class ListUsersController {
         Collections.sort(users);
 
         model.addAttribute("users", users);
-        return "user/admin/list";
+        return "admin/user/list";
     }
 
 }

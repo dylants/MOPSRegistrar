@@ -2,7 +2,7 @@ package com.mops.registrar.repositories.user;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.mops.registrar.entities.user.User;
+import com.mops.registrar.entities.User;
 
 /**
  * Represents the database repository that hosts the {@link User}s

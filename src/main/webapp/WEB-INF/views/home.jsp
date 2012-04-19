@@ -10,7 +10,7 @@
 
         <div id="home_links">    
             <a href="#">Login as an Existing User</a>
-            <a href="register">New User Registration</a>
+            <a href="user/register">New User Registration</a>
         </div>
     
     </div>
