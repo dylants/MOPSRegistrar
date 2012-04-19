@@ -15,7 +15,7 @@
 
         <div id="admin_links">    
             <a href="${adminRoot}/list">List Registered Users</a>
-            <a href="${adminRoot}/search">Search for a User</a>
+            <a href="#">Search for a User</a>
         </div>
     
     </div>

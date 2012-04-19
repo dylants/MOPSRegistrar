@@ -24,13 +24,17 @@ body a:active {
 
 body {
     font-family:'Trebuchet MS',sans-serif;
-    background-image: url(../img/bg_header.png);
+    background-image: url(../img/bg_page.png);
     background-repeat: repeat-x;
+    height: 99%;
+    background-color: #AFC1D5;
 }
 
 #header {
+    background-image: url(../img/bg_header.png);
     font-family:Verdana,Geneva,'DejaVu Sans',sans-serif;
     text-align: center;
+    margin: -8px;
 }
 
 #header strong {
@@ -83,7 +87,7 @@ body {
     border: 3px solid #ff0000;
     padding: 8px;
     margin: 16px;
-    width: 400px;
+    width: 420px;
 }
 
 #user_form .error {
@@ -118,7 +122,7 @@ body {
 
 /* ADMIN LIST */
 #admin_list_table tr.column_names {
-    background-color: #B5BDFE
+    background-color: #ACCCFF
 }
 
 #admin_list_table tr.odd {

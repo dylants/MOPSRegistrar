@@ -18,7 +18,7 @@
             <div id="toc_items">
                 <span id="toc_item"> <a href="${userRoot}/home">Home</a> </span>
                 <span id="toc_item"> <a href="${userRoot}/register">Register</a> </span>
-                <span id="toc_item"> <a href="${userRoot}/login">Login</a> </span>
+                <span id="toc_item"> <a href="#">Login</a> </span>
                 <span id="toc_item"> <a href="${userRoot}/admin/home">Admin</a> </span>
                 <span id="toc_item"> <a href="#">Contact Us</a> </span>
             </div>
@@ -31,15 +31,6 @@
         <tiles:insertAttribute name="body"/>
     </div>
     <!-- end main -->
-
-    <!-- footer -->
-    <div id="footer">
-        <div id="left_footer">
-        </div>
-        <div id="right_footer">
-        </div>
-    </div>
-    <!-- end footer -->
 
 </body>
 </html>
