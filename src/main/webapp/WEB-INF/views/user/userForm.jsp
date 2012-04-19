@@ -64,7 +64,7 @@
 					</tr>
 					<tr>
 						<td class="submitButton"><input type="submit" value="${submitButtonText}" /></td>
-						<td class="cancelButton"><a href="home"> <input type="button" value="Cancel" /></a></td>
+						<td class="cancelButton"><a href="${homeUrl}"> <input type="button" value="Cancel" /></a></td>
 					</tr>
 				</table>
 			</form:form>

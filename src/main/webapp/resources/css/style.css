@@ -1,34 +1,35 @@
-a:link {
+body a:link {
     text-decoration: none;
     font-weight: bold;
     color: black;
 }
 
-a:visited {
+body a:visited {
     text-decoration: none;
     font-weight: bold;
     color: black;
 }
 
-a:hover {
+body a:hover {
     text-decoration: underline;
     font-weight: bold;
     color: black;
 }
 
-a:active {
+body a:active {
     text-decoration: underline;
     font-weight: bold;
     color: black;
 }
 
 body {
-    font-family: 'Tahoma', sans-serif;
+    font-family:'Trebuchet MS',sans-serif;
     background-image: url(../img/bg_header.png);
     background-repeat: repeat-x;
 }
 
 #header {
+    font-family:Verdana,Geneva,'DejaVu Sans',sans-serif;
     text-align: center;
 }
 
@@ -37,7 +38,6 @@ body {
 }
 
 #toc {
-    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
     padding: 10px;
     margin-top: 20px;
 }
@@ -63,13 +63,18 @@ body {
     padding-right:20px;
 }
 
+/* ----------------- */
 /* page specific css */
+/* ----------------- */
+
+/* HOME */
 #home_links a {
     padding: 10px;
 }
 
+/* USER FORM */
 #user_form {
-    padding-left: 430px;
+    padding-left: 480px;
 }
 
 #user_form .error {
@@ -90,12 +95,30 @@ body {
 
 #user_form a:hover {
     text-decoration: none;
-    font-weight: bold;
-    color: black;
 }
 
 #user_form a:active {
     text-decoration: none;
-    font-weight: bold;
-    color: black;
+}
+
+/* ADMIN HOME */
+#admin_links a {
+    padding: 10px;
+}
+
+/* ADMIN LIST */
+#admin_list_table a:link {
+    color: blue;
+}
+
+#admin_list_table a:visited {
+    color: blue;
+}
+
+#admin_list_table a:active {
+    color: blue;
+}
+
+#admin_list_table a:hover {
+    color: blue;
 }

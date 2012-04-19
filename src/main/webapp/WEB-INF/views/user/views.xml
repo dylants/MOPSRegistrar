@@ -19,9 +19,4 @@
         <put-attribute name="body" value="/WEB-INF/views/user/registrationSuccess.jsp" />
     </definition>
 
-    <definition name="user/listUsers" extends="standardLayout">
-        <put-attribute name="title" value="MOPS Registration List"/>
-        <put-attribute name="body" value="/WEB-INF/views/user/listUsers.jsp" />
-    </definition>
-    
 </tiles-definitions>

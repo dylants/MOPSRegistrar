@@ -1,5 +1,6 @@
 package com.mops.registrar.web.user.validator;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.beanvalidation.CustomValidatorBean;
@@ -46,10 +47,19 @@ public class UserValidator extends CustomValidatorBean {
      */
     protected void performCustomValidation(User user, Errors errors) {
         /*
-         * Make sure the password and confirm password match
+         * Validate the password and confirm password fields are not blank
          */
         String password = user.getPassword();
+        if (StringUtils.isBlank(password)) {
+            errors.rejectValue("password", "NotBlank.user.password");
+        }
         String confirmPassword = user.getConfirmPassword();
+        if (StringUtils.isBlank(confirmPassword)) {
+            errors.rejectValue("confirmPassword", "NotBlank.user.confirmPassword");
+        }
+        /*
+         * Make sure the password and confirm password match
+         */
         if (!password.equals(confirmPassword)) {
             errors.rejectValue("password", "NotMatch.user.password");
         }

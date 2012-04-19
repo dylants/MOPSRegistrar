@@ -1,4 +1,4 @@
-package com.mops.registrar.web.user.page;
+package com.mops.registrar.web.user.page.admin;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import com.mops.registrar.services.user.UserService;
  * 
  */
 @Controller
-@RequestMapping(value = "/user/list")
+@RequestMapping(value = "/user/admin/list")
 public class ListUsersController {
     @Autowired
     private UserService userService = null;
@@ -34,7 +34,7 @@ public class ListUsersController {
     public String listUsers(Model model) {
         List<User> users = this.userService.getUsers();
         model.addAttribute("users", users);
-        return "user/listUsers";
+        return "user/admin/list";
     }
 
 }

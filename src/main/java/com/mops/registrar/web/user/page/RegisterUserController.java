@@ -1,5 +1,6 @@
 package com.mops.registrar.web.user.page;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,14 +46,14 @@ public class RegisterUserController {
      * 
      * @param model
      *            Contains information used by the view
+     * @param request
+     *            The {@link HttpServletRequest}
      * @return The JSP used to register the user
      */
     @RequestMapping(method = RequestMethod.GET)
-    public String registerUser(Model model) {
+    public String registerUser(Model model, HttpServletRequest request) {
         User user = new User();
-        model.addAttribute("user", user);
-        model.addAttribute("heading", "Welcome! Please register");
-        model.addAttribute("submitButtonText", "Register");
+        populateModel(model, user, request);
         return "user/userForm";
     }
 
@@ -65,23 +66,41 @@ public class RegisterUserController {
      *            The result of the binding of the user input to the {@link User} object
      * @param model
      *            Contains information used by the view
+     * @param request
+     *            The {@link HttpServletRequest}
      * @return The JSP used to display the next page
      */
     @RequestMapping(method = RequestMethod.POST)
-    public String processRegisterUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
+    public String processRegisterUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult,
+            Model model, HttpServletRequest request) {
         // first cover binding errors (invalid input)
         if (bindingResult.hasErrors()) {
-            // return them back to the registration page
-            model.addAttribute("user", user);
-            model.addAttribute("heading", "Welcome! Please register");
-            model.addAttribute("submitButtonText", "Register");
+            // show them the registration page again (to fix the errors)
+            populateModel(model, user, request);
             return "user/userForm";
         }
 
         // else add the user to our registry
         this.userService.addUser(user);
         model.addAttribute("user", user);
+        // show registration success page
         return "user/registrationSuccess";
     }
 
+    /**
+     * Populates the model with generic information required for this view
+     * 
+     * @param model
+     *            The {@link Model} to populate
+     * @param user
+     *            The {@link User}
+     * @param request
+     *            The {@link HttpServletRequest}
+     */
+    protected void populateModel(Model model, User user, HttpServletRequest request) {
+        model.addAttribute("user", user);
+        model.addAttribute("heading", "Welcome! Please register");
+        model.addAttribute("submitButtonText", "Register");
+        model.addAttribute("homeUrl", request.getContextPath() + "/page/user/home");
+    }
 }

@@ -17,10 +17,10 @@ public class User extends BaseEntity {
     @NotBlank
     @Pattern(regexp = ".+@.+\\.[a-z]+")
     private String emailAddress = null;
-    @NotBlank
+    // password validation done per validator
     private String password = null;
     @Transient
-    @NotBlank
+    // confirm password validation done per validator
     private String confirmPassword = null;
     @NotBlank
     private String firstName = null;

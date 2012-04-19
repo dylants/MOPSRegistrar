@@ -1,11 +1,7 @@
 package com.mops.registrar.security;
 
-import java.io.IOException;
-
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Component;
-
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 
 /**
  * Provides security operations
@@ -15,14 +11,6 @@ import sun.misc.BASE64Encoder;
  */
 @Component
 public class CryptUtil {
-
-    private BASE64Encoder encoder = null;
-    private BASE64Decoder decoder = null;
-
-    public CryptUtil() {
-        encoder = new BASE64Encoder();
-        decoder = new BASE64Decoder();
-    }
 
     /**
      * Encodes a message, returning the encoded String. If input is {@literal null}, will return {@literal null}
@@ -41,7 +29,7 @@ public class CryptUtil {
         byte[] byteArray = message.getBytes();
 
         // encode away
-        return this.encoder.encode(byteArray);
+        return new String(Base64.encodeBase64(byteArray));
     }
 
     /**
@@ -57,16 +45,10 @@ public class CryptUtil {
             return null;
         }
 
-        // decode the message to a byte[]
-        try {
-            byte[] byteArray = this.decoder.decodeBuffer(message);
-            if (byteArray == null) {
-                return null;
-            }
-            return byteArray.toString();
-        } catch (IOException e) {
-            // TODO add logging
-            return null;
-        }
+        // convert the String to a byte[]
+        byte[] byteArray = message.getBytes();
+
+        // decode the message to a String
+        return new String(Base64.decodeBase64(byteArray));
     }
 }
