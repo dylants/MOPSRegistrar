@@ -47,7 +47,7 @@
 		</c:if>
     
         <br/>
-        <a href="${adminRoot}home">Return to Admin Home</a>
+        <a href="${adminRoot}/home">Return to Admin Home</a>
 
     </div>
 
