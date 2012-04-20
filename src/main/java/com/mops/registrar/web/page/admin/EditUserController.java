@@ -80,6 +80,8 @@ public class EditUserController {
     /**
      * Processes the edit user request, edit the user and displaying a view based on the result.
      * 
+     * @param entityId
+     *            The ID of the {@link User} we should edit
      * @param user
      *            The edited {@link User}
      * @param bindingResult
@@ -93,8 +95,8 @@ public class EditUserController {
      * @return The JSP used to display the next page
      */
     @RequestMapping(method = RequestMethod.PUT)
-    public String processEditUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model,
-            HttpServletRequest request, HttpSession session) {
+    public String processEditUser(@PathVariable("entityId") String entityId, @Valid @ModelAttribute("user") User user,
+            BindingResult bindingResult, Model model, HttpServletRequest request, HttpSession session) {
         // first cover binding errors (invalid input)
         if (bindingResult.hasErrors()) {
             // show the user form again (so they can fix the errors)
@@ -118,10 +120,10 @@ public class EditUserController {
         }
 
         // else update the user in our registry
-        this.userService.addUser(user);
+        this.userService.updateUser(entityId, user);
         model.addAttribute("user", user);
         // show edit success page
-        return "user/admin/editSuccess";
+        return "admin/user/editSuccess";
     }
 
     /**

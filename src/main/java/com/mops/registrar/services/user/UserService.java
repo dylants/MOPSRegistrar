@@ -51,6 +51,18 @@ public interface UserService {
     public User getUserByFirstNameLastName(String firstName, String lastName);
 
     /**
+     * Updates the {@link User} specified by the <code>entityId</code> with the data contained in the <code>user</code>
+     * object.
+     * 
+     * @param entityId
+     *            The entity ID of the {@link User} that should be updated
+     * @param user
+     *            Data contained within this object will replace the data contained in the {@link User}
+     * @return the updated {@link User}
+     */
+    public User updateUser(String entityId, User user);
+
+    /**
      * Adds a {@link User}
      * 
      * @param user

@@ -61,6 +61,24 @@ public class LocalUserService implements UserService {
     }
 
     @Override
+    public User updateUser(String entityId, User user) {
+        /*
+         * The purpose here is to replace the existing user with the information found in user. So really we can just
+         * set the ID on the newer object, and replace it in our local List of Users.
+         */
+        // remove the old
+        User oldUser = getUserByEntityId(entityId);
+        this.users.remove(oldUser);
+        // update the new
+        user.setEntityId(entityId);
+        // and add the new
+        this.users.add(user);
+
+        // return the new
+        return user;
+    }
+
+    @Override
     public void addUser(User user) {
         // only add the user if not null
         if (user != null) {

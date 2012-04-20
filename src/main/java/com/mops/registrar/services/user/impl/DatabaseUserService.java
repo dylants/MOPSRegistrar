@@ -51,6 +51,17 @@ public class DatabaseUserService implements UserService {
     }
 
     @Override
+    public User updateUser(String entityId, User user) {
+        /*
+         * In this circumstance, we want to replace the old user with the new user. What we need to do is copy the
+         * entityId into the new user, and save it (using the addUser method)
+         */
+        user.setEntityId(entityId);
+        addUser(user);
+        return user;
+    }
+
+    @Override
     public void addUser(User user) {
         // always remember to encode the password prior to writing it to the database
         String password = user.getPassword();
