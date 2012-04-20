@@ -51,6 +51,15 @@ public interface UserService {
     public User getUserByFirstNameLastName(String firstName, String lastName);
 
     /**
+     * Adds a {@link User}
+     * 
+     * @param user
+     *            The {@link User} to add
+     * @return the added {@link User}
+     */
+    public User addUser(User user);
+
+    /**
      * Updates the {@link User} specified by the <code>entityId</code> with the data contained in the <code>user</code>
      * object.
      * 
@@ -63,10 +72,13 @@ public interface UserService {
     public User updateUser(String entityId, User user);
 
     /**
-     * Adds a {@link User}
+     * Verifies the password matches that of the given {@link User}
      * 
+     * @param password
+     *            The password entered
      * @param user
-     *            The {@link User} to add
+     *            The {@link User} to check against
+     * @return true iff the password matches that of the given {@link User}
      */
-    public void addUser(User user);
+    public boolean verifyPassword(String password, User user);
 }

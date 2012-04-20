@@ -61,6 +61,17 @@ public class LocalUserService implements UserService {
     }
 
     @Override
+    public User addUser(User user) {
+        // only add the user if not null
+        if (user != null) {
+            this.users.add(user);
+            return user;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
     public User updateUser(String entityId, User user) {
         /*
          * The purpose here is to replace the existing user with the information found in user. So really we can just
@@ -79,10 +90,11 @@ public class LocalUserService implements UserService {
     }
 
     @Override
-    public void addUser(User user) {
-        // only add the user if not null
-        if (user != null) {
-            this.users.add(user);
+    public boolean verifyPassword(String password, User user) {
+        if (user.getPassword().equals(password)) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

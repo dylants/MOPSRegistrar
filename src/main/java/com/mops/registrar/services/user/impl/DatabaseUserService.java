@@ -3,10 +3,11 @@ package com.mops.registrar.services.user.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.dao.SaltSource;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 
 import com.mops.registrar.entities.User;
 import com.mops.registrar.repositories.user.UserRepository;
-import com.mops.registrar.security.CryptUtil;
 import com.mops.registrar.services.user.UserService;
 
 /**
@@ -21,7 +22,10 @@ public class DatabaseUserService implements UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private CryptUtil cryptUtil;
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private SaltSource saltSource;
 
     @Override
     public List<User> getUsers() {
@@ -54,21 +58,30 @@ public class DatabaseUserService implements UserService {
     public User updateUser(String entityId, User user) {
         /*
          * In this circumstance, we want to replace the old user with the new user. What we need to do is copy the
-         * entityId into the new user, and save it (using the addUser method)
+         * entityId into the new user, and save it.
          */
         user.setEntityId(entityId);
-        addUser(user);
-        return user;
+        return this.userRepository.save(user);
     }
 
     @Override
-    public void addUser(User user) {
+    public User addUser(User user) {
         // always remember to encode the password prior to writing it to the database
         String password = user.getPassword();
-        String encodedPassword = this.cryptUtil.encode(password);
+        Object salt = null;
+//        if (this.saltSource != null) {
+//            salt = this.saltSource.getSalt(user);
+//        }
+        String encodedPassword = this.passwordEncoder.encodePassword(password, salt);
         user.setPassword(encodedPassword);
 
-        this.userRepository.save(user);
+        return this.userRepository.save(user);
+    }
+
+    @Override
+    public boolean verifyPassword(String password, User user) {
+        // TODO Auto-generated method stub
+        return false;
     }
 
     /**
@@ -87,17 +100,32 @@ public class DatabaseUserService implements UserService {
     }
 
     /**
-     * @return the cryptUtil
+     * @return the passwordEncoder
      */
-    public CryptUtil getCryptUtil() {
-        return cryptUtil;
+    public PasswordEncoder getPasswordEncoder() {
+        return passwordEncoder;
     }
 
     /**
-     * @param cryptUtil
-     *            the cryptUtil to set
+     * @param passwordEncoder
+     *            the passwordEncoder to set
      */
-    public void setCryptUtil(CryptUtil cryptUtil) {
-        this.cryptUtil = cryptUtil;
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    /**
+     * @return the saltSource
+     */
+    public SaltSource getSaltSource() {
+        return saltSource;
+    }
+
+    /**
+     * @param saltSource
+     *            the saltSource to set
+     */
+    public void setSaltSource(SaltSource saltSource) {
+        this.saltSource = saltSource;
     }
 }

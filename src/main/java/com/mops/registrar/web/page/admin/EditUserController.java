@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,14 +64,6 @@ public class EditUserController {
     public String editUser(@PathVariable("entityId") String entityId, Model model, HttpServletRequest request,
             HttpSession session) {
         User user = this.userService.getUserByEntityId(entityId);
-
-        /*
-         * Because editing the password field(s) are optional, they may not supply one through the edit. If this is the
-         * case, we don't want to blow away the user's original password. So keep the User in the session so we can pull
-         * this out later if needed.
-         */
-        session.setAttribute("registrar.user.originalUser", user);
-
         populateModel(model, user, request);
         return "user/userForm";
     }
@@ -104,23 +95,9 @@ public class EditUserController {
             return "user/userForm";
         }
 
-        /*
-         * If they supply a password, use it. If they don't, use the original password.
-         */
-        if (StringUtils.isNotBlank(user.getPassword())) {
-            // use this password in the update, no additional work required
-        } else {
-            // update this user with the original password
-            User originalUser = (User) session.getAttribute("registrar.user.originalUser");
-            if (originalUser != null) {
-                String password = originalUser.getPassword();
-                String plainTextPassword = cryptUtil.decode(password);
-                user.setPassword(plainTextPassword);
-            }
-        }
-
-        // else update the user in our registry
-        this.userService.updateUser(entityId, user);
+        // update the user in our registry, which will return us the updated user
+        user = this.userService.updateUser(entityId, user);
+        // add it to the model for the jsp
         model.addAttribute("user", user);
         // show edit success page
         return "admin/user/editSuccess";

@@ -5,8 +5,6 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.Transient;
 
-import com.mops.registrar.entities.BaseEntity;
-
 /**
  * A User contains an email address along with a password, and first and last name. The User also has an associated
  * RegistrationInformation object, which contains additional data collected during the registration process.
@@ -18,15 +16,32 @@ public class User extends BaseEntity implements Comparable<User> {
     @Pattern(regexp = ".+@.+\\.[a-z]+")
     private String emailAddress = null;
     // password validation done per validator
-    private String password = null;
     @Transient
+    private String password = null;
     // confirm password validation done per validator
+    @Transient
     private String confirmPassword = null;
+    private String passwordHash = null;
     @NotBlank
     private String firstName = null;
     @NotBlank
     private String lastName = null;
     private RegistrationInformation registrationInformation = null;
+
+    @Override
+    public int compareTo(User user) {
+        // sort based off last name
+        String myLastName = this.lastName;
+        String yourLastName = user.getLastName();
+
+        return myLastName.compareTo(yourLastName);
+    }
+
+    @Override
+    public String toString() {
+        return "User emailAddress: " + this.emailAddress + " firstName: " + this.firstName + " lastName: "
+                + this.lastName;
+    }
 
     /**
      * @return the emailAddress
@@ -76,6 +91,21 @@ public class User extends BaseEntity implements Comparable<User> {
     }
 
     /**
+     * @return the passwordHash
+     */
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    /**
+     * @param passwordHash
+     *            the passwordHash to set
+     */
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    /**
      * @return the firstName
      */
     public String getFirstName() {
@@ -120,18 +150,4 @@ public class User extends BaseEntity implements Comparable<User> {
         this.registrationInformation = registrationInformation;
     }
 
-    @Override
-    public String toString() {
-        return "User emailAddress: " + this.emailAddress + " firstName: " + this.firstName + " lastName: "
-                + this.lastName;
-    }
-
-    @Override
-    public int compareTo(User user) {
-        // sort based off last name
-        String myLastName = this.lastName;
-        String yourLastName = user.getLastName();
-
-        return myLastName.compareTo(yourLastName);
-    }
 }
