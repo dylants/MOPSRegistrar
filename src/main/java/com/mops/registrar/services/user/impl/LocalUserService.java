@@ -91,7 +91,7 @@ public class LocalUserService implements UserService {
 
     @Override
     public boolean verifyPassword(String password, User user) {
-        if (user.getPassword().equals(password)) {
+        if (user.getClearTextPassword().equals(password)) {
             return true;
         } else {
             return false;

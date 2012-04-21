@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-	
-	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <!-- Root Context: defines shared resources visible to all other web components -->
+
+    <!-- Spring Security uses our User's and thus, our database, so we need to load things in the root context -->
+    <import resource="spring-app-configuration.xml" />
+    <import resource="spring-security-configuration.xml" />
+
 </beans>

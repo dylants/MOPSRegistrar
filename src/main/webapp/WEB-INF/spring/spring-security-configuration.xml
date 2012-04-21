@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security" xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+    <beans:bean id="application.passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
+
+    <beans:bean id="application.saltSource" class="org.springframework.security.authentication.dao.ReflectionSaltSource">
+        <!-- Use the entityId as the salt since it will always be available and never change -->
+        <beans:property name="userPropertyToUse" value="entityId" />
+    </beans:bean>
+
+    <beans:bean id="application.userDetailsService" class="com.mops.registrar.security.RegistrarUserDetailsService" />
+
+    <beans:bean id="application.authenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+        <beans:property name="passwordEncoder" ref="application.passwordEncoder" />
+        <beans:property name="saltSource" ref="application.saltSource" />
+        <beans:property name="userDetailsService" ref="application.userDetailsService" />
+    </beans:bean>
+
+    <http authentication-manager-ref="application.authenticationManager">
+        <intercept-url pattern="/**/admin/**" access="ROLE_ADMIN_USER" />
+        <intercept-url pattern="/**/user/profile/**" access="ROLE_REGISTERED_USER" />
+        <intercept-url pattern="/**" access="ROLE_ANONYMOUS" />
+        <form-login />
+        <logout />
+    </http>
+
+    <authentication-manager id="application.authenticationManager">
+        <authentication-provider ref="application.authenticationProvider" />
+    </authentication-manager>
+</beans:beans>

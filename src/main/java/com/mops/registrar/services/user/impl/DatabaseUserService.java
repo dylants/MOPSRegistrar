@@ -2,6 +2,7 @@ package com.mops.registrar.services.user.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.dao.SaltSource;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
@@ -61,27 +62,70 @@ public class DatabaseUserService implements UserService {
          * entityId into the new user, and save it.
          */
         user.setEntityId(entityId);
+        // if the user updated their password (in addition to anything else)
+        if (StringUtils.isNotBlank(user.getClearTextPassword())) {
+            // process the password fields
+            processPassword(user);
+        } else {
+            // else we should just copy the old user's password hash over (no change was made)
+            User oldUser = this.userRepository.findByEntityId(entityId);
+            user.setPasswordHash(oldUser.getPasswordHash());
+        }
         return this.userRepository.save(user);
     }
 
     @Override
     public User addUser(User user) {
-        // always remember to encode the password prior to writing it to the database
-        String password = user.getPassword();
-        Object salt = null;
-//        if (this.saltSource != null) {
-//            salt = this.saltSource.getSalt(user);
-//        }
-        String encodedPassword = this.passwordEncoder.encodePassword(password, salt);
-        user.setPassword(encodedPassword);
-
+        // before writing the the database, process the password fields
+        processPassword(user);
         return this.userRepository.save(user);
     }
 
     @Override
     public boolean verifyPassword(String password, User user) {
-        // TODO Auto-generated method stub
-        return false;
+        /*
+         * So we're not storing the actual password, but a hash. Because of this, we must verify the password the user
+         * entered against this hash. We'll use the password encoder we used to store the password to verify the
+         * password.
+         */
+
+        // Get the salt (if available)
+        Object salt = null;
+        if (this.saltSource != null) {
+            salt = this.saltSource.getSalt(user);
+        }
+
+        return this.passwordEncoder.isPasswordValid(user.getPasswordHash(), password, salt);
+    }
+
+    /**
+     * Performs operations necessary to store the password in the database. This includes storing a hash of the
+     * password, and wiping the actual password so it is not stored in the database.
+     * 
+     * @param user
+     *            The {@link User} to process
+     */
+    protected void processPassword(User user) {
+        String plainTextPassword = user.getClearTextPassword();
+
+        // sanity check
+        if (StringUtils.isBlank(plainTextPassword)) {
+            return;
+        }
+
+        // Get the salt (if available)
+        Object salt = null;
+        if (this.saltSource != null) {
+            salt = this.saltSource.getSalt(user);
+        }
+        // encode the password (returning a hash)
+        String encodedPassword = this.passwordEncoder.encodePassword(plainTextPassword, salt);
+        // store the hash which we'll use to verify the user on subsequent requests
+        user.setPasswordHash(encodedPassword);
+
+        // clear the plain text password(s)
+        user.setClearTextPassword(null);
+        user.setClearTextConfirmPassword(null);
     }
 
     /**

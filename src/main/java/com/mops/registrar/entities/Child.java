@@ -10,14 +10,14 @@ import java.util.Date;
  */
 public class Child {
 
-    private String firstName;
-    private String lastName;
-    private Date birthDate;
-    private String fatherFirstName;
-    private String fatherLastName;
-    private String doctorName;
-    private String doctorPhoneNumber;
-    private String allergyInformation;
+    protected String firstName;
+    protected String lastName;
+    protected Date birthDate;
+    protected String fatherFirstName;
+    protected String fatherLastName;
+    protected String doctorName;
+    protected String doctorPhoneNumber;
+    protected String allergyInformation;
 
     /**
      * @return the firstName

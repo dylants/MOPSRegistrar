@@ -7,8 +7,9 @@
 	</configSuffixes>
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
-		<config>src/main/webapp/WEB-INF/spring/appServlet/spring-app-configuration.xml</config>
-		<config>src/main/webapp/WEB-INF/spring/appServlet/spring-data-configuration.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/spring-security-configuration.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/spring-app-configuration.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/spring-data-configuration.xml</config>
 	</configs>
 	<configSets>
 	</configSets>

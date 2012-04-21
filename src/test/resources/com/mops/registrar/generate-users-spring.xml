@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p" 
+    xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+    xmlns:mvc="http://www.springframework.org/schema/mvc" 
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
+    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+    <!-- Enables the Spring MVC @Controller programming model -->
+<!--     <mvc:annotation-driven /> -->
+
+    <!-- Default bean name is 'mongo' -->
+    <mongo:mongo host="localhost" port="27017" />
+
+    <!-- MongoDB template used to interact with the database -->
+    <bean id="usersDBMongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg ref="mongo" />
+        <constructor-arg name="databaseName" value="registrarDB" />
+    </bean>
+
+    <!-- The user repository -->
+    <mongo:repositories base-package="com.mops.registrar.repositories.user" mongo-template-ref="usersDBMongoTemplate"
+        create-query-indexes="true">
+        <mongo:repository id="userRepository" custom-impl-ref="customUserRepository"
+            mongo-template-ref="usersDBMongoTemplate" create-query-indexes="true" />
+    </mongo:repositories>
+
+    <!-- Additional custom queries for the user repository -->
+    <bean id="customUserRepository" class="com.mops.registrar.repositories.user.impl.CustomUserRepositoryImpl" />
+
+    <bean id="application.userService" class="com.mops.registrar.services.user.impl.DatabaseUserService">
+        <property name="userRepository" ref="userRepository"/>
+        <property name="passwordEncoder" ref="application.passwordEncoder"/>
+        <property name="saltSource" ref="application.saltSource"/>
+    </bean>
+
+    <bean id="application.passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
+
+    <bean id="application.saltSource" class="org.springframework.security.authentication.dao.ReflectionSaltSource">
+        <!-- Use the entityId as the salt since it will always be available and never change -->
+        <property name="userPropertyToUse" value="entityId" />
+    </bean>
+
+
+</beans>

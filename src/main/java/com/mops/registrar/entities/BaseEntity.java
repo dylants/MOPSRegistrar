@@ -11,7 +11,7 @@ import org.springframework.data.annotation.Id;
 public abstract class BaseEntity {
 
     @Id
-    private String entityId = null;
+    protected String entityId = null;
 
     /**
      * @return the entityId

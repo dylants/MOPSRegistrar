@@ -10,7 +10,7 @@
     <!-- MongoDB template used to interact with the database -->
     <bean id="usersDBMongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
         <constructor-arg ref="mongo" />
-        <constructor-arg name="databaseName" value="usersdb" />
+        <constructor-arg name="databaseName" value="registrarDB" />
     </bean>
 
     <!-- The user repository -->

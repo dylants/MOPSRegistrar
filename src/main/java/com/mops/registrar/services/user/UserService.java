@@ -51,7 +51,7 @@ public interface UserService {
     public User getUserByFirstNameLastName(String firstName, String lastName);
 
     /**
-     * Adds a {@link User}
+     * Adds a new {@link User}
      * 
      * @param user
      *            The {@link User} to add

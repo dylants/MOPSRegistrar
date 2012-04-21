@@ -8,11 +8,11 @@ package com.mops.registrar.entities;
  */
 public class Address {
 
-    private String homeAddress1;
-    private String homeAddress2;
-    private String city;
-    private String state;
-    private String zipCode;
+    protected String homeAddress1;
+    protected String homeAddress2;
+    protected String city;
+    protected String state;
+    protected String zipCode;
 
     /**
      * @return the homeAddress1

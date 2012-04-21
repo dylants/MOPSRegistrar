@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 /**
  * Represents the information filled out during registration
@@ -14,11 +13,11 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
  */
 public class RegistrationInformation {
 
-    private Address address;
-    private String phoneNumber;
-    @DateTimeFormat(iso=ISO.DATE)
-    private Date dateOfBirth;
-    private Set<Child> children;
+    protected Address address;
+    protected String phoneNumber;
+    @DateTimeFormat(pattern="MM/dd/yyyy")
+    protected Date dateOfBirth;
+    protected Set<Child> children;
 
     /**
      * Adds a {@link Child} to the {@link Set}
@@ -71,8 +70,8 @@ public class RegistrationInformation {
      * @param dateOfBirth
      *            the dateOfBirth to set
      */
-    public void setDateOfBirth(Date birthDate) {
-        this.dateOfBirth = birthDate;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     /**

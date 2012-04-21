@@ -28,7 +28,7 @@ public class UserValidator extends CustomValidatorBean {
         super.validate(target, errors);
 
         performCustomValidation((User) target, errors);
-        
+
         if (errors.hasErrors()) {
             errors.reject("global.user.form");
         }
@@ -39,7 +39,7 @@ public class UserValidator extends CustomValidatorBean {
         super.validate(target, errors, validationHints);
 
         performCustomValidation((User) target, errors);
-        
+
         if (errors.hasErrors()) {
             errors.reject("global.user.form");
         }
@@ -57,11 +57,11 @@ public class UserValidator extends CustomValidatorBean {
         /*
          * Validate the password and confirm password fields are not blank
          */
-        String password = user.getPassword();
+        String password = user.getClearTextPassword();
         if (StringUtils.isBlank(password)) {
             errors.rejectValue("password", "NotBlank.user.password");
         }
-        String confirmPassword = user.getConfirmPassword();
+        String confirmPassword = user.getClearTextConfirmPassword();
         if (StringUtils.isBlank(confirmPassword)) {
             errors.rejectValue("confirmPassword", "NotBlank.user.confirmPassword");
         }

@@ -35,13 +35,13 @@
 					</tr>
 					<tr>
 						<td>Password:</td>
-						<td><form:password path="password" cssClass="longText" /></td>
-						<td><form:errors path="password" cssClass="error" /></td>
+						<td><form:password path="clearTextPassword" cssClass="longText" /></td>
+						<td><form:errors path="clearTextPassword" cssClass="error" /></td>
 					</tr>
 	                <tr>
 	                    <td>Confirm Password:</td>
-	                    <td><form:password path="confirmPassword" cssClass="longText" /></td>
-	                    <td><form:errors path="confirmPassword" cssClass="error" /></td>
+	                    <td><form:password path="clearTextConfirmPassword" cssClass="longText" /></td>
+	                    <td><form:errors path="clearTextConfirmPassword" cssClass="error" /></td>
 	                </tr>
 					<tr>
 						<td>Home Address:</td>

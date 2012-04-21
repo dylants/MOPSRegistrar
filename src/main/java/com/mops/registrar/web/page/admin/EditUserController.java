@@ -1,7 +1,6 @@
 package com.mops.registrar.web.page.admin;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mops.registrar.entities.User;
-import com.mops.registrar.security.CryptUtil;
 import com.mops.registrar.services.user.UserService;
 import com.mops.registrar.web.validator.admin.UserValidatorForAdmin;
 import com.mops.registrar.web.validator.user.UserValidator;
@@ -34,8 +32,6 @@ public class EditUserController {
     private UserService userService = null;
     @Autowired
     private UserValidatorForAdmin userValidatorForAdmin = null;
-    @Autowired
-    private CryptUtil cryptUtil = null;
 
     /**
      * Configures the {@link UserValidator} to be used when validating {@link User} type objects.
@@ -56,13 +52,10 @@ public class EditUserController {
      *            Contains information used by the view
      * @param request
      *            The {@link HttpServletRequest}
-     * @param session
-     *            The {@link HttpSession}
      * @return The JSP used to edit the user
      */
     @RequestMapping(method = RequestMethod.GET)
-    public String editUser(@PathVariable("entityId") String entityId, Model model, HttpServletRequest request,
-            HttpSession session) {
+    public String editUser(@PathVariable("entityId") String entityId, Model model, HttpServletRequest request) {
         User user = this.userService.getUserByEntityId(entityId);
         populateModel(model, user, request);
         return "user/userForm";
@@ -81,13 +74,11 @@ public class EditUserController {
      *            Contains information used by the view
      * @param request
      *            The {@link HttpServletRequest}
-     * @param session
-     *            The {@link HttpSession}
      * @return The JSP used to display the next page
      */
     @RequestMapping(method = RequestMethod.PUT)
     public String processEditUser(@PathVariable("entityId") String entityId, @Valid @ModelAttribute("user") User user,
-            BindingResult bindingResult, Model model, HttpServletRequest request, HttpSession session) {
+            BindingResult bindingResult, Model model, HttpServletRequest request) {
         // first cover binding errors (invalid input)
         if (bindingResult.hasErrors()) {
             // show the user form again (so they can fix the errors)
