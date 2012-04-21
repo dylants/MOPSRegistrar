@@ -6,29 +6,42 @@
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
+    <!-- Creates a one-way hash of the password, which we store instead of storing the password -->
     <beans:bean id="application.passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
 
+    <!-- The salt used when creating the hash of the password -->
     <beans:bean id="application.saltSource" class="org.springframework.security.authentication.dao.ReflectionSaltSource">
         <!-- Use the entityId as the salt since it will always be available and never change -->
         <beans:property name="userPropertyToUse" value="entityId" />
     </beans:bean>
 
+    <!-- Our Registrar application UserDetailsService implementation -->
     <beans:bean id="application.userDetailsService" class="com.mops.registrar.security.RegistrarUserDetailsService" />
 
+    <!-- Specify we want to use this authentication provider, and it use all our specific implementations -->
     <beans:bean id="application.authenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
         <beans:property name="passwordEncoder" ref="application.passwordEncoder" />
         <beans:property name="saltSource" ref="application.saltSource" />
         <beans:property name="userDetailsService" ref="application.userDetailsService" />
     </beans:bean>
 
+    <!-- Spring Security tag which enables HTTP (web) based security -->
+    <!-- (warnings here are because the Spring Security namespace uses deprecated APIs) -->
+    <!-- (see: https://jira.springsource.org/browse/SEC-1909 for more details) -->
     <http authentication-manager-ref="application.authenticationManager">
+        <!-- Any URL with "/admin/" in the path is restricted to ROLE_ADMIN_USER -->
         <intercept-url pattern="/**/admin/**" access="ROLE_ADMIN_USER" />
+        <!-- Any URL with "/user/profile/" in the path is restricted to ROLE_REGISTERED_USER -->
         <intercept-url pattern="/**/user/profile/**" access="ROLE_REGISTERED_USER" />
+        <!-- Any URL (not matched by the above patterns) is restricted to ROLE_ANONYMOUS (anyone) -->
         <intercept-url pattern="/**" access="ROLE_ANONYMOUS" />
+        <!-- Enables form based login -->
         <form-login />
+        <!-- Enables the logout function -->
         <logout />
     </http>
 
+    <!-- Establishes an AuthenticationManager which uses our AuthenticationProvider -->
     <authentication-manager id="application.authenticationManager">
         <authentication-provider ref="application.authenticationProvider" />
     </authentication-manager>

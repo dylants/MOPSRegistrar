@@ -57,19 +57,19 @@ public class UserValidator extends CustomValidatorBean {
         /*
          * Validate the password and confirm password fields are not blank
          */
-        String password = user.getClearTextPassword();
-        if (StringUtils.isBlank(password)) {
-            errors.rejectValue("password", "NotBlank.user.password");
+        String clearTextPassword = user.getClearTextPassword();
+        if (StringUtils.isBlank(clearTextPassword)) {
+            errors.rejectValue("clearTextPassword", "NotBlank.user.clearTextPassword");
         }
-        String confirmPassword = user.getClearTextConfirmPassword();
-        if (StringUtils.isBlank(confirmPassword)) {
-            errors.rejectValue("confirmPassword", "NotBlank.user.confirmPassword");
+        String clearTextConfirmPassword = user.getClearTextConfirmPassword();
+        if (StringUtils.isBlank(clearTextConfirmPassword)) {
+            errors.rejectValue("clearTextConfirmPassword", "NotBlank.user.clearTextConfirmPassword");
         }
         /*
          * Make sure the password and confirm password match
          */
-        if (!password.equals(confirmPassword)) {
-            errors.rejectValue("password", "NotMatch.user.password");
+        if (!clearTextPassword.equals(clearTextConfirmPassword)) {
+            errors.rejectValue("clearTextPassword", "NotMatch.user.clearTextPassword");
         }
     }
 }

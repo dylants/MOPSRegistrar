@@ -9,30 +9,40 @@
     http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
-    <!-- Enables the Spring MVC @Controller programming model -->
-<!--     <mvc:annotation-driven /> -->
-
     <!-- Default bean name is 'mongo' -->
     <mongo:mongo host="localhost" port="27017" />
 
     <!-- MongoDB template used to interact with the database -->
-    <bean id="usersDBMongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+    <bean id="registrarDBMongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
         <constructor-arg ref="mongo" />
         <constructor-arg name="databaseName" value="registrarDB" />
     </bean>
 
     <!-- The user repository -->
-    <mongo:repositories base-package="com.mops.registrar.repositories.user" mongo-template-ref="usersDBMongoTemplate"
+    <mongo:repositories base-package="com.mops.registrar.repositories.user" mongo-template-ref="registrarDBMongoTemplate"
         create-query-indexes="true">
         <mongo:repository id="userRepository" custom-impl-ref="customUserRepository"
-            mongo-template-ref="usersDBMongoTemplate" create-query-indexes="true" />
+            mongo-template-ref="registrarDBMongoTemplate" create-query-indexes="true" />
     </mongo:repositories>
 
     <!-- Additional custom queries for the user repository -->
     <bean id="customUserRepository" class="com.mops.registrar.repositories.user.impl.CustomUserRepositoryImpl" />
 
+    <!-- The admin user repository -->
+    <mongo:repositories base-package="com.mops.registrar.repositories.admin" mongo-template-ref="registrarDBMongoTemplate"
+        create-query-indexes="true">
+        <mongo:repository id="adminUserRepository" mongo-template-ref="registrarDBMongoTemplate"
+            create-query-indexes="true" />
+    </mongo:repositories>
+
     <bean id="application.userService" class="com.mops.registrar.services.user.impl.DatabaseUserService">
         <property name="userRepository" ref="userRepository"/>
+        <property name="passwordEncoder" ref="application.passwordEncoder"/>
+        <property name="saltSource" ref="application.saltSource"/>
+    </bean>
+
+    <bean id="application.adminUserService" class="com.mops.registrar.services.admin.impl.DatabaseAdminUserService">
+        <property name="adminUserRepository" ref="adminUserRepository"/>
         <property name="passwordEncoder" ref="application.passwordEncoder"/>
         <property name="saltSource" ref="application.saltSource"/>
     </bean>

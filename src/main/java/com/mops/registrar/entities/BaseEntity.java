@@ -27,13 +27,4 @@ public abstract class BaseEntity {
     public void setEntityId(String entityId) {
         this.entityId = entityId;
     }
-
-    /**
-     * Returns true iff this {@link BaseEntity} is new (and not one that already exists)
-     * 
-     * @return true iff this {@link BaseEntity} is new
-     */
-    public boolean isNew() {
-        return (this.entityId == null);
-    }
 }

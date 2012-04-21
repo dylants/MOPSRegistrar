@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <c:choose>
-    <c:when test="${user['new']}">
+    <c:when test="${isNew}">
         <c:set var="method" value="post"/>
     </c:when>
     <c:otherwise>
@@ -78,10 +78,6 @@
                         <td><form:input path="registrationInformation.dateOfBirth" cssClass="longText" /></td>
                         <td><form:errors path="registrationInformation.dateOfBirth" cssClass="error" /></td>
                     </tr>
-<!-- 					<tr> -->
-<!-- 						<td class="submitButton"></td> -->
-<!-- 						<td class="cancelButton"></td> -->
-<!-- 					</tr> -->
 				</table>
                 <div class="submitButtons">
                     <span class="submitButton"><input type="submit" value="${submitButtonText}"/></span>

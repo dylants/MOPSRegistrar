@@ -3,10 +3,9 @@ package com.mops.registrar.services.user;
 import java.util.List;
 
 import com.mops.registrar.entities.User;
-import com.mops.registrar.repositories.user.UserRepository;
 
 /**
- * Provides methods for interacting with the {@link User} through the {@link UserRepository}
+ * Provides methods for interacting with the {@link User}
  * 
  * @author dylants
  * 

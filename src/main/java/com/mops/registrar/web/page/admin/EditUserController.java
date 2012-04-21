@@ -106,6 +106,8 @@ public class EditUserController {
      */
     protected void populateModel(Model model, User user, HttpServletRequest request) {
         model.addAttribute("user", user);
+        // it's an existing User we're dealing with, not a new one
+        model.addAttribute("isNew", false);
         model.addAttribute("heading", "Edit Registration Information");
         model.addAttribute("submitButtonText", "Submit");
         model.addAttribute("homeUrl", request.getContextPath() + "/page/admin/home");

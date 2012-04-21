@@ -9,8 +9,10 @@
 
     <!-- Beans loaded in development (local mode) -->
     <beans profile="development">
-        <bean id="application.userService"
-            class="com.mops.registrar.services.user.impl.LocalUserService" />
+        <!-- Service used to interact with User's -->
+        <bean id="application.userService" class="com.mops.registrar.services.user.impl.LocalUserService" />
+        <!-- Service used to interact with AdminUser's -->
+        <bean id="application.adminUserService" class="com.mops.registrar.services.admin.impl.LocalAdminUserService" />
     </beans>
 
     <!-- Beans loaded in production (running with a database) -->
@@ -18,8 +20,10 @@
         <!-- We'll need the beans in the spring-data-configuration for database user service -->
         <import resource="spring-data-configuration.xml" />
 
-        <bean id="application.userService"
-            class="com.mops.registrar.services.user.impl.DatabaseUserService" />
+        <!-- Service used to interact with User's -->
+        <bean id="application.userService" class="com.mops.registrar.services.user.impl.DatabaseUserService" />
+        <!-- Service used to interact with AdminUser's -->
+        <bean id="application.adminUserService" class="com.mops.registrar.services.admin.impl.DatabaseAdminUserService" />
     </beans>
 
 </beans>

@@ -22,10 +22,10 @@ public class UserValidatorForAdmin extends UserValidator {
          * On the Admin edit page, supplying the password is optional. However, if they do enter one in, we need to
          * verify it matches the other.
          */
-        String password = user.getClearTextPassword();
-        String confirmPassword = user.getClearTextConfirmPassword();
-        if (!password.equals(confirmPassword)) {
-            errors.rejectValue("password", "NotMatch.user.password");
+        String clearTextPassword = user.getClearTextPassword();
+        String clearTextConfirmPassword = user.getClearTextConfirmPassword();
+        if (!clearTextPassword.equals(clearTextConfirmPassword)) {
+            errors.rejectValue("clearTextPassword", "NotMatch.user.clearTextPassword");
         }
 
     }

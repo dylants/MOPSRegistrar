@@ -99,6 +99,8 @@ public class RegisterUserController {
      */
     protected void populateModel(Model model, User user, HttpServletRequest request) {
         model.addAttribute("user", user);
+        // it's a new User we're dealing with, not an existing
+        model.addAttribute("isNew", true);
         model.addAttribute("heading", "Welcome! Please register");
         model.addAttribute("submitButtonText", "Register");
         model.addAttribute("homeUrl", request.getContextPath() + "/page/home");

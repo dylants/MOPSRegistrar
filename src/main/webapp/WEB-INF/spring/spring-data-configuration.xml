@@ -8,19 +8,26 @@
     <mongo:mongo host="localhost" port="27017" />
 
     <!-- MongoDB template used to interact with the database -->
-    <bean id="usersDBMongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+    <bean id="registrarDBMongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
         <constructor-arg ref="mongo" />
         <constructor-arg name="databaseName" value="registrarDB" />
     </bean>
 
     <!-- The user repository -->
-    <mongo:repositories base-package="com.mops.registrar.repositories.user" mongo-template-ref="usersDBMongoTemplate"
+    <mongo:repositories base-package="com.mops.registrar.repositories.user" mongo-template-ref="registrarDBMongoTemplate"
         create-query-indexes="true">
         <mongo:repository id="userRepository" custom-impl-ref="customUserRepository"
-            mongo-template-ref="usersDBMongoTemplate" create-query-indexes="true" />
+            mongo-template-ref="registrarDBMongoTemplate" create-query-indexes="true" />
     </mongo:repositories>
 
     <!-- Additional custom queries for the user repository -->
     <bean id="customUserRepository" class="com.mops.registrar.repositories.user.impl.CustomUserRepositoryImpl" />
+
+    <!-- The admin user repository -->
+    <mongo:repositories base-package="com.mops.registrar.repositories.admin" mongo-template-ref="registrarDBMongoTemplate"
+        create-query-indexes="true">
+        <mongo:repository id="adminUserRepository" mongo-template-ref="registrarDBMongoTemplate"
+            create-query-indexes="true" />
+    </mongo:repositories>
 
 </beans>

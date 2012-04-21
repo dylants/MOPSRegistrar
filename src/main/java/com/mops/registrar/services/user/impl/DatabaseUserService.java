@@ -4,11 +4,10 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.dao.SaltSource;
-import org.springframework.security.authentication.encoding.PasswordEncoder;
 
 import com.mops.registrar.entities.User;
 import com.mops.registrar.repositories.user.UserRepository;
+import com.mops.registrar.services.baseuser.AbstractBaseUserService;
 import com.mops.registrar.services.user.UserService;
 
 /**
@@ -17,16 +16,10 @@ import com.mops.registrar.services.user.UserService;
  * @author dylants
  * 
  */
-public class DatabaseUserService implements UserService {
+public class DatabaseUserService extends AbstractBaseUserService implements UserService {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private SaltSource saltSource;
 
     @Override
     public List<User> getUsers() {
@@ -56,6 +49,13 @@ public class DatabaseUserService implements UserService {
     }
 
     @Override
+    public User addUser(User user) {
+        // before writing the the database, process the password fields
+        processPassword(user);
+        return this.userRepository.save(user);
+    }
+
+    @Override
     public User updateUser(String entityId, User user) {
         /*
          * In this circumstance, we want to replace the old user with the new user. What we need to do is copy the
@@ -71,13 +71,6 @@ public class DatabaseUserService implements UserService {
             User oldUser = this.userRepository.findByEntityId(entityId);
             user.setPasswordHash(oldUser.getPasswordHash());
         }
-        return this.userRepository.save(user);
-    }
-
-    @Override
-    public User addUser(User user) {
-        // before writing the the database, process the password fields
-        processPassword(user);
         return this.userRepository.save(user);
     }
 
@@ -99,36 +92,6 @@ public class DatabaseUserService implements UserService {
     }
 
     /**
-     * Performs operations necessary to store the password in the database. This includes storing a hash of the
-     * password, and wiping the actual password so it is not stored in the database.
-     * 
-     * @param user
-     *            The {@link User} to process
-     */
-    protected void processPassword(User user) {
-        String plainTextPassword = user.getClearTextPassword();
-
-        // sanity check
-        if (StringUtils.isBlank(plainTextPassword)) {
-            return;
-        }
-
-        // Get the salt (if available)
-        Object salt = null;
-        if (this.saltSource != null) {
-            salt = this.saltSource.getSalt(user);
-        }
-        // encode the password (returning a hash)
-        String encodedPassword = this.passwordEncoder.encodePassword(plainTextPassword, salt);
-        // store the hash which we'll use to verify the user on subsequent requests
-        user.setPasswordHash(encodedPassword);
-
-        // clear the plain text password(s)
-        user.setClearTextPassword(null);
-        user.setClearTextConfirmPassword(null);
-    }
-
-    /**
      * @return the userRepository
      */
     public UserRepository getUserRepository() {
@@ -141,35 +104,5 @@ public class DatabaseUserService implements UserService {
      */
     public void setUserRepository(UserRepository userRepository) {
         this.userRepository = userRepository;
-    }
-
-    /**
-     * @return the passwordEncoder
-     */
-    public PasswordEncoder getPasswordEncoder() {
-        return passwordEncoder;
-    }
-
-    /**
-     * @param passwordEncoder
-     *            the passwordEncoder to set
-     */
-    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
-
-    /**
-     * @return the saltSource
-     */
-    public SaltSource getSaltSource() {
-        return saltSource;
-    }
-
-    /**
-     * @param saltSource
-     *            the saltSource to set
-     */
-    public void setSaltSource(SaltSource saltSource) {
-        this.saltSource = saltSource;
     }
 }
