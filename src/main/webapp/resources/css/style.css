@@ -58,10 +58,6 @@ body {
     text-align: center;
 }
 
-#main th,td {
-    padding: 10px;
-}
-
 #main li {
     list-style: none;
     padding-right:20px;
@@ -78,7 +74,8 @@ body {
 
 /* USER FORM */
 #user_form {
-    padding-left: 480px;
+    margin:0 auto;
+    width:380px;
 }
 
 #user_form .errorblock {
@@ -92,11 +89,6 @@ body {
 
 #user_form .error {
     color: #ff0000;
-}
-
-#user_form .submitButtons {
-    text-align: left;
-    padding-left: 80px;
 }
 
 #user_form .submitButton {
@@ -126,6 +118,10 @@ body {
 }
 
 /* ADMIN LIST */
+#admin_list_table th, #admin_list_table td {
+    padding: 8px;
+}
+
 #admin_list_table tr.column_names {
     background-color: #ACCCFF
 }
