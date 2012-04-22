@@ -26,15 +26,16 @@
     </beans:bean>
 
     <!-- Spring Security tag which enables HTTP (web) based security -->
+    <!-- Here we're specifying our AuthenticationManager and also that we're using expressions -->
     <!-- (warnings here are because the Spring Security namespace uses deprecated APIs) -->
     <!-- (see: https://jira.springsource.org/browse/SEC-1909 for more details) -->
-    <http authentication-manager-ref="application.authenticationManager">
+    <http authentication-manager-ref="application.authenticationManager" use-expressions="true">
         <!-- Any URL with "/admin/" in the path is restricted to ROLE_ADMIN_USER -->
-        <intercept-url pattern="/**/admin/**" access="ROLE_ADMIN_USER" />
-        <!-- Any URL with "/user/profile/" in the path is restricted to ROLE_REGISTERED_USER -->
-        <intercept-url pattern="/**/user/profile/**" access="ROLE_REGISTERED_USER" />
-        <!-- Any URL (not matched by the above patterns) is restricted to ROLE_ANONYMOUS (anyone) -->
-        <intercept-url pattern="/**" access="ROLE_ANONYMOUS" />
+        <intercept-url pattern="/**/admin/**" access="hasRole('ROLE_ADMIN_USER')" />
+        <!-- Any URL with "/user/profile/" in the path is restricted to admins and registered users -->
+        <intercept-url pattern="/**/user/profile/**" access="hasAnyRole('ROLE_ADMIN_USER','ROLE_REGISTERED_USER')" />
+        <!-- Any URL (not matched by the above patterns) is restricted to admins, registered users, and anonymous (anyone) -->
+        <intercept-url pattern="/**" access="hasAnyRole('ROLE_ADMIN_USER','ROLE_REGISTERED_USER','ROLE_ANONYMOUS')" />
         <!-- Enables form based login -->
         <form-login />
         <!-- Enables the logout function -->
