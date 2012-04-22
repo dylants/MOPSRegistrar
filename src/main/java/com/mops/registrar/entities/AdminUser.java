@@ -22,10 +22,8 @@ public class AdminUser extends BaseUser implements UserDetails, CredentialsConta
      * Default constructor
      */
     public AdminUser() {
-        // An AdminUser has ROLE_ADMIN_USER, ROLE_REGISTERED_USER, and ROLE_ANONYMOUS access
-        super(Sets.newHashSet(Authorities.ROLE_ADMIN_USER.getGrantedAuthority(),
-                Authorities.ROLE_REGISTERED_USER.getGrantedAuthority(),
-                Authorities.ROLE_ANONYMOUS.getGrantedAuthority()));
+        // An AdminUser has ROLE_ADMIN_USER access
+        super(Sets.newHashSet(Authorities.ROLE_ADMIN_USER.getGrantedAuthority()));
     }
 
     @Override

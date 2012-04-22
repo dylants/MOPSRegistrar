@@ -19,11 +19,11 @@
         <div id="toc">
             <div id="toc_items">
                 <span id="toc_item"> <a href="${contextPath}/page/home">Home</a> </span>
-                <sec:authorize access="!hasAnyRole('ROLE_ADMIN_USER','ROLE_REGISTERED_USER')">
+                <sec:authorize access="hasRole('ROLE_ANONYMOUS')">
                     <span id="toc_item"> <a href="${userRoot}/register">Register</a> </span>
                     <span id="toc_item"> <a href="${contextPath}/spring_security_login">Login</a> </span>
                 </sec:authorize>
-                <sec:authorize access="hasAnyRole('ROLE_ADMIN_USER','ROLE_REGISTERED_USER')">
+                <sec:authorize access="!hasRole('ROLE_ANONYMOUS')">
                     <span id="toc_item"> <a href="#">Profile</a> </span>
                     <span id="toc_item"> <a href="${contextPath}/j_spring_security_logout">Logout</a> </span>
                 </sec:authorize>

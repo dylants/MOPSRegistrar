@@ -34,9 +34,8 @@ public class User extends BaseUser implements UserDetails, CredentialsContainer,
      * Default constructor
      */
     public User() {
-        // A User's GrantedAuthority's are ROLE_REGISTERED_USER and ROLE_ANONYMOUS
-        super(Sets.newHashSet(Authorities.ROLE_REGISTERED_USER.getGrantedAuthority(),
-                Authorities.ROLE_ANONYMOUS.getGrantedAuthority()));
+        // A User's GrantedAuthority is ROLE_REGISTERED_USER
+        super(Sets.newHashSet(Authorities.ROLE_REGISTERED_USER.getGrantedAuthority()));
     }
 
     @Override

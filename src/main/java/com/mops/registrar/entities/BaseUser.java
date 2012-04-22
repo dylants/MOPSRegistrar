@@ -16,7 +16,7 @@ import com.mops.registrar.security.Authorities;
 /**
  * Base class that all "user" objects should extend. This adds the {@link UserDetails} Spring Security behavior which
  * allows these {@link BaseUser} objects to be used as credentials when accessing secured resources. {@link BaseUser}
- * provides the
+ * provides the "username" and "password" attributes along with Spring Security attributes.
  * 
  * @author dylants
  * 
