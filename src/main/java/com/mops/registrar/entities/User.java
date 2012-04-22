@@ -16,7 +16,7 @@ import com.mops.registrar.security.Authorities;
  * 
  * @author dylants
  */
-public class User extends BaseUser implements UserDetails, CredentialsContainer, Comparable<User> {
+public class User extends AbstractBaseUser implements BaseUser, UserDetails, CredentialsContainer, Comparable<User> {
 
     // for Serializable
     private static final long serialVersionUID = -6102304126936444301L;

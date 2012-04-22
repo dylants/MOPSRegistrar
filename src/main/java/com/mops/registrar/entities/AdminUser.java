@@ -14,7 +14,7 @@ import com.mops.registrar.security.Authorities;
  * @author dylants
  * 
  */
-public class AdminUser extends BaseUser implements UserDetails, CredentialsContainer {
+public class AdminUser extends AbstractBaseUser implements BaseUser, UserDetails, CredentialsContainer {
 
     private static final long serialVersionUID = 4376388347985824942L;
 

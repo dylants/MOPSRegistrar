@@ -15,14 +15,13 @@ import org.springframework.stereotype.Service;
 import com.mops.registrar.entities.User;
 
 /**
- * Implementation of the {@link RegistrarAuthenticationProcessor} using the {@link User} object as the token to
- * authenticate the user
+ * Default implementation of the {@link RegistrarAuthenticationProcessor}
  * 
  * @author dylants
  * 
  */
 @Service
-public class UserTokenRegistrarAuthenticationProcessor implements RegistrarAuthenticationProcessor {
+public class DefaultRegistrarAuthenticationProcessor implements RegistrarAuthenticationProcessor {
 
     private AuthenticationDetailsSource<HttpServletRequest, ?> authenticationDetailsSource = new WebAuthenticationDetailsSource();
     @Autowired

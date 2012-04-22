@@ -22,6 +22,8 @@
     </sec:authorize>
     <sec:authorize access="!hasRole('ROLE_ANONYMOUS')">
         <!-- Content for users who are logged in -->
-        <p>Welcome back!</p>
+        <h1>
+            <strong>Welcome to back ${firstName}!</strong>
+        </h1>
     </sec:authorize>
 </div>
