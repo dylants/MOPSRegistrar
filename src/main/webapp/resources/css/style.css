@@ -115,6 +115,11 @@ body {
     text-decoration: none;
 }
 
+/* USER PROFILE */
+#user_profile_links a {
+    padding: 10px;
+}
+
 /* ADMIN HOME */
 #admin_links a {
     padding: 10px;

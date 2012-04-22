@@ -23,7 +23,7 @@
     <sec:authorize access="!hasRole('ROLE_ANONYMOUS')">
         <!-- Content for users who are logged in -->
         <h1>
-            <strong>Welcome to back ${firstName}!</strong>
+            <strong>Welcome back ${firstName}!</strong>
         </h1>
     </sec:authorize>
 </div>

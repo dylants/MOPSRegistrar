@@ -23,12 +23,14 @@
                     <span id="toc_item"> <a href="${userRoot}/register">Register</a> </span>
                     <span id="toc_item"> <a href="${contextPath}/spring_security_login">Login</a> </span>
                 </sec:authorize>
-                <sec:authorize access="!hasRole('ROLE_ANONYMOUS')">
-                    <span id="toc_item"> <a href="#">Profile</a> </span>
-                    <span id="toc_item"> <a href="${contextPath}/j_spring_security_logout">Logout</a> </span>
+                <sec:authorize access="hasRole('ROLE_REGISTERED_USER')">
+                    <span id="toc_item"> <a href="${userRoot}/profile">Profile</a> </span>
                 </sec:authorize>
                 <sec:authorize access="hasRole('ROLE_ADMIN_USER')">
                     <span id="toc_item"> <a href="${adminRoot}/home">Admin</a> </span>
+                </sec:authorize>
+                <sec:authorize access="!hasRole('ROLE_ANONYMOUS')">
+                    <span id="toc_item"> <a href="${contextPath}/j_spring_security_logout">Logout</a> </span>
                 </sec:authorize>
                 <span id="toc_item"> <a href="#">Contact Us</a> </span>
             </div>
