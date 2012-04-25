@@ -4,7 +4,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <c:set var="userRoot" value="${contextPath}/page/user" />
 
-<div id="home">
+<div id="home" class="curved">
 
     <sec:authorize access="hasRole('ROLE_ANONYMOUS')">
         <!-- Content for users who are not logged in -->

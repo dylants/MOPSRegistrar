@@ -8,40 +8,24 @@ package com.mops.registrar.entities;
  */
 public class Address {
 
-    protected String homeAddress1;
-    protected String homeAddress2;
+    protected String homeAddress;
     protected String city;
     protected String state;
     protected String zipCode;
 
     /**
-     * @return the homeAddress1
+     * @return the homeAddress
      */
-    public String getHomeAddress1() {
-        return homeAddress1;
+    public String getHomeAddress() {
+        return homeAddress;
     }
 
     /**
-     * @param homeAddress1
-     *            the homeAddress1 to set
+     * @param homeAddress
+     *            the homeAddress to set
      */
-    public void setHomeAddress1(String homeAddress1) {
-        this.homeAddress1 = homeAddress1;
-    }
-
-    /**
-     * @return the homeAddress2
-     */
-    public String getHomeAddress2() {
-        return homeAddress2;
-    }
-
-    /**
-     * @param homeAddress2
-     *            the homeAddress2 to set
-     */
-    public void setHomeAddress2(String homeAddress2) {
-        this.homeAddress2 = homeAddress2;
+    public void setHomeAddress(String homeAddress) {
+        this.homeAddress = homeAddress;
     }
 
     /**

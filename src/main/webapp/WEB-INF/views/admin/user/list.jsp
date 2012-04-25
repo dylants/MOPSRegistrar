@@ -17,13 +17,14 @@
 				<tr class="column_names">
 					<th><a href="#">Email Address</a></th>
 					<th><a href="#">First Name</a></th>
+                    <th><a href="#">M.I.</a></th>
 					<th><a href="#">Last Name</a></th>
-                    <th><a href="#">Home Address 1</a></th>
-                    <th><a href="#">Home Address 2</a></th>
+                    <th><a href="#">Home Address</a></th>
                     <th><a href="#">City</a></th>
                     <th><a href="#">State</a></th>
-                    <th><a href="#">Zip Code</a></th>
-                    <th><a href="#">Phone Number</a></th>
+                    <th><a href="#">Zip</a></th>
+                    <th><a href="#">Daytime Number</a></th>
+                    <th><a href="#">Evening Number</a></th>
                     <th><a href="#">Date of Birth</a></th>
                     <th><a href="#">Children</a></th>
 				</tr>
@@ -32,13 +33,14 @@
 					<tr class="${loopStatus.index % 2 == 0 ? 'odd' : 'even'}">
 						<td><a href="${editUrl}">${user.emailAddress}</a></td>
 						<td>${user.firstName}</td>
+                        <td>${user.middleInitial}</td>
 						<td>${user.lastName}</td>
-                        <td>${user.registrationInformation.address.homeAddress1}</td>
-                        <td>${user.registrationInformation.address.homeAddress2}</td>
+                        <td>${user.registrationInformation.address.homeAddress}</td>
                         <td>${user.registrationInformation.address.city}</td>
                         <td>${user.registrationInformation.address.state}</td>
                         <td>${user.registrationInformation.address.zipCode}</td>
-                        <td>${user.registrationInformation.phoneNumber}</td>
+                        <td>${user.registrationInformation.daytimePhone}</td>
+                        <td>${user.registrationInformation.eveningPhone}</td>
                         <td><spring:eval expression="user.registrationInformation.dateOfBirth" /></td>
                         <td>${user.registrationInformation.children}</td>
 					</tr>

@@ -26,6 +26,7 @@ public class User extends AbstractBaseUser implements BaseUser, UserDetails, Cre
     protected String emailAddress = null;
     @NotBlank
     protected String firstName = null;
+    protected String middleInitial = null;
     @NotBlank
     protected String lastName = null;
     protected RegistrationInformation registrationInformation = null;
@@ -94,6 +95,21 @@ public class User extends AbstractBaseUser implements BaseUser, UserDetails, Cre
      */
     public String getLastName() {
         return lastName;
+    }
+
+    /**
+     * @return the middleInitial
+     */
+    public String getMiddleInitial() {
+        return middleInitial;
+    }
+
+    /**
+     * @param middleInitial
+     *            the middleInitial to set
+     */
+    public void setMiddleInitial(String middleInitial) {
+        this.middleInitial = middleInitial;
     }
 
     /**

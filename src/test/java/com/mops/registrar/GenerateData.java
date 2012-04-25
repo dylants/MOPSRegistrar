@@ -47,37 +47,39 @@ public class GenerateData {
      * Generates a new {@link User} and adds it to the database
      * 
      * @param firstName
+     * @param middleInitial
      * @param lastName
      * @param emailAddress
      * @param password
-     * @param homeAddress1
-     * @param homeAddress2
+     * @param homeAddress
      * @param city
      * @param state
      * @param zipCode
-     * @param phoneNumber
+     * @param daytimeNumber
+     * @param eveningNumber
      * @param dateOfBirth
      */
-    public void generateUser(String firstName, String lastName, String emailAddress, String password,
-            String homeAddress1, String homeAddress2, String city, String state, String zipCode, String phoneNumber,
-            Date dateOfBirth) {
+    public void generateUser(String firstName, String middleInitial, String lastName, String emailAddress,
+            String password, String homeAddress, String city, String state, String zipCode, String daytimeNumber,
+            String eveningNumber, Date dateOfBirth) {
 
         User user = new User();
         user.setFirstName(firstName);
+        user.setMiddleInitial(middleInitial);
         user.setLastName(lastName);
         user.setEmailAddress(emailAddress);
         user.setClearTextPassword(password);
 
         Address address = new Address();
-        address.setHomeAddress1(homeAddress1);
-        address.setHomeAddress2(homeAddress2);
+        address.setHomeAddress(homeAddress);
         address.setCity(city);
         address.setState(state);
         address.setZipCode(zipCode);
 
         RegistrationInformation registrationInformation = new RegistrationInformation();
         registrationInformation.setAddress(address);
-        registrationInformation.setPhoneNumber(phoneNumber);
+        registrationInformation.setDaytimePhone(daytimeNumber);
+        registrationInformation.setEveningPhone(eveningNumber);
         registrationInformation.setDateOfBirth(dateOfBirth);
 
         user.setRegistrationInformation(registrationInformation);
@@ -104,16 +106,18 @@ public class GenerateData {
         GenerateData generateData = new GenerateData();
         generateData.loadSpringContext();
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yy");
-        generateData.generateUser("Bob", "Jones", "bobjones@email.com", "bobjones", "94920 Street", null, "Austin",
-                "Texas", "75839", "512-993-2901", dateFormat.parse("03/12/68"));
-        generateData.generateUser("Biff", "Henderson", "biffhenderson@cbs.com", "biffhenderson", "234 Avenue A",
-                "Apt 943", "New York", "New York", "11903", "939-321-9560", dateFormat.parse("01/19/49"));
-        generateData.generateUser("Mary", "Jane", "maryjane@mars.com", "maryjane", "22932 Park Lane", null,
-                "Round Rock", "Texas", "75832", "512-301-6675", dateFormat.parse("04/02/79"));
-        generateData.generateUser("Amy", "Zooma", "amyzooma@gmail.com", "amyzooma", "1029 Cove", null, "Round Rock",
-                "Texas", "77348", "512-212-0503", dateFormat.parse("10/20/81"));
-        generateData.generateUser("Mary", "Poppins", "marypoppins@yahoo.com", "marypoppins", "123 Crazy Moon Street",
-                null, "Austin", "Texas", "74632", "512-394-9298", dateFormat.parse("07/18/50"));
+        generateData.generateUser("Bob", "T", "Jones", "bobjones@email.com", "bobjones", "94920 Street", "Austin",
+                "Texas", "75839", "512-993-2901", "512-585-5993", dateFormat.parse("03/12/68"));
+        generateData.generateUser("Biff", "G", "Henderson", "biffhenderson@cbs.com", "biffhenderson",
+                "234 Avenue A, Apt 943", "New York", "New York", "11903", "939-321-9560", "213-300-2001",
+                dateFormat.parse("01/19/49"));
+        generateData.generateUser("Mary", "", "Jane", "maryjane@mars.com", "maryjane", "22932 Park Lane", "Round Rock",
+                "Texas", "75832", "512-301-6675", "512-301-6675", dateFormat.parse("04/02/79"));
+        generateData.generateUser("Amy", "M", "Zooma", "amyzooma@gmail.com", "amyzooma", "1029 Cove", "Round Rock",
+                "Texas", "77348", "512-212-0503", "512-310-4992", dateFormat.parse("10/20/81"));
+        generateData.generateUser("Mary", "P", "Poppins", "marypoppins@yahoo.com", "marypoppins",
+                "123 Crazy Moon Street", "Austin", "Texas", "74632", "512-394-9298", "512-758-2990",
+                dateFormat.parse("07/18/50"));
 
         generateData.generateAdminUser("RegistrarAdmin", "mops");
     }

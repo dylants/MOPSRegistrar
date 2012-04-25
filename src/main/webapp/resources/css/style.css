@@ -22,19 +22,40 @@ body a:active {
     color: black;
 }
 
+.curved {
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    behavior: url(border-radius.htc);
+    -webkit-box-shadow: 0 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+    box-shadow: 0 8px 6px -6px black;
+
+    /* Box */
+    margin: 0pt auto;
+    background-color: #E2E7ED;
+    background-image: url(../img/f_bg.png);
+    border: 2px solid #CDE6FF;
+    margin-top: 20px;
+    padding: 2px;
+    width: 950px;
+    padding-bottom: 8px;
+}
+
 body {
-    font-family:'Trebuchet MS',sans-serif;
+    font-family: 'Trebuchet MS', sans-serif;
     background-image: url(../img/bg_page.png);
     background-repeat: repeat-x;
     height: 99%;
     background-color: #AFC1D5;
 }
 
+/* HEADER */
 #header {
     background-image: url(../img/bg_header.png);
-    font-family:Verdana,Geneva,'DejaVu Sans',sans-serif;
+    font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif;
     text-align: center;
     margin: -8px;
+    border-bottom: 5px solid #CDE6FF;
 }
 
 #header strong {
@@ -54,13 +75,14 @@ body {
     padding: 8px;
 }
 
+/* MAIN PAGE */
 #main {
     text-align: center;
 }
 
 #main li {
     list-style: none;
-    padding-right:20px;
+    padding-right: 20px;
 }
 
 /* ----------------- */
@@ -73,37 +95,65 @@ body {
 }
 
 /* USER FORM */
-#user_form {
-    margin:0 auto;
-    width:380px;
+#userForm {
 }
 
-#user_form .errorblock {
+#userForm .errorblock {
     color: #000;
     background-color: #ffEEEE;
     border: 3px solid #ff0000;
     padding: 8px;
-    margin: 16px;
-    width: 420px;
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
-#user_form .error {
+#userForm #nameAndAddress {
+    padding-left: 100px;
+}
+
+#userForm #phoneNumbers {
+    padding-left: 35px;
+}
+
+#userForm #emailAndPassword {
+    padding-left: 15px;
+}
+
+#userForm .error {
     color: #ff0000;
 }
 
-#user_form .submitButton {
-    padding: 30px;
+#user_form_table td {
+    padding-left: 4px;
 }
 
-#user_form .longText {
+#user_form_table .shortText {
+    width: 50px;
+}
+
+#user_form_table .mediumText {
+    width: 100px;
+}
+
+#user_form_table .longText {
     width: 180px;
 }
 
-#user_form a:hover {
+#user_form_table .xtralongText {
+    width: 605px;
+}
+
+#userForm .submitButton {
+    padding: 30px;
+}
+
+#userForm a:hover {
     text-decoration: none;
 }
 
-#user_form a:active {
+#userForm a:active {
     text-decoration: none;
 }
 
@@ -118,7 +168,7 @@ body {
 }
 
 /* ADMIN LIST */
-#admin_list_table th, #admin_list_table td {
+#admin_list_table th,#admin_list_table td {
     padding: 8px;
 }
 

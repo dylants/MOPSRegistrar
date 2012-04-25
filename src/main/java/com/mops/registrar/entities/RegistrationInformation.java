@@ -14,8 +14,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class RegistrationInformation {
 
     protected Address address;
-    protected String phoneNumber;
-    @DateTimeFormat(pattern="MM/dd/yyyy")
+    protected String daytimePhone;
+    protected String eveningPhone;
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
     protected Date dateOfBirth;
     protected Set<Child> children;
 
@@ -45,18 +46,33 @@ public class RegistrationInformation {
     }
 
     /**
-     * @return the phoneNumber
+     * @return the daytimePhone
      */
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getDaytimePhone() {
+        return daytimePhone;
     }
 
     /**
-     * @param phoneNumber
-     *            the phoneNumber to set
+     * @param daytimePhone
+     *            the daytimePhone to set
      */
-    public void setPhoneNumber(String phoneNumer) {
-        this.phoneNumber = phoneNumer;
+    public void setDaytimePhone(String phoneNumer) {
+        this.daytimePhone = phoneNumer;
+    }
+
+    /**
+     * @return the eveningPhone
+     */
+    public String getEveningPhone() {
+        return eveningPhone;
+    }
+
+    /**
+     * @param eveningPhone
+     *            the eveningPhone to set
+     */
+    public void setEveningPhone(String eveningPhone) {
+        this.eveningPhone = eveningPhone;
     }
 
     /**
