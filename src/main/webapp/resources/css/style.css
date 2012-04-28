@@ -35,6 +35,7 @@ body a:active {
     background-color: #E2E7ED;
     border: 2px solid #CDE6FF;
     margin-top: 20px;
+    margin-bottom: 20px;
     padding: 2px;
     width: 950px;
     padding-bottom: 8px;
@@ -53,6 +54,7 @@ body a:active {
     background-color: #E2E7ED;
     border: 2px solid #CDE6FF;
     margin-top: 20px;
+    margin-bottom: 20px;
     padding: 2px;
     width: 750px;
     padding-bottom: 8px;
@@ -157,15 +159,24 @@ body {
 }
 
 /* USER FORM */
-#userForm {
-}
-
 #userForm #nameAndAddress {
     padding-left: 100px;
 }
 
 #userForm #phoneNumbers {
     padding-left: 35px;
+}
+
+#userForm #additionalRegistrationData #dataRow {
+    margin: 20px 0px 20px 0px;
+}
+
+#userForm #additionalRegistrationData #dataRow #dataQuestionAnswer {
+    margin: 5px 0px 5px 0px;
+}
+
+#userForm #registrationBreak {
+    border-bottom: 5px solid #FCFCFC;
 }
 
 #userForm #emailAndPassword {

@@ -1,6 +1,5 @@
 package com.mops.registrar.web.page.admin;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mops.registrar.entities.User;
 import com.mops.registrar.services.user.UserService;
-import com.mops.registrar.web.validator.admin.UserValidatorForAdmin;
+import com.mops.registrar.web.validator.admin.UserValidatorForEditRegistrationInformation;
 import com.mops.registrar.web.validator.user.UserValidator;
 
 /**
@@ -31,7 +30,7 @@ public class EditUserController {
     @Autowired
     private UserService userService = null;
     @Autowired
-    private UserValidatorForAdmin userValidatorForAdmin = null;
+    private UserValidatorForEditRegistrationInformation userValidatorForEditRegistrationInformation = null;
 
     /**
      * Configures the {@link UserValidator} to be used when validating {@link User} type objects.
@@ -40,7 +39,7 @@ public class EditUserController {
      */
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
-        binder.setValidator(this.userValidatorForAdmin);
+        binder.setValidator(this.userValidatorForEditRegistrationInformation);
     }
 
     /**
@@ -50,14 +49,12 @@ public class EditUserController {
      *            The ID of the {@link User} we should edit
      * @param model
      *            Contains information used by the view
-     * @param request
-     *            The {@link HttpServletRequest}
      * @return The JSP used to edit the user
      */
     @RequestMapping(method = RequestMethod.GET)
-    public String editUser(@PathVariable("entityId") String entityId, Model model, HttpServletRequest request) {
+    public String editUser(@PathVariable("entityId") String entityId, Model model) {
         User user = this.userService.getUserByEntityId(entityId);
-        populateModel(model, user, request);
+        populateModel(model, user);
         return "user/userForm";
     }
 
@@ -72,17 +69,15 @@ public class EditUserController {
      *            The result of the binding of the user input to the {@link User} object
      * @param model
      *            Contains information used by the view
-     * @param request
-     *            The {@link HttpServletRequest}
      * @return The JSP used to display the next page
      */
     @RequestMapping(method = RequestMethod.PUT)
     public String processEditUser(@PathVariable("entityId") String entityId, @Valid @ModelAttribute("user") User user,
-            BindingResult bindingResult, Model model, HttpServletRequest request) {
+            BindingResult bindingResult, Model model) {
         // first cover binding errors (invalid input)
         if (bindingResult.hasErrors()) {
             // show the user form again (so they can fix the errors)
-            populateModel(model, user, request);
+            populateModel(model, user);
             return "user/userForm";
         }
 
@@ -101,15 +96,42 @@ public class EditUserController {
      *            The {@link Model} to populate
      * @param user
      *            The {@link User}
-     * @param request
-     *            The {@link HttpServletRequest}
      */
-    protected void populateModel(Model model, User user, HttpServletRequest request) {
+    protected void populateModel(Model model, User user) {
         model.addAttribute("user", user);
         // it's an existing User we're dealing with, not a new one
         model.addAttribute("isNew", false);
-        model.addAttribute("heading", "Edit Registration Information");
-        model.addAttribute("submitButtonText", "Submit");
-        model.addAttribute("homeUrl", request.getContextPath() + "/page/admin/home");
     }
+
+    /**
+     * @return the userService
+     */
+    public UserService getUserService() {
+        return userService;
+    }
+
+    /**
+     * @param userService
+     *            the userService to set
+     */
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    /**
+     * @return the userValidatorForEditRegistrationInformation
+     */
+    public UserValidatorForEditRegistrationInformation getUserValidatorForEditRegistrationInformation() {
+        return userValidatorForEditRegistrationInformation;
+    }
+
+    /**
+     * @param userValidatorForEditRegistrationInformation
+     *            the userValidatorForEditRegistrationInformation to set
+     */
+    public void setUserValidatorForEditRegistrationInformation(
+            UserValidatorForEditRegistrationInformation userValidatorForEditRegistrationInformation) {
+        this.userValidatorForEditRegistrationInformation = userValidatorForEditRegistrationInformation;
+    }
+
 }

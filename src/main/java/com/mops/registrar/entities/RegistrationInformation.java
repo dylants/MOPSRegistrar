@@ -17,6 +17,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 public class RegistrationInformation {
 
+    // required data
     @Valid
     protected Address address;
     @NotBlank
@@ -26,7 +27,17 @@ public class RegistrationInformation {
     @NotNull
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     protected Date dateOfBirth;
-    @Valid
+
+    // additional data
+    protected boolean attendedMopsBefore = false;
+    protected String attendedMopsBeforeLocation = null;
+    protected boolean registeredMopsToMomConnection = false;
+    protected boolean attendChurch = false;
+    protected String attendChurchLocation = null;
+    protected String howDidYouHearAboutMops = null;
+    protected String husbandsName = null;
+
+    // children
     protected Set<Child> children;
 
     /**
@@ -97,6 +108,111 @@ public class RegistrationInformation {
      */
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    /**
+     * @return the attendedMopsBefore
+     */
+    public boolean isAttendedMopsBefore() {
+        return attendedMopsBefore;
+    }
+
+    /**
+     * @param attendedMopsBefore
+     *            the attendedMopsBefore to set
+     */
+    public void setAttendedMopsBefore(boolean attendedMopsBefore) {
+        this.attendedMopsBefore = attendedMopsBefore;
+    }
+
+    /**
+     * @return the attendedMopsBeforeLocation
+     */
+    public String getAttendedMopsBeforeLocation() {
+        return attendedMopsBeforeLocation;
+    }
+
+    /**
+     * @param attendedMopsBeforeLocation
+     *            the attendedMopsBeforeLocation to set
+     */
+    public void setAttendedMopsBeforeLocation(String attendedMopsBeforeLocation) {
+        this.attendedMopsBeforeLocation = attendedMopsBeforeLocation;
+    }
+
+    /**
+     * @return the registeredMopsToMomConnection
+     */
+    public boolean isRegisteredMopsToMomConnection() {
+        return registeredMopsToMomConnection;
+    }
+
+    /**
+     * @param registeredMopsToMomConnection
+     *            the registeredMopsToMomConnection to set
+     */
+    public void setRegisteredMopsToMomConnection(boolean registeredMopsToMomConnection) {
+        this.registeredMopsToMomConnection = registeredMopsToMomConnection;
+    }
+
+    /**
+     * @return the attendChurch
+     */
+    public boolean isAttendChurch() {
+        return attendChurch;
+    }
+
+    /**
+     * @param attendChurch
+     *            the attendChurch to set
+     */
+    public void setAttendChurch(boolean attendChurch) {
+        this.attendChurch = attendChurch;
+    }
+
+    /**
+     * @return the attendChurchLocation
+     */
+    public String getAttendChurchLocation() {
+        return attendChurchLocation;
+    }
+
+    /**
+     * @param attendChurchLocation
+     *            the attendChurchLocation to set
+     */
+    public void setAttendChurchLocation(String attendChurchLocation) {
+        this.attendChurchLocation = attendChurchLocation;
+    }
+
+    /**
+     * @return the howDidYouHearAboutMops
+     */
+    public String getHowDidYouHearAboutMops() {
+        return howDidYouHearAboutMops;
+    }
+
+    /**
+     * @param howDidYouHearAboutMops
+     *            the howDidYouHearAboutMops to set
+     */
+    public void setHowDidYouHearAboutMops(String howDidYouHearAboutMops) {
+        this.howDidYouHearAboutMops = howDidYouHearAboutMops;
+    }
+
+    /**
+     * @return the husbandsName
+     */
+    public String getHusbandsName() {
+        return husbandsName;
+    }
+
+    /**
+     * @param husbandsName
+     *            the husbandsName to set
+     */
+    public void setHusbandsName(String husbandsName) {
+        this.husbandsName = husbandsName;
     }
 
     /**

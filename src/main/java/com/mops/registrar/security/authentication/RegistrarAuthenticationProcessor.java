@@ -1,5 +1,7 @@
 package com.mops.registrar.security.authentication;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,4 +24,14 @@ public interface RegistrarAuthenticationProcessor {
      * @param user
      */
     public void loginNewlyRegisteredUser(HttpServletRequest request, HttpServletResponse response, User user);
+
+    /**
+     * Locates and returns the {@link User} object stored within the supplied {@link Principal}, else returns
+     * {@literal null} if none is found
+     * 
+     * @param principal
+     *            The {@link Principal} of the current user
+     * @return The {@link User} object, else {@literal null} if none foundO
+     */
+    public User deriveUserFromPrincipal(Principal principal);
 }

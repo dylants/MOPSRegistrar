@@ -1,5 +1,7 @@
 package com.mops.registrar.security.authentication;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -77,6 +79,24 @@ public class DefaultRegistrarAuthenticationProcessor implements RegistrarAuthent
 
         // return what we've built
         return authenticationToken;
+    }
+
+    @Override
+    public User deriveUserFromPrincipal(Principal principal) {
+        // first find out if it's of type Authentication
+        if (principal instanceof Authentication) {
+            // now get the principal from the... principal
+            Authentication authentication = (Authentication) principal;
+            Object authenticationPrincipal = authentication.getPrincipal();
+            // see if it's of type User
+            if (authenticationPrincipal instanceof User) {
+                User user = (User) authenticationPrincipal;
+                return user;
+            }
+        }
+
+        // else, doesn't exist, return null
+        return null;
     }
 
     /**

@@ -1,8 +1,9 @@
 package com.mops.registrar.web.page.user;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
+
 import javax.validation.Valid;
+import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,26 +18,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.mops.registrar.entities.User;
 import com.mops.registrar.security.authentication.RegistrarAuthenticationProcessor;
 import com.mops.registrar.services.user.UserService;
-import com.mops.registrar.web.validator.user.UserValidator;
+import com.mops.registrar.web.validator.admin.UserValidatorForEditRegistrationInformation;
 
 /**
- * Web controller that handles registering new {@link User}s
+ * Builds and processes the Edit Registration Information page
  * 
  * @author dylants
  * 
  */
 @Controller
-@RequestMapping(value = "/user/register")
-public class RegisterUserController {
+@RequestMapping(value = "user/profile/editRegistrationInformation")
+public class EditRegistrationInformationController {
     @Autowired
     private UserService userService;
     @Autowired
-    private UserValidator userValidator;
+    private UserValidatorForEditRegistrationInformation userValidator;
     @Autowired
     private RegistrarAuthenticationProcessor registrarAuthenticationProcessor;
 
     /**
-     * Configures the {@link UserValidator} to be used when validating {@link User} type objects.
+     * Configures the {@link Validator} to be used when validating {@link User} type objects.
      * 
      * @param binder
      */
@@ -46,67 +47,56 @@ public class RegisterUserController {
     }
 
     /**
-     * Displays a view used to register a {@link User}
+     * Returns the edit registration information view
      * 
+     * @param principal
+     *            The current {@link Principal}
      * @param model
-     *            Contains information used by the view
-     * @return The JSP used to register the user
+     *            The {@link Model} used to pass information to the view
+     * @return The edit registration information view
      */
     @RequestMapping(method = RequestMethod.GET)
-    public String registerUser(Model model) {
-        User user = new User();
-        populateModel(model, user);
-        return "user/userForm";
+    public String editRegistrationInformation(Principal principal, Model model) {
+        // get the User from the principal
+        User user = this.registrarAuthenticationProcessor.deriveUserFromPrincipal(principal);
+        if (user != null) {
+            model.addAttribute("user", user);
+            return "user/userForm";
+        }
+
+        // if we're here, something went wrong, send them back to home
+        // TODO logging
+        return "home";
     }
 
     /**
-     * Processes the register user request, registering the user and displaying a view based on the result.
+     * Processes the edit registration information request, edit the user and displaying a view based on the result.
      * 
      * @param user
-     *            The {@link User} to register
+     *            The edited {@link User}
      * @param bindingResult
      *            The result of the binding of the user input to the {@link User} object
      * @param model
      *            Contains information used by the view
-     * @param request
-     *            The {@link HttpServletRequest}
-     * @param response
-     *            The {@link HttpServletResponse}
      * @return The JSP used to display the next page
      */
-    @RequestMapping(method = RequestMethod.POST)
-    public String processRegisterUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult,
-            Model model, HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(method = RequestMethod.PUT)
+    public String processEditUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
         // first cover binding errors (invalid input)
         if (bindingResult.hasErrors()) {
-            // show them the registration page again (to fix the errors)
-            populateModel(model, user);
+            // show the user form again (so they can fix the errors)
+            model.addAttribute("user", user);
             return "user/userForm";
         }
 
-        // if things are good, add the user to our registry
-        this.userService.addUser(user);
-
-        // use this User object to log them in
-        this.registrarAuthenticationProcessor.loginNewlyRegisteredUser(request, response, user);
-
-        // show registration success page
+        // find this user's entity ID
+        String entityId = user.getEntityId();
+        // update the user in our registry, which will return us the updated user
+        user = this.userService.updateUser(entityId, user);
+        // add it to the model for the jsp
         model.addAttribute("user", user);
-        return "user/registrationSuccess";
-    }
-
-    /**
-     * Populates the model with generic information required for this view
-     * 
-     * @param model
-     *            The {@link Model} to populate
-     * @param user
-     *            The {@link User}
-     */
-    protected void populateModel(Model model, User user) {
-        model.addAttribute("user", user);
-        // it's a new User we're dealing with, not an existing
-        model.addAttribute("isNew", true);
+        // show edit success page
+        return "user/profile";
     }
 
     /**
@@ -127,7 +117,7 @@ public class RegisterUserController {
     /**
      * @return the userValidator
      */
-    public UserValidator getUserValidator() {
+    public UserValidatorForEditRegistrationInformation getUserValidator() {
         return userValidator;
     }
 
@@ -135,7 +125,7 @@ public class RegisterUserController {
      * @param userValidator
      *            the userValidator to set
      */
-    public void setUserValidator(UserValidator userValidator) {
+    public void setUserValidator(UserValidatorForEditRegistrationInformation userValidator) {
         this.userValidator = userValidator;
     }
 
