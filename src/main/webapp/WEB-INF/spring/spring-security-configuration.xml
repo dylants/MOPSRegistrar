@@ -37,7 +37,7 @@
         <!-- Any URL (not matched by the above patterns) is restricted to admins, registered users, and anonymous (anyone) -->
         <intercept-url pattern="/**" access="hasAnyRole('ROLE_ADMIN_USER','ROLE_REGISTERED_USER','ROLE_ANONYMOUS')" />
         <!-- Enables form based login -->
-        <form-login default-target-url="/page/home"/>
+        <form-login default-target-url="/page/home" login-page="/page/login" authentication-failure-url="/page/login?error"/>
         <!-- Enables the logout function -->
         <logout logout-success-url="/page/home"/>
     </http>

@@ -3,7 +3,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <c:set var="adminRoot" value="${contextPath}/page/admin"/>
 
-    <div id="admin_editSuccess">
+    <div id="admin_editSuccess" class="curved_narrow">
         <div>
     
             <h1>The registration information for ${user.firstName} ${user.lastName} has been updated</h1>

@@ -3,7 +3,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <c:set var="adminRoot" value="${contextPath}/page/admin"/>
 
-    <div id="admin">
+    <div id="admin" class="curved_narrow">
     
         <h1>
             <strong>MOPS Registration Admin</strong>

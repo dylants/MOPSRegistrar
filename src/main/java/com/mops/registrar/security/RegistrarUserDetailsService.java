@@ -39,9 +39,13 @@ public class RegistrarUserDetailsService implements UserDetailsService {
 
         // look in the AdminUser repository
         userDetails = this.adminUserService.getAdminUserByUsername(username);
+        if (userDetails != null) {
+            // we found it, return this one
+            return userDetails;
+        }
 
-        // return what we've got, null is okay
-        return userDetails;
+        // if we're here, we've not found a UserDetails... 
+        throw new UsernameNotFoundException("Username: \"" + username + "\" not found");
     }
 
 }

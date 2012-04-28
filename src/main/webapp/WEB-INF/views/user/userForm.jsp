@@ -10,12 +10,12 @@
     </c:otherwise>
 </c:choose>
 
-	<div id="userForm" class="curved">
+	<div id="userForm" class="curved_wide">
 	
 		<h1>${heading}</h1>
         
 		<form:form modelAttribute="user" method="${method}">
-            <form:errors cssClass="errorblock" element="div" />
+            <form:errors cssClass="errorBlock" element="div" />
             <p>Please complete the form below so we can learn some basic information about you</p>
             <div id="nameAndAddress">
                 <table id="user_form_table">

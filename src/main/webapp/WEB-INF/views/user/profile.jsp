@@ -3,7 +3,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <c:set var="userRoot" value="${contextPath}/page/user" />
 
-<div id="user_profile">
+<div id="user_profile" class="curved_narrow">
 
         <h1>
             <strong>Profile for ${user.firstName} ${user.lastName}</strong>

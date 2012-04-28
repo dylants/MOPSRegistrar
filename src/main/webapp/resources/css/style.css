@@ -22,7 +22,7 @@ body a:active {
     color: black;
 }
 
-.curved {
+.curved_wide {
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     behavior: url(border-radius.htc);
@@ -33,11 +33,28 @@ body a:active {
     /* Box */
     margin: 0pt auto;
     background-color: #E2E7ED;
-    background-image: url(../img/f_bg.png);
     border: 2px solid #CDE6FF;
     margin-top: 20px;
     padding: 2px;
     width: 950px;
+    padding-bottom: 8px;
+}
+
+.curved_narrow {
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    behavior: url(border-radius.htc);
+    -webkit-box-shadow: 0 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+    box-shadow: 0 8px 6px -6px black;
+
+    /* Box */
+    margin: 0pt auto;
+    background-color: #E2E7ED;
+    border: 2px solid #CDE6FF;
+    margin-top: 20px;
+    padding: 2px;
+    width: 750px;
     padding-bottom: 8px;
 }
 
@@ -47,6 +64,22 @@ body {
     background-repeat: repeat-x;
     height: 99%;
     background-color: #AFC1D5;
+}
+
+.shortText {
+    width: 50px;
+}
+
+.mediumText {
+    width: 100px;
+}
+
+.longText {
+    width: 180px;
+}
+
+.xtralongText {
+    width: 605px;
 }
 
 /* HEADER */
@@ -85,20 +118,7 @@ body {
     padding-right: 20px;
 }
 
-/* ----------------- */
-/* page specific css */
-/* ----------------- */
-
-/* HOME */
-#home_links a {
-    padding: 10px;
-}
-
-/* USER FORM */
-#userForm {
-}
-
-#userForm .errorblock {
+.errorBlock {
     color: #000;
     background-color: #ffEEEE;
     border: 3px solid #ff0000;
@@ -107,6 +127,37 @@ body {
     margin-right: 200px;
     margin-bottom: 10px;
     text-align: center;
+}
+
+/* ----------------- */
+/* page specific css */
+/* ----------------- */
+
+/* HOME */
+#home #information {
+    padding-left: 20px;
+    padding-right: 20px;    
+}
+
+#home_links {
+    padding: 10px;
+}
+
+#home_links a {
+    padding: 10px;
+}
+
+/* LOGIN */
+#login .usernameAndPassword {
+    padding-left: 215px;
+}
+
+#login .submitButtons {
+    padding: 10px;
+}
+
+/* USER FORM */
+#userForm {
 }
 
 #userForm #nameAndAddress {
@@ -129,22 +180,6 @@ body {
     padding-left: 4px;
 }
 
-#user_form_table .shortText {
-    width: 50px;
-}
-
-#user_form_table .mediumText {
-    width: 100px;
-}
-
-#user_form_table .longText {
-    width: 180px;
-}
-
-#user_form_table .xtralongText {
-    width: 605px;
-}
-
 #userForm .submitButton {
     padding: 30px;
 }
@@ -158,6 +193,10 @@ body {
 }
 
 /* USER PROFILE */
+#user_profile_links {
+    padding: 10px;
+}
+
 #user_profile_links a {
     padding: 10px;
 }
