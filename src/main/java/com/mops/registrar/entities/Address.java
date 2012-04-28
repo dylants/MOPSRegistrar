@@ -1,5 +1,7 @@
 package com.mops.registrar.entities;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 /**
  * Represents a {@link User}'s address
  * 
@@ -8,9 +10,13 @@ package com.mops.registrar.entities;
  */
 public class Address {
 
+    @NotBlank
     protected String homeAddress;
+    @NotBlank
     protected String city;
+    @NotBlank
     protected String state;
+    @NotBlank
     protected String zipCode;
 
     /**

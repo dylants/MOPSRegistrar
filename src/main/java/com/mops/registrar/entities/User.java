@@ -1,5 +1,6 @@
 package com.mops.registrar.entities;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -29,6 +30,7 @@ public class User extends AbstractBaseUser implements BaseUser, UserDetails, Cre
     protected String middleInitial = null;
     @NotBlank
     protected String lastName = null;
+    @Valid
     protected RegistrationInformation registrationInformation = null;
 
     /**

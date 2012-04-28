@@ -61,36 +61,33 @@
                     <tr>
                         <td>&nbsp;</td>
                         <c:set var="cityErrors"><form:errors path="registrationInformation.address.city"/></c:set>
-                        <td><span id="city.errors" class="error">${city}</span></td>
+                        <td><span id="city.errors" class="error">${cityErrors}</span></td>
                         <td>&nbsp;</td>
                         <c:set var="stateErrors"><form:errors path="registrationInformation.address.state"/></c:set>
-                        <td><span id="state.errors" class="error">${state}</span></td>
+                        <td><span id="state.errors" class="error">${stateErrors}</span></td>
                         <td>&nbsp;</td>
-                        <c:set var="zipCoderrors"><form:errors path="registrationInformation.address.zipCode"/></c:set>
-                        <td><span id="zipCode.errors" class="error">${zipCode}</span></td>
+                        <c:set var="zipCodeErrors"><form:errors path="registrationInformation.address.zipCode"/></c:set>
+                        <td><span id="zipCode.errors" class="error">${zipCodeErrors}</span></td>
                     </tr>
                 </table>
             </div>
             <div id="phoneNumbers">
                 <table id="user_form_table">
                     <tr>
-                        <td>Daytime Phone Number:</td>
-                        <td><form:input path="registrationInformation.daytimePhone" cssClass="mediumText" /></td>
-                        <td>Evening Phone Number:</td>
-                        <td><form:input path="registrationInformation.eveningPhone" cssClass="mediumText" /></td>
+                        <td>Home Phone Number:</td>
+                        <td><form:input path="registrationInformation.homePhoneNumber" cssClass="mediumText" /></td>
+                        <td>Cell Phone Number:</td>
+                        <td><form:input path="registrationInformation.cellPhoneNumber" cssClass="mediumText" /></td>
                         <td>&nbsp;Date of Birth:<br/>(MM/DD/YYYY)</td>
                         <td><form:input path="registrationInformation.dateOfBirth" cssClass="longText" /></td>
                     </tr>
                     <tr>
-                        <td>&nbsp;</td>
-                        <c:set var="daytimePhoneErrors"><form:errors path="registrationInformation.daytimePhone"/></c:set>
-                        <td><span id="daytimePhone.errors" class="error">${daytimePhoneErrors}</span></td>
-                        <td>&nbsp;</td>
-                        <c:set var="eveningPhoneErrors"><form:errors path="registrationInformation.eveningPhone"/></c:set>
-                        <td><span id="eveningPhone.errors" class="error">${eveningPhoneErrors}</span></td>
-                        <td>&nbsp;</td>
+                        <c:set var="homePhoneNumberErrors"><form:errors path="registrationInformation.homePhoneNumber"/></c:set>
+                        <td colspan="2"><span id="homePhoneNumber.errors" class="error">${homePhoneNumberErrors}</span></td>
+                        <c:set var="cellPhoneNumberErrors"><form:errors path="registrationInformation.cellPhoneNumber"/></c:set>
+                        <td colspan="2"><span id="cellPhoneNumber.errors" class="error">${cellPhoneNumberErrors}</span></td>
                         <c:set var="dateOfBirthErrors"><form:errors path="registrationInformation.dateOfBirth"/></c:set>
-                        <td><span id="dateOfBirth.errors" class="error">${dateOfBirthErrors}</span></td>
+                        <td colspan="2"><span id="dateOfBirth.errors" class="error">${dateOfBirthErrors}</span></td>
                     </tr>
     			</table>
             </div>

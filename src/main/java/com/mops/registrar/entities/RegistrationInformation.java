@@ -3,6 +3,10 @@ package com.mops.registrar.entities;
 import java.util.Date;
 import java.util.Set;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -13,11 +17,16 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 public class RegistrationInformation {
 
+    @Valid
     protected Address address;
-    protected String daytimePhone;
-    protected String eveningPhone;
+    @NotBlank
+    protected String homePhoneNumber;
+    @NotBlank
+    protected String cellPhoneNumber;
+    @NotNull
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     protected Date dateOfBirth;
+    @Valid
     protected Set<Child> children;
 
     /**
@@ -46,33 +55,33 @@ public class RegistrationInformation {
     }
 
     /**
-     * @return the daytimePhone
+     * @return the homePhoneNumber
      */
-    public String getDaytimePhone() {
-        return daytimePhone;
+    public String getHomePhoneNumber() {
+        return homePhoneNumber;
     }
 
     /**
-     * @param daytimePhone
-     *            the daytimePhone to set
+     * @param homePhoneNumber
+     *            the homePhoneNumber to set
      */
-    public void setDaytimePhone(String phoneNumer) {
-        this.daytimePhone = phoneNumer;
+    public void setHomePhoneNumber(String homePhoneNumber) {
+        this.homePhoneNumber = homePhoneNumber;
     }
 
     /**
-     * @return the eveningPhone
+     * @return the cellPhoneNumber
      */
-    public String getEveningPhone() {
-        return eveningPhone;
+    public String getCellPhoneNumber() {
+        return cellPhoneNumber;
     }
 
     /**
-     * @param eveningPhone
-     *            the eveningPhone to set
+     * @param cellPhoneNumber
+     *            the cellPhoneNumber to set
      */
-    public void setEveningPhone(String eveningPhone) {
-        this.eveningPhone = eveningPhone;
+    public void setCellPhoneNumber(String cellPhoneNumber) {
+        this.cellPhoneNumber = cellPhoneNumber;
     }
 
     /**

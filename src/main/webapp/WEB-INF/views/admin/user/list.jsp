@@ -23,8 +23,8 @@
                     <th><a href="#">City</a></th>
                     <th><a href="#">State</a></th>
                     <th><a href="#">Zip</a></th>
-                    <th><a href="#">Daytime Number</a></th>
-                    <th><a href="#">Evening Number</a></th>
+                    <th><a href="#">Home Phone Number</a></th>
+                    <th><a href="#">Cell Phone Number</a></th>
                     <th><a href="#">Date of Birth</a></th>
                     <th><a href="#">Children</a></th>
 				</tr>
@@ -39,8 +39,8 @@
                         <td>${user.registrationInformation.address.city}</td>
                         <td>${user.registrationInformation.address.state}</td>
                         <td>${user.registrationInformation.address.zipCode}</td>
-                        <td>${user.registrationInformation.daytimePhone}</td>
-                        <td>${user.registrationInformation.eveningPhone}</td>
+                        <td>${user.registrationInformation.homePhoneNumber}</td>
+                        <td>${user.registrationInformation.cellPhoneNumber}</td>
                         <td><spring:eval expression="user.registrationInformation.dateOfBirth" /></td>
                         <td>${user.registrationInformation.children}</td>
 					</tr>
