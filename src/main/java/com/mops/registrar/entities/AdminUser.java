@@ -1,22 +1,19 @@
 package com.mops.registrar.entities;
 
-import org.springframework.security.core.CredentialsContainer;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import com.google.common.collect.Sets;
 import com.mops.registrar.security.Authorities;
 
 /**
  * Represents an Administrative user within the system, who can access restricted resources. This user exists outside of
- * the normal registration process, and as such, does not contain the extra information a normal registered {@link User}
- * would contain.
+ * the normal registration process, and as such, does not contain the extra information a normal registered
+ * {@link MOPSUser} would contain.
  * 
  * @author dylants
  * 
  */
-public class AdminUser extends AbstractBaseUser implements BaseUser, UserDetails, CredentialsContainer {
+public class AdminUser extends BaseUser {
 
-    private static final long serialVersionUID = 4376388347985824942L;
+    private static final long serialVersionUID = 415399535255120380L;
 
     /**
      * Default constructor
@@ -28,6 +25,7 @@ public class AdminUser extends AbstractBaseUser implements BaseUser, UserDetails
 
     @Override
     public String toString() {
-        return "AdminUser username: " + this.username;
+        return "AdminUser username: " + this.getUsername();
     }
+
 }

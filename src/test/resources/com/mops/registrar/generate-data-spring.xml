@@ -26,7 +26,7 @@
     </mongo:repositories>
 
     <!-- Additional custom queries for the user repository -->
-    <bean id="customUserRepository" class="com.mops.registrar.repositories.user.impl.CustomUserRepositoryImpl" />
+    <bean id="customUserRepository" class="com.mops.registrar.repositories.user.impl.CustomMOPSUserRepositoryImpl" />
 
     <!-- The admin user repository -->
     <mongo:repositories base-package="com.mops.registrar.repositories.admin" mongo-template-ref="registrarDBMongoTemplate"

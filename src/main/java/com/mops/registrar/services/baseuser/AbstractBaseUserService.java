@@ -8,7 +8,7 @@ import org.springframework.security.authentication.encoding.PasswordEncoder;
 import com.mops.registrar.entities.BaseUser;
 
 /**
- * Provides some common methods used by {@link BaseUser} servicesO
+ * Provides some common methods used by {@link BaseUser} services
  * 
  * @author dylants
  * 
@@ -21,19 +21,56 @@ public abstract class AbstractBaseUserService {
     @Autowired
     protected SaltSource saltSource;
 
+    protected boolean verifyBaseUserPassword(String password, BaseUser baseUser) {
+        /*
+         * So we're not storing the actual password, but a hash. Because of this, we must verify the password the user
+         * entered against this hash. We'll use the password encoder we used to store the password to verify the
+         * password.
+         */
+
+        // Get the salt (if available)
+        Object salt = null;
+        if (this.saltSource != null) {
+            salt = this.saltSource.getSalt(baseUser);
+        }
+
+        return this.passwordEncoder.isPasswordValid(baseUser.getPasswordHash(), password, salt);
+    }
+
     /**
-     * Performs operations necessary to store the password in the database. This includes storing a hash of the
-     * password, and wiping the actual password so it is not stored in the database.
+     * Performs operations necessary to store the password in the repository. This includes storing a hash of the
+     * password, and wiping the actual password so it is not stored in the repository.
      * 
      * @param baseUser
      *            The {@link BaseUser} to process
      */
     protected void processPassword(BaseUser baseUser) {
-        String plainTextPassword = baseUser.getClearTextPassword();
+        String clearTextPassword = baseUser.getClearTextPassword();
 
+        // generate the password hash
+        String passwordHash = generatePasswordHash(clearTextPassword, baseUser);
+
+        // store the hash which we'll use to verify the base user on subsequent requests
+        baseUser.setPasswordHash(passwordHash);
+
+        // clear the plain text passwords
+        baseUser.setClearTextPassword(null);
+        baseUser.setClearTextConfirmPassword(null);
+    }
+
+    /**
+     * Generates a password hash of the <code>clearTextPassword</code>
+     * 
+     * @param clearTextPassword
+     *            The clear text password
+     * @param baseUser
+     *            The {@link BaseUser} which owns this password
+     * @return The password hash
+     */
+    protected String generatePasswordHash(String clearTextPassword, BaseUser baseUser) {
         // sanity check
-        if (StringUtils.isBlank(plainTextPassword)) {
-            return;
+        if (StringUtils.isBlank(clearTextPassword)) {
+            return null;
         }
 
         // Get the salt (if available)
@@ -42,13 +79,9 @@ public abstract class AbstractBaseUserService {
             salt = this.saltSource.getSalt(baseUser);
         }
         // encode the password (returning a hash)
-        String encodedPassword = this.passwordEncoder.encodePassword(plainTextPassword, salt);
-        // store the hash which we'll use to verify the base user on subsequent requests
-        baseUser.setPasswordHash(encodedPassword);
+        String passwordHash = this.passwordEncoder.encodePassword(clearTextPassword, salt);
 
-        // clear the plain text password(s)
-        baseUser.setClearTextPassword(null);
-        baseUser.setClearTextConfirmPassword(null);
+        return passwordHash;
     }
 
     /**

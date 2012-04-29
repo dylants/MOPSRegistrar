@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mops.registrar.entities.User;
+import com.mops.registrar.entities.MOPSUser;
 import com.mops.registrar.security.authentication.RegistrarAuthenticationProcessor;
 
 @Controller
@@ -27,10 +27,10 @@ public class UserProfileController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public String profile(Principal principal, Model model) {
-        // attempt to get the User
-        User user = this.registrarAuthenticationProcessor.deriveUserFromPrincipal(principal);
-        if (user != null) {
-            model.addAttribute("user", user);
+        // attempt to get the MOPSUser
+        MOPSUser mopsUser = this.registrarAuthenticationProcessor.deriveMOPSUserFromPrincipal(principal);
+        if (mopsUser != null) {
+            model.addAttribute("user", mopsUser);
             return "user/profile";
         }
 

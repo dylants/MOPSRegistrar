@@ -1,25 +1,31 @@
 package com.mops.registrar.entities;
 
+import org.springframework.data.annotation.Id;
+
 /**
- * A base level element all elements should implement
+ * A base level entity all entities should extend
  * 
- * @author dysmith
+ * @author dylants
  * 
  */
-public interface BaseEntity {
+public class BaseEntity {
+
+    @Id
+    private String entityId = null;
 
     /**
-     * Returns the entity ID of the {@link BaseEntity}
-     * 
-     * @return The entity ID of the {@link BaseEntity}
+     * @return the entityId
      */
-    public String getEntityId();
+    public String getEntityId() {
+        return entityId;
+    }
 
     /**
-     * Sets the entity ID of the {@link BaseEntity}
-     * 
      * @param entityId
-     *            The entity ID to set
+     *            the entityId to set
      */
-    public void setEntityId(String entityId);
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
+    }
+
 }

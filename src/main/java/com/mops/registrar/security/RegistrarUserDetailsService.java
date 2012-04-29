@@ -30,7 +30,7 @@ public class RegistrarUserDetailsService implements UserDetailsService {
          */
         UserDetails userDetails = null;
 
-        // in the case of User's, the username is the email address
+        // in the case of MOPSUser's, the username is the email address
         userDetails = this.userService.getUserByEmailAddress(username);
         if (userDetails != null) {
             // we found it, return this one
@@ -44,7 +44,7 @@ public class RegistrarUserDetailsService implements UserDetailsService {
             return userDetails;
         }
 
-        // if we're here, we've not found a UserDetails... 
+        // if we're here, we've not found a UserDetails...
         throw new UsernameNotFoundException("Username: \"" + username + "\" not found");
     }
 

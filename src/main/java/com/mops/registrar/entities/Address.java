@@ -3,7 +3,7 @@ package com.mops.registrar.entities;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
- * Represents a {@link User}'s address
+ * Represents an address
  * 
  * @author dylants
  * 
@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Address {
 
     @NotBlank
-    protected String homeAddress;
+    protected String streetAddress;
     @NotBlank
     protected String city;
     @NotBlank
@@ -20,18 +20,18 @@ public class Address {
     protected String zipCode;
 
     /**
-     * @return the homeAddress
+     * @return the streetAddress
      */
-    public String getHomeAddress() {
-        return homeAddress;
+    public String getStreetAddress() {
+        return streetAddress;
     }
 
     /**
-     * @param homeAddress
-     *            the homeAddress to set
+     * @param streetAddress
+     *            the streetAddress to set
      */
-    public void setHomeAddress(String homeAddress) {
-        this.homeAddress = homeAddress;
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
     }
 
     /**

@@ -9,8 +9,8 @@ import org.springframework.util.ClassUtils;
 
 import com.mops.registrar.entities.Address;
 import com.mops.registrar.entities.AdminUser;
+import com.mops.registrar.entities.MOPSUser;
 import com.mops.registrar.entities.RegistrationInformation;
-import com.mops.registrar.entities.User;
 import com.mops.registrar.services.admin.AdminUserService;
 import com.mops.registrar.services.user.UserService;
 
@@ -44,14 +44,14 @@ public class GenerateData {
     }
 
     /**
-     * Generates a new {@link User} and adds it to the database
+     * Generates a new {@link MOPSUser} and adds it to the database
      * 
      * @param firstName
      * @param middleInitial
      * @param lastName
      * @param emailAddress
      * @param password
-     * @param homeAddress
+     * @param streetAddress
      * @param city
      * @param state
      * @param zipCode
@@ -63,28 +63,29 @@ public class GenerateData {
             String password, String homeAddress, String city, String state, String zipCode, String homePhoneNumber,
             String cellPhoneNumber, Date dateOfBirth) {
 
-        User user = new User();
-        user.setFirstName(firstName);
-        user.setMiddleInitial(middleInitial);
-        user.setLastName(lastName);
-        user.setEmailAddress(emailAddress);
-        user.setClearTextPassword(password);
+        MOPSUser mopsUser = new MOPSUser();
+        mopsUser.setUsername(emailAddress);
+        mopsUser.setClearTextPassword(password);
 
         Address address = new Address();
-        address.setHomeAddress(homeAddress);
+        address.setStreetAddress(homeAddress);
         address.setCity(city);
         address.setState(state);
         address.setZipCode(zipCode);
 
         RegistrationInformation registrationInformation = new RegistrationInformation();
+        registrationInformation.setFirstName(firstName);
+        registrationInformation.setMiddleInitial(middleInitial);
+        registrationInformation.setLastName(lastName);
+        registrationInformation.setEmailAddress(emailAddress);
         registrationInformation.setAddress(address);
         registrationInformation.setHomePhoneNumber(homePhoneNumber);
         registrationInformation.setCellPhoneNumber(cellPhoneNumber);
         registrationInformation.setDateOfBirth(dateOfBirth);
 
-        user.setRegistrationInformation(registrationInformation);
+        mopsUser.setRegistrationInformation(registrationInformation);
 
-        this.userService.addUser(user);
+        this.userService.addUser(mopsUser);
     }
 
     /**

@@ -1,53 +1,108 @@
 package com.mops.registrar.entities;
 
 import java.util.Date;
-import java.util.Set;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * Represents the information filled out during registration
+ * Represents the information filled out during registration of a {@link MOPSUser}
  * 
  * @author dylants
  * 
  */
 public class RegistrationInformation {
 
-    // required data
+    // information about the user
+    @NotBlank
+    @Pattern(regexp = ".+@.+\\.[a-z]+")
+    private String emailAddress = null;
+    @NotBlank
+    private String firstName = null;
+    private String middleInitial = null;
+    @NotBlank
+    private String lastName = null;
     @Valid
-    protected Address address;
+    private Address address;
     @NotBlank
-    protected String homePhoneNumber;
+    private String homePhoneNumber;
     @NotBlank
-    protected String cellPhoneNumber;
+    private String cellPhoneNumber;
     @NotNull
     @DateTimeFormat(pattern = "MM/dd/yyyy")
-    protected Date dateOfBirth;
+    private Date dateOfBirth;
 
     // additional data
-    protected boolean attendedMopsBefore = false;
-    protected String attendedMopsBeforeLocation = null;
-    protected boolean registeredMopsToMomConnection = false;
-    protected boolean attendChurch = false;
-    protected String attendChurchLocation = null;
-    protected String howDidYouHearAboutMops = null;
-    protected String husbandsName = null;
-
-    // children
-    protected Set<Child> children;
+    private boolean attendedMopsBefore = false;
+    private String attendedMopsBeforeLocation = null;
+    private boolean registeredMopsToMomConnection = false;
+    private boolean attendChurch = false;
+    private String attendChurchLocation = null;
+    private String howDidYouHearAboutMops = null;
+    private String husbandsName = null;
 
     /**
-     * Adds a {@link Child} to the {@link Set}
-     * 
-     * @param child
-     *            The {@link Child} to add
+     * @return the emailAddress
      */
-    public void addChild(Child child) {
-        this.children.add(child);
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    /**
+     * @param emailAddress
+     *            the emailAddress to set
+     */
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    /**
+     * @return the firstName
+     */
+    public String getFirstName() {
+        return firstName;
+    }
+
+    /**
+     * @param firstName
+     *            the firstName to set
+     */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    /**
+     * @return the middleInitial
+     */
+    public String getMiddleInitial() {
+        return middleInitial;
+    }
+
+    /**
+     * @param middleInitial
+     *            the middleInitial to set
+     */
+    public void setMiddleInitial(String middleInitial) {
+        this.middleInitial = middleInitial;
+    }
+
+    /**
+     * @return the lastName
+     */
+    public String getLastName() {
+        return lastName;
+    }
+
+    /**
+     * @param lastName
+     *            the lastName to set
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     /**
@@ -215,18 +270,4 @@ public class RegistrationInformation {
         this.husbandsName = husbandsName;
     }
 
-    /**
-     * @return the children
-     */
-    public Set<Child> getChildren() {
-        return children;
-    }
-
-    /**
-     * @param children
-     *            the children to set
-     */
-    public void setChildren(Set<Child> children) {
-        this.children = children;
-    }
 }

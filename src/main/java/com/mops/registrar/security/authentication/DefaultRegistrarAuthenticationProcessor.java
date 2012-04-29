@@ -14,7 +14,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 import org.springframework.stereotype.Service;
 
-import com.mops.registrar.entities.User;
+import com.mops.registrar.entities.MOPSUser;
 
 /**
  * Default implementation of the {@link RegistrarAuthenticationProcessor}
@@ -30,7 +30,7 @@ public class DefaultRegistrarAuthenticationProcessor implements RegistrarAuthent
     private SessionAuthenticationStrategy sessionStrategy;
 
     @Override
-    public void loginNewlyRegisteredUser(HttpServletRequest request, HttpServletResponse response, User user) {
+    public void loginNewlyRegisteredMOPSUser(HttpServletRequest request, HttpServletResponse response, MOPSUser mopsUser) {
         /*
          * This uses generally the same logic as an AbstractAuthenticationProcessingFilter, however we know the
          * information provided is correct (since they've just registered this user) and can be used as an
@@ -39,7 +39,7 @@ public class DefaultRegistrarAuthenticationProcessor implements RegistrarAuthent
          */
 
         // first build the Authentication token
-        Authentication authenticationToken = buildAuthenticationToken(request, response, user);
+        Authentication authenticationToken = buildAuthenticationToken(request, response, mopsUser);
 
         // now perform any additional session logic based on an authentication
         sessionStrategy.onAuthentication(authenticationToken, request, response);
@@ -49,30 +49,30 @@ public class DefaultRegistrarAuthenticationProcessor implements RegistrarAuthent
     }
 
     /**
-     * Builds an {@link Authentication} token from the <code>user</code> object
+     * Builds an {@link Authentication} token from the <code>mopsUser</code> object
      * 
      * @param request
      *            The {@link HttpServletRequest}
      * @param response
      *            The {@link HttpServletResponse}
-     * @param user
-     *            The newly created {@link User} used to build the {@link Authentication} token
+     * @param mopsUser
+     *            The newly created {@link MOPSUser} used to build the {@link Authentication} token
      * @return The authenticated {@link Authentication}
      */
     protected Authentication buildAuthenticationToken(HttpServletRequest request, HttpServletResponse response,
-            User user) {
+            MOPSUser mopsUser) {
         /*
-         * Since the user has just registered this User object, we can authenticate it based on the information they
+         * Since the user has just registered this MOPSUser object, we can authenticate it based on the information they
          * provided. So, use the user's information to build the authenticated Authentication token, using the
          * UsernamePasswordAuthenticationToken as our model.
          * 
-         * Note that even though the clear text password retreived from the User at this point is most likely null, we
-         * should not need to store it in the Authentication token. Since authentication has already taken place, we
+         * Note that even though the clear text password retreived from the MOPSUser at this point is most likely null,
+         * we should not need to store it in the Authentication token. Since authentication has already taken place, we
          * would normally clear the credentials so as to not keep sensitive information around in the session. So we
          * just store null as the credentials in this Authentication token.
          */
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user, null,
-                user.getAuthorities());
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(mopsUser,
+                null, mopsUser.getAuthorities());
 
         // add the additional details of the authentication token
         authenticationToken.setDetails(authenticationDetailsSource.buildDetails(request));
@@ -82,16 +82,16 @@ public class DefaultRegistrarAuthenticationProcessor implements RegistrarAuthent
     }
 
     @Override
-    public User deriveUserFromPrincipal(Principal principal) {
+    public MOPSUser deriveMOPSUserFromPrincipal(Principal principal) {
         // first find out if it's of type Authentication
         if (principal instanceof Authentication) {
             // now get the principal from the... principal
             Authentication authentication = (Authentication) principal;
             Object authenticationPrincipal = authentication.getPrincipal();
-            // see if it's of type User
-            if (authenticationPrincipal instanceof User) {
-                User user = (User) authenticationPrincipal;
-                return user;
+            // see if it's of type MOPSUser
+            if (authenticationPrincipal instanceof MOPSUser) {
+                MOPSUser mopsUser = (MOPSUser) authenticationPrincipal;
+                return mopsUser;
             }
         }
 

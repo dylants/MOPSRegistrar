@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mops.registrar.entities.User;
+import com.mops.registrar.entities.MOPSUser;
 import com.mops.registrar.security.authentication.RegistrarAuthenticationProcessor;
 import com.mops.registrar.services.user.UserService;
 import com.mops.registrar.web.validator.user.UserValidator;
 
 /**
- * Web controller that handles registering new {@link User}s
+ * Web controller that handles registering new {@link MOPSUser}s
  * 
  * @author dylants
  * 
@@ -36,7 +36,7 @@ public class RegisterUserController {
     private RegistrarAuthenticationProcessor registrarAuthenticationProcessor;
 
     /**
-     * Configures the {@link UserValidator} to be used when validating {@link User} type objects.
+     * Configures the {@link UserValidator} to be used when validating {@link MOPSUser} type objects.
      * 
      * @param binder
      */
@@ -46,7 +46,7 @@ public class RegisterUserController {
     }
 
     /**
-     * Displays a view used to register a {@link User}
+     * Displays a view used to register a {@link MOPSUser}
      * 
      * @param model
      *            Contains information used by the view
@@ -54,18 +54,18 @@ public class RegisterUserController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public String registerUser(Model model) {
-        User user = new User();
-        populateModel(model, user);
+        MOPSUser mopsUser = new MOPSUser();
+        populateModel(model, mopsUser);
         return "user/userForm";
     }
 
     /**
      * Processes the register user request, registering the user and displaying a view based on the result.
      * 
-     * @param user
-     *            The {@link User} to register
+     * @param mopsUser
+     *            The {@link MOPSUser} to register
      * @param bindingResult
-     *            The result of the binding of the user input to the {@link User} object
+     *            The result of the binding of the user input to the {@link MOPSUser} object
      * @param model
      *            Contains information used by the view
      * @param request
@@ -75,23 +75,23 @@ public class RegisterUserController {
      * @return The JSP used to display the next page
      */
     @RequestMapping(method = RequestMethod.POST)
-    public String processRegisterUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult,
+    public String processRegisterUser(@Valid @ModelAttribute("user") MOPSUser mopsUser, BindingResult bindingResult,
             Model model, HttpServletRequest request, HttpServletResponse response) {
         // first cover binding errors (invalid input)
         if (bindingResult.hasErrors()) {
             // show them the registration page again (to fix the errors)
-            populateModel(model, user);
+            populateModel(model, mopsUser);
             return "user/userForm";
         }
 
         // if things are good, add the user to our registry
-        this.userService.addUser(user);
+        this.userService.addUser(mopsUser);
 
-        // use this User object to log them in
-        this.registrarAuthenticationProcessor.loginNewlyRegisteredUser(request, response, user);
+        // use this MOPSUser object to log them in
+        this.registrarAuthenticationProcessor.loginNewlyRegisteredMOPSUser(request, response, mopsUser);
 
         // show registration success page
-        model.addAttribute("user", user);
+        model.addAttribute("user", mopsUser);
         return "user/registrationSuccess";
     }
 
@@ -100,12 +100,12 @@ public class RegisterUserController {
      * 
      * @param model
      *            The {@link Model} to populate
-     * @param user
-     *            The {@link User}
+     * @param mopsUser
+     *            The {@link MOPSUser}
      */
-    protected void populateModel(Model model, User user) {
-        model.addAttribute("user", user);
-        // it's a new User we're dealing with, not an existing
+    protected void populateModel(Model model, MOPSUser mopsUser) {
+        model.addAttribute("user", mopsUser);
+        // it's a new MOPSUser we're dealing with, not an existing
         model.addAttribute("isNew", true);
     }
 

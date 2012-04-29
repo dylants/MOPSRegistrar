@@ -2,16 +2,16 @@ package com.mops.registrar.services.user.impl;
 
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.mops.registrar.entities.User;
-import com.mops.registrar.repositories.user.UserRepository;
+import com.mops.registrar.entities.MOPSUser;
+import com.mops.registrar.entities.RegistrationInformation;
+import com.mops.registrar.repositories.user.MOPSUserRepository;
 import com.mops.registrar.services.baseuser.AbstractBaseUserService;
 import com.mops.registrar.services.user.UserService;
 
 /**
- * Persistent based {@link UserService} which utilizes the {@link UserRepository}
+ * Persistent based {@link UserService} which utilizes the {@link MOPSUserRepository}
  * 
  * @author dylants
  * 
@@ -19,29 +19,29 @@ import com.mops.registrar.services.user.UserService;
 public class DatabaseUserService extends AbstractBaseUserService implements UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private MOPSUserRepository mopsUserRepository;
 
     @Override
-    public List<User> getUsers() {
-        return this.userRepository.findAll();
+    public List<MOPSUser> getUsers() {
+        return this.mopsUserRepository.findAll();
     }
 
     @Override
-    public User getUserByEntityId(String entityId) {
-        return this.userRepository.findByEntityId(entityId);
+    public MOPSUser getUserByEntityId(String entityId) {
+        return this.mopsUserRepository.findByEntityId(entityId);
     }
 
     @Override
-    public User getUserByEmailAddress(String emailAddress) {
-        return this.userRepository.findByEmailAddress(emailAddress);
+    public MOPSUser getUserByEmailAddress(String emailAddress) {
+        return this.mopsUserRepository.findByEmailAddress(emailAddress);
     }
 
     @Override
-    public User getUserByFirstNameLastName(String firstName, String lastName) {
-        List<User> users = this.userRepository.findByFirstNameLastName(firstName, lastName);
+    public MOPSUser getUserByFirstNameLastName(String firstName, String lastName) {
+        List<MOPSUser> mopsUsers = this.mopsUserRepository.findByFirstNameLastName(firstName, lastName);
         // since we don't know much else, return the first one
-        if ((users != null) && (users.size() > 0)) {
-            return users.get(0);
+        if ((mopsUsers != null) && (mopsUsers.size() > 0)) {
+            return mopsUsers.get(0);
         } else {
             // none found
             return null;
@@ -49,60 +49,51 @@ public class DatabaseUserService extends AbstractBaseUserService implements User
     }
 
     @Override
-    public User addUser(User user) {
+    public MOPSUser addUser(MOPSUser mopsUser) {
         // before writing the the database, process the password fields
-        processPassword(user);
-        return this.userRepository.save(user);
+        processPassword(mopsUser);
+        return this.mopsUserRepository.save(mopsUser);
     }
 
     @Override
-    public User updateUser(String entityId, User user) {
-        /*
-         * In this circumstance, we want to replace the old user with the new user. What we need to do is copy the
-         * entityId into the new user, and save it.
-         */
-        user.setEntityId(entityId);
-        // if the user updated their password (in addition to anything else)
-        if (StringUtils.isNotBlank(user.getClearTextPassword())) {
-            // process the password fields
-            processPassword(user);
-        } else {
-            // else we should just copy the old user's password hash over (no change was made)
-            User oldUser = this.userRepository.findByEntityId(entityId);
-            user.setPasswordHash(oldUser.getPasswordHash());
-        }
-        return this.userRepository.save(user);
+    public MOPSUser updateEmailAddress(String entityId, String emailAddress) {
+        return this.mopsUserRepository.updateEmailAddress(entityId, emailAddress);
     }
 
     @Override
-    public boolean verifyPassword(String password, User user) {
-        /*
-         * So we're not storing the actual password, but a hash. Because of this, we must verify the password the user
-         * entered against this hash. We'll use the password encoder we used to store the password to verify the
-         * password.
-         */
+    public MOPSUser updatePassword(String entityId, String password) {
+        // first we have to get the user
+        MOPSUser mopsUser = getUserByEntityId(entityId);
 
-        // Get the salt (if available)
-        Object salt = null;
-        if (this.saltSource != null) {
-            salt = this.saltSource.getSalt(user);
-        }
+        // then we generate the hash from the clear text password
+        String passwordHash = generatePasswordHash(password, mopsUser);
 
-        return this.passwordEncoder.isPasswordValid(user.getPasswordHash(), password, salt);
+        // finally we update the password hash
+        return this.mopsUserRepository.updatePasswordHash(entityId, passwordHash);
+    }
+
+    @Override
+    public MOPSUser updateRegistrationInformation(String entityId, RegistrationInformation registrationInformation) {
+        return this.mopsUserRepository.updateRegistrationInformation(entityId, registrationInformation);
+    }
+
+    @Override
+    public boolean verifyPassword(String password, MOPSUser mopsUser) {
+        return this.verifyBaseUserPassword(password, mopsUser);
     }
 
     /**
-     * @return the userRepository
+     * @return the mopsUserRepository
      */
-    public UserRepository getUserRepository() {
-        return userRepository;
+    public MOPSUserRepository getUserRepository() {
+        return mopsUserRepository;
     }
 
     /**
-     * @param userRepository
-     *            the userRepository to set
+     * @param mopsUserRepository
+     *            the mopsUserRepository to set
      */
-    public void setUserRepository(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public void setUserRepository(MOPSUserRepository mopsUserRepository) {
+        this.mopsUserRepository = mopsUserRepository;
     }
 }

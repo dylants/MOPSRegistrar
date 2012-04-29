@@ -3,31 +3,33 @@ package com.mops.registrar.services.user.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mops.registrar.entities.User;
+import com.mops.registrar.entities.MOPSUser;
+import com.mops.registrar.entities.RegistrationInformation;
+import com.mops.registrar.services.baseuser.AbstractBaseUserService;
 import com.mops.registrar.services.user.UserService;
 
 /**
- * Local in-memory {@link UserService} using a simple {@link ArrayList} to store the {@link User}s
+ * Local in-memory {@link UserService} using a simple {@link ArrayList} to store the {@link MOPSUser}s
  * 
  * @author dylants
  * 
  */
-public class LocalUserService implements UserService {
+public class LocalUserService extends AbstractBaseUserService implements UserService {
 
-    private List<User> users = new ArrayList<User>();
+    private List<MOPSUser> mopsUsers = new ArrayList<MOPSUser>();
 
     @Override
-    public List<User> getUsers() {
-        return this.users;
+    public List<MOPSUser> getUsers() {
+        return this.mopsUsers;
     }
 
     @Override
-    public User getUserByEntityId(String entityId) {
-        User returnUser = null;
+    public MOPSUser getUserByEntityId(String entityId) {
+        MOPSUser returnUser = null;
 
-        for (User user : this.users) {
-            if (user.getEntityId().equals(entityId)) {
-                returnUser = user;
+        for (MOPSUser mopsUser : this.mopsUsers) {
+            if (mopsUser.getEntityId().equals(entityId)) {
+                returnUser = mopsUser;
             }
         }
 
@@ -35,12 +37,12 @@ public class LocalUserService implements UserService {
     }
 
     @Override
-    public User getUserByEmailAddress(String emailAddress) {
-        User returnUser = null;
+    public MOPSUser getUserByEmailAddress(String emailAddress) {
+        MOPSUser returnUser = null;
 
-        for (User user : this.users) {
-            if (user.getEmailAddress().equals(emailAddress)) {
-                returnUser = user;
+        for (MOPSUser mopsUser : this.mopsUsers) {
+            if (mopsUser.getRegistrationInformation().getEmailAddress().equals(emailAddress)) {
+                returnUser = mopsUser;
             }
         }
 
@@ -48,12 +50,13 @@ public class LocalUserService implements UserService {
     }
 
     @Override
-    public User getUserByFirstNameLastName(String firstName, String lastName) {
-        User returnUser = null;
+    public MOPSUser getUserByFirstNameLastName(String firstName, String lastName) {
+        MOPSUser returnUser = null;
 
-        for (User user : this.users) {
-            if (user.getFirstName().equals(firstName) && user.getLastName().equals(lastName)) {
-                returnUser = user;
+        for (MOPSUser mopsUser : this.mopsUsers) {
+            if (mopsUser.getRegistrationInformation().getFirstName().equals(firstName)
+                    && mopsUser.getRegistrationInformation().getLastName().equals(lastName)) {
+                returnUser = mopsUser;
             }
         }
 
@@ -61,40 +64,62 @@ public class LocalUserService implements UserService {
     }
 
     @Override
-    public User addUser(User user) {
+    public MOPSUser addUser(MOPSUser mopsUser) {
         // only add the user if not null
-        if (user != null) {
-            this.users.add(user);
-            return user;
+        if (mopsUser != null) {
+            this.mopsUsers.add(mopsUser);
+            return mopsUser;
         } else {
             return null;
         }
     }
 
     @Override
-    public User updateUser(String entityId, User user) {
-        /*
-         * The purpose here is to replace the existing user with the information found in user. So really we can just
-         * set the ID on the newer object, and replace it in our local List of Users.
-         */
-        // remove the old
-        User oldUser = getUserByEntityId(entityId);
-        this.users.remove(oldUser);
-        // update the new
-        user.setEntityId(entityId);
-        // and add the new
-        this.users.add(user);
+    public MOPSUser updateEmailAddress(String entityId, String emailAddress) {
+        MOPSUser mopsUser = getUserByEntityId(entityId);
+        // sanity check
+        if (mopsUser == null) {
+            return null;
+        }
 
-        // return the new
-        return user;
+        // update the email address
+        mopsUser.getRegistrationInformation().setEmailAddress(emailAddress);
+
+        return mopsUser;
     }
 
     @Override
-    public boolean verifyPassword(String password, User user) {
-        if (user.getClearTextPassword().equals(password)) {
-            return true;
-        } else {
-            return false;
+    public MOPSUser updatePassword(String entityId, String password) {
+        MOPSUser mopsUser = getUserByEntityId(entityId);
+        // sanity check
+        if (mopsUser == null) {
+            return null;
         }
+
+        // update the password
+        mopsUser.setClearTextPassword(password);
+        processPassword(mopsUser);
+
+        return mopsUser;
     }
+
+    @Override
+    public MOPSUser updateRegistrationInformation(String entityId, RegistrationInformation registrationInformation) {
+        MOPSUser mopsUser = getUserByEntityId(entityId);
+        // sanity check
+        if (mopsUser == null) {
+            return null;
+        }
+
+        // update the registration information
+        mopsUser.setRegistrationInformation(registrationInformation);
+
+        return mopsUser;
+    }
+
+    @Override
+    public boolean verifyPassword(String password, MOPSUser mopsUser) {
+        return this.verifyBaseUserPassword(password, mopsUser);
+    }
+
 }

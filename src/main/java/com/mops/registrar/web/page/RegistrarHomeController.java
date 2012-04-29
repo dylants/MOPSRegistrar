@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mops.registrar.entities.AdminUser;
-import com.mops.registrar.entities.User;
+import com.mops.registrar.entities.MOPSUser;
 
 /**
  * MOPS Registrar Home Page Controller
@@ -40,10 +40,10 @@ public class RegistrarHomeController {
             Authentication authentication = (Authentication) principal;
             Object authenticationPrincipal = authentication.getPrincipal();
             // see what type of logged in user they are
-            if (authenticationPrincipal instanceof User) {
-                User user = (User) authenticationPrincipal;
+            if (authenticationPrincipal instanceof MOPSUser) {
+                MOPSUser mopsUser = (MOPSUser) authenticationPrincipal;
                 // add the first name
-                model.addAttribute("firstName", user.getFirstName());
+                model.addAttribute("firstName", mopsUser.getRegistrationInformation().getFirstName());
             } else if (authenticationPrincipal instanceof AdminUser) {
                 AdminUser adminUser = (AdminUser) authenticationPrincipal;
                 // add the first name

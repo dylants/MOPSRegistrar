@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mops.registrar.entities.User;
+import com.mops.registrar.entities.MOPSUser;
 import com.mops.registrar.services.user.UserService;
 import com.mops.registrar.web.validator.admin.UserValidatorForEditRegistrationInformation;
 import com.mops.registrar.web.validator.user.UserValidator;
 
 /**
- * Web controller responsible for editing an existing {@link User}
+ * Web controller responsible for editing an existing {@link MOPSUser}
  * 
  * @author dysmith
  * 
@@ -33,7 +33,7 @@ public class EditUserController {
     private UserValidatorForEditRegistrationInformation userValidatorForEditRegistrationInformation = null;
 
     /**
-     * Configures the {@link UserValidator} to be used when validating {@link User} type objects.
+     * Configures the {@link UserValidator} to be used when validating {@link MOPSUser} type objects.
      * 
      * @param binder
      */
@@ -43,18 +43,18 @@ public class EditUserController {
     }
 
     /**
-     * Displays a view used to edit a {@link User}
+     * Displays a view used to edit a {@link MOPSUser}
      * 
      * @param entityId
-     *            The ID of the {@link User} we should edit
+     *            The ID of the {@link MOPSUser} we should edit
      * @param model
      *            Contains information used by the view
      * @return The JSP used to edit the user
      */
     @RequestMapping(method = RequestMethod.GET)
     public String editUser(@PathVariable("entityId") String entityId, Model model) {
-        User user = this.userService.getUserByEntityId(entityId);
-        populateModel(model, user);
+        MOPSUser mopsUser = this.userService.getUserByEntityId(entityId);
+        populateModel(model, mopsUser);
         return "user/userForm";
     }
 
@@ -62,29 +62,29 @@ public class EditUserController {
      * Processes the edit user request, edit the user and displaying a view based on the result.
      * 
      * @param entityId
-     *            The ID of the {@link User} we should edit
-     * @param user
-     *            The edited {@link User}
+     *            The ID of the {@link MOPSUser} we should edit
+     * @param mopsUser
+     *            The edited {@link MOPSUser}
      * @param bindingResult
-     *            The result of the binding of the user input to the {@link User} object
+     *            The result of the binding of the user input to the {@link MOPSUser} object
      * @param model
      *            Contains information used by the view
      * @return The JSP used to display the next page
      */
     @RequestMapping(method = RequestMethod.PUT)
-    public String processEditUser(@PathVariable("entityId") String entityId, @Valid @ModelAttribute("user") User user,
+    public String processEditUser(@PathVariable("entityId") String entityId, @Valid @ModelAttribute("user") MOPSUser mopsUser,
             BindingResult bindingResult, Model model) {
         // first cover binding errors (invalid input)
         if (bindingResult.hasErrors()) {
             // show the user form again (so they can fix the errors)
-            populateModel(model, user);
+            populateModel(model, mopsUser);
             return "user/userForm";
         }
 
         // update the user in our registry, which will return us the updated user
-        user = this.userService.updateUser(entityId, user);
+        mopsUser = this.userService.updateUser(entityId, mopsUser);
         // add it to the model for the jsp
-        model.addAttribute("user", user);
+        model.addAttribute("user", mopsUser);
         // show edit success page
         return "admin/user/editSuccess";
     }
@@ -94,12 +94,12 @@ public class EditUserController {
      * 
      * @param model
      *            The {@link Model} to populate
-     * @param user
-     *            The {@link User}
+     * @param mopsUser
+     *            The {@link MOPSUser}
      */
-    protected void populateModel(Model model, User user) {
-        model.addAttribute("user", user);
-        // it's an existing User we're dealing with, not a new one
+    protected void populateModel(Model model, MOPSUser mopsUser) {
+        model.addAttribute("user", mopsUser);
+        // it's an existing MOPSUser we're dealing with, not a new one
         model.addAttribute("isNew", false);
     }
 

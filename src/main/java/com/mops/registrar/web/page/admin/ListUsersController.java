@@ -9,11 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mops.registrar.entities.User;
+import com.mops.registrar.entities.MOPSUser;
 import com.mops.registrar.services.user.UserService;
 
 /**
- * Web controller used to display the {@link User}s available.
+ * Web controller used to display the {@link MOPSUser}s available.
  * 
  * @author dylants
  * 
@@ -25,20 +25,20 @@ public class ListUsersController {
     private UserService userService = null;
 
     /**
-     * Lists the {@link User}s in the system
+     * Lists the {@link MOPSUser}s in the system
      * 
      * @param model
      *            Contains information used by the view
-     * @return The JSP used to list the {@link User}s
+     * @return The JSP used to list the {@link MOPSUser}s
      */
     @RequestMapping(method = RequestMethod.GET)
     public String listUsers(Model model) {
-        List<User> users = this.userService.getUsers();
+        List<MOPSUser> mopsUsers = this.userService.getUsers();
 
         // by default, sort the list by last name
-        Collections.sort(users);
+        Collections.sort(mopsUsers);
 
-        model.addAttribute("users", users);
+        model.addAttribute("users", mopsUsers);
         return "admin/user/list";
     }
 
