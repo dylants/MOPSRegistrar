@@ -98,7 +98,7 @@ public class LocalUserService extends AbstractUserService implements UserService
         // generate the hash from the clear text password
         String passwordHash = generatePasswordHash(password, mopsUser);
 
-        // update the password
+        // update the password hash
         mopsUser.setPasswordHash(passwordHash);
 
         return mopsUser;

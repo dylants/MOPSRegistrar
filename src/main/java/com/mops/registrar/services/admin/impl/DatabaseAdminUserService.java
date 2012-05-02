@@ -41,13 +41,20 @@ public class DatabaseAdminUserService extends AbstractAdminUserService implement
     }
 
     @Override
-    public AdminUser updateAdminUser(String entityId, AdminUser adminUser) {
-        /*
-         * In this circumstance, we want to replace the old admin user with the new admin user. What we need to do is
-         * copy the entityId into the new admin user, and save it.
-         */
-        adminUser.setEntityId(entityId);
-        return this.adminUserRepository.save(adminUser);
+    public AdminUser updateUsername(String entityId, String username) {
+        return this.adminUserRepository.updateUsername(entityId, username);
+    }
+
+    @Override
+    public AdminUser updatePassword(String entityId, String password) {
+        // first we have to get the user
+        AdminUser adminUser = getAdminUserByEntityId(entityId);
+
+        // then we generate the hash from the clear text password
+        String passwordHash = generatePasswordHash(password, adminUser);
+
+        // finally we update the password hash
+        return this.adminUserRepository.updatePasswordHash(entityId, passwordHash);
     }
 
     /**

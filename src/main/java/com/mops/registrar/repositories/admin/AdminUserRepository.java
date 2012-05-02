@@ -10,7 +10,7 @@ import com.mops.registrar.entities.AdminUser;
  * @author dylants
  * 
  */
-public interface AdminUserRepository extends MongoRepository<AdminUser, String> {
+public interface AdminUserRepository extends MongoRepository<AdminUser, String>, CustomAdminUserRepository {
 
     /**
      * Locates an {@link AdminUser} by it's <code>entityId</code>

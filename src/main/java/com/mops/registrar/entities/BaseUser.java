@@ -2,7 +2,6 @@ package com.mops.registrar.entities;
 
 import java.util.Collection;
 import java.util.Set;
-import java.util.UUID;
 
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.core.GrantedAuthority;
@@ -46,9 +45,6 @@ public abstract class BaseUser extends BaseEntity implements UserDetails {
      *            The {@link GrantedAuthority} of the {@link AbstractBaseUser}
      */
     public BaseUser(Set<GrantedAuthority> authorities) {
-        // generate the entity ID since it's used as a salt
-        this.setEntityId(UUID.randomUUID().toString());
-
         // Spring Security details
         this.authorities = authorities;
         // provide some defaults for spring security elements

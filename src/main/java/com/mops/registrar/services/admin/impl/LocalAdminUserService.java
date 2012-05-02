@@ -53,15 +53,30 @@ public class LocalAdminUserService extends AbstractAdminUserService implements A
     }
 
     @Override
-    public AdminUser updateAdminUser(String entityId, AdminUser adminUser) {
-        // get the old admin user
-        AdminUser oldAdminUser = getAdminUserByEntityId(entityId);
-        // remove it from our repository
-        this.adminUsers.remove(oldAdminUser);
-        // update the new one with the entity ID of the old
-        adminUser.setEntityId(oldAdminUser.getEntityId());
-        // add it and return it
-        return addAdminUser(adminUser);
+    public AdminUser updateUsername(String entityId, String username) {
+        // get the admin user
+        AdminUser adminUser = getAdminUserByEntityId(entityId);
+
+        // update the username
+        adminUser.setUsername(username);
+
+        // and return it
+        return adminUser;
+    }
+
+    @Override
+    public AdminUser updatePassword(String entityId, String password) {
+        // get the admin user
+        AdminUser adminUser = getAdminUserByEntityId(entityId);
+
+        // generate the hash from the clear text password
+        String passwordHash = generatePasswordHash(password, adminUser);
+
+        // update the password hash
+        adminUser.setPasswordHash(passwordHash);
+
+        // and return it
+        return adminUser;
     }
 
 }

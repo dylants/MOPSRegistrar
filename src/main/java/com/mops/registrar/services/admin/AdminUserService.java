@@ -47,16 +47,26 @@ public interface AdminUserService {
     public AdminUser addAdminUser(AdminUser adminUser);
 
     /**
-     * Updates an existing {@link AdminUser} specified by the <code>entityId</code> with that contained in the
-     * </code>adminUser</code> object
+     * Updates the username of an existing {@link AdminUser}, specified by the <code>entityId</code>.
      * 
      * @param entityId
      *            The entity ID of the {@link AdminUser} to update
-     * @param adminUser
-     *            The {@link AdminUser} information that will be used to update the {@link AdminUser}
+     * @param username
+     *            The updated username
      * @return The updated {@link AdminUser}
      */
-    public AdminUser updateAdminUser(String entityId, AdminUser adminUser);
+    public AdminUser updateUsername(String entityId, String username);
+
+    /**
+     * Updates the password of an existing {@link AdminUser}, specified by the <code>entityId</code>.
+     * 
+     * @param entityId
+     *            The entity ID of the {@link AdminUser} to update
+     * @param password
+     *            The updated password
+     * @return The updated {@link AdminUser}
+     */
+    public AdminUser updatePassword(String entityId, String password);
 
     /**
      * Generates a password hash of the <code>clearTextPassword</code>

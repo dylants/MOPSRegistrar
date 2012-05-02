@@ -13,18 +13,22 @@
         <constructor-arg name="databaseName" value="registrarDB" />
     </bean>
 
-    <!-- The user repository -->
+    <!-- The mops user repository -->
     <mongo:repositories base-package="com.mops.registrar.repositories.user" mongo-template-ref="registrarDBMongoTemplate">
         <mongo:repository id="userRepository" custom-impl-ref="customUserRepository"
             mongo-template-ref="registrarDBMongoTemplate" />
     </mongo:repositories>
 
-    <!-- Additional custom queries for the user repository -->
+    <!-- Additional custom queries for the mops user repository -->
     <bean id="customUserRepository" class="com.mops.registrar.repositories.user.impl.CustomUserRepositoryImpl" />
 
     <!-- The admin user repository -->
     <mongo:repositories base-package="com.mops.registrar.repositories.admin" mongo-template-ref="registrarDBMongoTemplate">
-        <mongo:repository id="adminUserRepository" mongo-template-ref="registrarDBMongoTemplate" />
+        <mongo:repository id="adminUserRepository" custom-impl-ref="customAdminUserRepository"
+            mongo-template-ref="registrarDBMongoTemplate" />
     </mongo:repositories>
+
+    <!-- Additional custom queries for the admin user repository -->
+    <bean id="customAdminUserRepository" class="com.mops.registrar.repositories.admin.impl.CustomAdminUserRepositoryImpl" />
 
 </beans>

@@ -1,5 +1,7 @@
 package com.mops.registrar.entities;
 
+import java.util.UUID;
+
 import org.springframework.data.annotation.Id;
 
 /**
@@ -8,10 +10,28 @@ import org.springframework.data.annotation.Id;
  * @author dylants
  * 
  */
-public class BaseEntity {
+public abstract class BaseEntity {
 
     @Id
     private String entityId = null;
+
+    /**
+     * Default constructor which generates a unique entity ID
+     */
+    public BaseEntity() {
+        // by default, generate a random UUID for the entity ID
+        this.entityId = UUID.randomUUID().toString();
+    }
+
+    /**
+     * Creates a {@link BaseEntity} specifying the entity ID
+     * 
+     * @param entityId
+     *            The entity ID of this {@link BaseUser}
+     */
+    public BaseEntity(String entityId) {
+        this.entityId = entityId;
+    }
 
     /**
      * @return the entityId
@@ -19,13 +39,4 @@ public class BaseEntity {
     public String getEntityId() {
         return entityId;
     }
-
-    /**
-     * @param entityId
-     *            the entityId to set
-     */
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
-    }
-
 }
