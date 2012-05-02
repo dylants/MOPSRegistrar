@@ -3,8 +3,6 @@ package com.mops.registrar.entities;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.validation.Valid;
-
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,32 +10,33 @@ import com.google.common.collect.Sets;
 import com.mops.registrar.security.Authorities;
 
 /**
- * A {@link MOPSUser} contains a RegistrationInformation object, which contains the {@link MOPSUser}'s first name, last
- * name, and additional data collected during the registration process. The {@link MOPSUser} also extends
- * {@link BaseUser} object, which acts as the {@link UserDetails} for Spring Security. Finally, the {@link MOPSUser}
- * links all the {@link Child} objects owned by the {@link MOPSUser}.
+ * A {@link MopsUser} contains a RegistrationInformation object, which contains the {@link MopsUser}'s first name, last
+ * name, and additional data collected during the registration process. The {@link MopsUser} also extends
+ * {@link BaseUser} object, which acts as the {@link UserDetails} for Spring Security. Finally, the {@link MopsUser}
+ * links all the {@link Child} objects owned by the {@link MopsUser}.
  * 
  * @author dylants
  */
-public class MOPSUser extends BaseUser implements Comparable<MOPSUser> {
+public class MopsUser extends BaseUser implements Comparable<MopsUser> {
 
     private static final long serialVersionUID = 4203546994668744168L;
 
-    @Valid
     private RegistrationInformation registrationInformation = new RegistrationInformation();
     @DBRef
     private Set<Child> children = new HashSet<Child>();
 
     /**
-     * Default constructor
+     * Creates a new {@link MopsUser}
+     * 
      */
-    public MOPSUser() {
-        // A MOPSUser's GrantedAuthority is ROLE_REGISTERED_USER
+    public MopsUser() {
+        // A MopsUser's GrantedAuthority is ROLE_REGISTERED_USER
         super(Sets.newHashSet(Authorities.ROLE_REGISTERED_USER.getGrantedAuthority()));
+
     }
 
     @Override
-    public int compareTo(MOPSUser mopsUser) {
+    public int compareTo(MopsUser mopsUser) {
         // sort based off last name
         if ((this.registrationInformation != null) && (mopsUser != null)
                 && (mopsUser.getRegistrationInformation() != null)) {
@@ -57,27 +56,9 @@ public class MOPSUser extends BaseUser implements Comparable<MOPSUser> {
     }
 
     @Override
-    public String getUsername() {
-        // for a MOPS user, the email address is the username
-        if (this.registrationInformation != null) {
-            return this.registrationInformation.getEmailAddress();
-        }
-        return super.getUsername();
-    }
-
-    @Override
-    public void setUsername(String username) {
-        // for a MOPS user, the email address is the username
-        if (this.registrationInformation != null) {
-            this.registrationInformation.setEmailAddress(username);
-        }
-        super.setUsername(username);
-    }
-
-    @Override
     public String toString() {
         if (this.registrationInformation != null) {
-            return "MOPSUser username: " + this.getUsername() + " firstName: "
+            return "MopsUser username: " + this.getUsername() + " firstName: "
                     + this.registrationInformation.getFirstName() + " lastName: "
                     + this.registrationInformation.getLastName();
         } else {

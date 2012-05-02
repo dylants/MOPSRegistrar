@@ -6,12 +6,12 @@
 <div id="user_profile" class="curved_narrow">
 
         <h1>
-            <strong>Profile for ${user.firstName} ${user.lastName}</strong>
+            <strong>Profile for ${user.registrationInformation.firstName} ${user.registrationInformation.lastName}</strong>
         </h1>
 
-        <p>Click on the link below to update your personal profile or MOPETTS related information</p>
+        <p>Click on the link below to update your personal profile or MOPPETS related information</p>
 
         <div id="user_profile_links">
-            <a href="${userProfileRoot}/editRegistrationInformation">Edit Registration Information</a> <a href="#">Edit MOPETTS Information</a>
+            <a href="${userProfileRoot}/registrationInformation">Edit Registration Information</a> <a href="#">Edit MOPPETS Information</a>
         </div>
 </div>

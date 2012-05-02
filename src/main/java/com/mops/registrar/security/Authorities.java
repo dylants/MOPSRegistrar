@@ -13,7 +13,7 @@ public enum Authorities {
 
     // Anonymous (not logged in)
     ROLE_ANONYMOUS(new SimpleGrantedAuthority("ROLE_ANONYMOUS")),
-    // Registered MOPSUser (any logged in registered user)
+    // Registered MopsUser (any logged in registered user)
     ROLE_REGISTERED_USER(new SimpleGrantedAuthority("ROLE_REGISTERED_USER")),
     // Admin user
     ROLE_ADMIN_USER(new SimpleGrantedAuthority("ROLE_ADMIN_USER"));

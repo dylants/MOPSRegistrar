@@ -38,27 +38,6 @@ public abstract class AbstractBaseUserService {
     }
 
     /**
-     * Performs operations necessary to store the password in the repository. This includes storing a hash of the
-     * password, and wiping the actual password so it is not stored in the repository.
-     * 
-     * @param baseUser
-     *            The {@link BaseUser} to process
-     */
-    protected void processPassword(BaseUser baseUser) {
-        String clearTextPassword = baseUser.getClearTextPassword();
-
-        // generate the password hash
-        String passwordHash = generatePasswordHash(clearTextPassword, baseUser);
-
-        // store the hash which we'll use to verify the base user on subsequent requests
-        baseUser.setPasswordHash(passwordHash);
-
-        // clear the plain text passwords
-        baseUser.setClearTextPassword(null);
-        baseUser.setClearTextConfirmPassword(null);
-    }
-
-    /**
      * Generates a password hash of the <code>clearTextPassword</code>
      * 
      * @param clearTextPassword

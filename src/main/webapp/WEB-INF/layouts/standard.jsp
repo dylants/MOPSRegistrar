@@ -20,8 +20,8 @@
             <div id="toc_items">
                 <span id="toc_item"> <a href="${contextPath}/page/home">Home</a> </span>
                 <sec:authorize access="hasRole('ROLE_ANONYMOUS')">
-                    <span id="toc_item"> <a href="${userRoot}/register">Register</a> </span>
                     <span id="toc_item"> <a href="${contextPath}/page/login">Login</a> </span>
+                    <span id="toc_item"> <a href="${userRoot}/createAccount">Create Account</a> </span>
                 </sec:authorize>
                 <sec:authorize access="hasRole('ROLE_REGISTERED_USER')">
                     <span id="toc_item"> <a href="${userRoot}/profile">Profile</a> </span>

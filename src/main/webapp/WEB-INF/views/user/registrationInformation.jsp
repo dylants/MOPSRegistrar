@@ -6,13 +6,11 @@
 
 <c:choose>
     <c:when test="${isNew}">
-        <c:set var="method" value="post"/>
-        <c:set var="heading" value="Welcome! Please Register"/>
+        <c:set var="heading" value="Registration Information"/>
         <c:set var="submitButtonText" value="Register"/>
         <c:set var="cancelUrl" value="${contextPath}/page/home"/>
     </c:when>
     <c:otherwise>
-        <c:set var="method" value="put"/>
         <c:set var="heading" value="Edit Registration Information"/>
         <c:set var="submitButtonText" value="Submit"/>
         <sec:authorize access="hasRole('ROLE_ADMIN_USER')">
@@ -27,11 +25,11 @@
     </c:otherwise>
 </c:choose>
 
-	<div id="userForm" class="curved_wide">
+	<div id="registrationInformation" class="curved_wide">
 	
 		<h1>${heading}</h1>
         
-		<form:form modelAttribute="user" method="${method}">
+		<form:form modelAttribute="registrationInformation" method="POST">
             <form:errors cssClass="errorBlock" element="div" />
 
             <!-- Begin Registration Information -->
@@ -42,7 +40,7 @@
             </c:if>
 
             <div id="nameAndAddress">
-                <table id="user_form_table">
+                <table id="registration_information_table">
     				<tr>
     					<td>First Name:</td>
     					<td><form:input path="firstName" cssClass="longText" /></td>
@@ -62,55 +60,55 @@
                         <td><span id="lastName" class="error">${lastNameErrors}</span></td>
                     </tr>
                 </table>
-                <table id="user_form_table">
+                <table id="registration_information_table">
     				<tr>
     					<td>Home Address:</td>
-    					<td><form:input	path="registrationInformation.address.homeAddress"	cssClass="xtralongText" /></td>
+    					<td><form:input	path="address.streetAddress" cssClass="xtralongText" /></td>
     				</tr>
-                    <c:set var="homeAddressErrors"><form:errors path="registrationInformation.address.homeAddress"/></c:set>
+                    <c:set var="streetAddressErrors"><form:errors path="address.streetAddress"/></c:set>
                     <tr>
                         <td>&nbsp;</td>
-                        <td><span id="homeAddress.errors" class="error">${homeAddressErrors}</span></td>
+                        <td><span id="streetAddress.errors" class="error">${streetAddressErrors}</span></td>
                     </tr>
                 </table>
-                <table id="user_form_table">
+                <table id="registration_information_table">
     				<tr>
     					<td>City:</td>
-    					<td><form:input path="registrationInformation.address.city" cssClass="longText" /></td>
+    					<td><form:input path="address.city" cssClass="longText" /></td>
                         <td>State:</td>
-                        <td><form:input path="registrationInformation.address.state" cssClass="longText" /></td>
+                        <td><form:input path="address.state" cssClass="longText" /></td>
                         <td>Zip Code:</td>
-                        <td><form:input path="registrationInformation.address.zipCode" cssClass="longText" /></td>
+                        <td><form:input path="address.zipCode" cssClass="longText" /></td>
     				</tr>
                     <tr>
                         <td>&nbsp;</td>
-                        <c:set var="cityErrors"><form:errors path="registrationInformation.address.city"/></c:set>
+                        <c:set var="cityErrors"><form:errors path="address.city"/></c:set>
                         <td><span id="city.errors" class="error">${cityErrors}</span></td>
                         <td>&nbsp;</td>
-                        <c:set var="stateErrors"><form:errors path="registrationInformation.address.state"/></c:set>
+                        <c:set var="stateErrors"><form:errors path="address.state"/></c:set>
                         <td><span id="state.errors" class="error">${stateErrors}</span></td>
                         <td>&nbsp;</td>
-                        <c:set var="zipCodeErrors"><form:errors path="registrationInformation.address.zipCode"/></c:set>
+                        <c:set var="zipCodeErrors"><form:errors path="address.zipCode"/></c:set>
                         <td><span id="zipCode.errors" class="error">${zipCodeErrors}</span></td>
                     </tr>
                 </table>
             </div>
             <div id="phoneNumbers">
-                <table id="user_form_table">
+                <table id="registration_information_table">
                     <tr>
                         <td>Home Phone Number:</td>
-                        <td><form:input path="registrationInformation.homePhoneNumber" cssClass="mediumText" /></td>
+                        <td><form:input path="homePhoneNumber" cssClass="mediumText" /></td>
                         <td>Cell Phone Number:</td>
-                        <td><form:input path="registrationInformation.cellPhoneNumber" cssClass="mediumText" /></td>
+                        <td><form:input path="cellPhoneNumber" cssClass="mediumText" /></td>
                         <td>&nbsp;Date of Birth:<br/>(MM/DD/YYYY)</td>
-                        <td><form:input path="registrationInformation.dateOfBirth" cssClass="longText" /></td>
+                        <td><form:input path="dateOfBirth" cssClass="longText" /></td>
                     </tr>
                     <tr>
-                        <c:set var="homePhoneNumberErrors"><form:errors path="registrationInformation.homePhoneNumber"/></c:set>
+                        <c:set var="homePhoneNumberErrors"><form:errors path="homePhoneNumber"/></c:set>
                         <td colspan="2"><span id="homePhoneNumber.errors" class="error">${homePhoneNumberErrors}</span></td>
-                        <c:set var="cellPhoneNumberErrors"><form:errors path="registrationInformation.cellPhoneNumber"/></c:set>
+                        <c:set var="cellPhoneNumberErrors"><form:errors path="cellPhoneNumber"/></c:set>
                         <td colspan="2"><span id="cellPhoneNumber.errors" class="error">${cellPhoneNumberErrors}</span></td>
-                        <c:set var="dateOfBirthErrors"><form:errors path="registrationInformation.dateOfBirth"/></c:set>
+                        <c:set var="dateOfBirthErrors"><form:errors path="dateOfBirth"/></c:set>
                         <td colspan="2"><span id="dateOfBirth.errors" class="error">${dateOfBirthErrors}</span></td>
                     </tr>
     			</table>
@@ -119,69 +117,40 @@
                 <div id="dataRow">
                     <div id="dataQuestionAnswer">
                         Have you attended a MOPS group before?
-                        <form:radiobutton path="registrationInformation.attendedMopsBefore" value="true"/>Yes
-                        <form:radiobutton path="registrationInformation.attendedMopsBefore" value="false"/>No
+                        <form:radiobutton path="attendedMopsBefore" value="true"/>Yes
+                        <form:radiobutton path="attendedMopsBefore" value="false"/>No
                         &nbsp;&nbsp;&nbsp;If so, where?
                     </div>
                     <div id="dataQuestionAnswer">
-                        <form:input path="registrationInformation.attendedMopsBeforeLocation" cssClass="xtralongText"/>
+                        <form:input path="attendedMopsBeforeLocation" cssClass="xtralongText"/>
                     </div>
                 </div>
                 <div id="dataRow">
                     Are you registered for the MOPS to MOM Connection through MOPS International?
-                    <form:radiobutton path="registrationInformation.registeredMopsToMomConnection" value="true"/>Yes
-                    <form:radiobutton path="registrationInformation.registeredMopsToMomConnection" value="false"/>No
+                    <form:radiobutton path="registeredMopsToMomConnection" value="true"/>Yes
+                    <form:radiobutton path="registeredMopsToMomConnection" value="false"/>No
                 </div>
                 <div id="dataRow">
                     <div id="dataQuestionAnswer">
                         Do you attend a church?
-                        <form:radiobutton path="registrationInformation.attendChurch" value="true"/>Yes
-                        <form:radiobutton path="registrationInformation.attendChurch" value="false"/>No
+                        <form:radiobutton path="attendChurch" value="true"/>Yes
+                        <form:radiobutton path="attendChurch" value="false"/>No
                         &nbsp;&nbsp;&nbsp;If so, where?
                     </div>
                     <div id="dataQuestionAnswer">
-                        <form:input path="registrationInformation.attendChurchLocation" cssClass="xtralongText"/>
+                        <form:input path="attendChurchLocation" cssClass="xtralongText"/>
                     </div>
                 </div>
                 <div id="dataRow">
                     How did you hear about this MOPS group?<br/>
-                    <form:textarea path="registrationInformation.howDidYouHearAboutMops" cssClass="xtralongText"/>
+                    <form:textarea path="howDidYouHearAboutMops" cssClass="xtralongText"/>
                 </div>
                 <div id="dataRow">
-                    Husband's Name (if applicable): <form:input path="registrationInformation.husbandsName" cssClass="longText"/>
+                    Husband's Name (if applicable): <form:input path="husbandsName" cssClass="longText"/>
                 </div>
             </div>
 
             <!-- End Registration Information -->
-
-            <!-- If it's a new user, ask them to create an account -->
-            <c:if test="${isNew}">
-                <div id="registrationBreak">&nbsp;</div>
-                <p>Please enter the following information to create an account, allowing you to login later to update your profile or make payments</p>
-                <div id="emailAndPassword">
-                    <table id="user_form_table">
-                        <tr>
-                            <td>Email Address:&nbsp;</td>
-                            <td><form:input path="emailAddress" cssClass="longText" /></td>
-                            <td>Password:</td>
-                            <td><form:password path="clearTextPassword" cssClass="longText" /></td>
-                            <td>Confirm Password:</td>
-                            <td><form:password path="clearTextConfirmPassword" cssClass="longText" /></td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <c:set var="emailAddressErrors"><form:errors path="emailAddress"/></c:set>
-                            <td><span id="emailAddress" class="error">${emailAddressErrors}</span></td>
-                            <td>&nbsp;</td>
-                            <c:set var="clearTextPasswordErrors"><form:errors path="clearTextPassword"/></c:set>
-                            <td><span id="clearTextPassword" class="error">${clearTextPasswordErrors}</span></td>
-                            <td>&nbsp;</td>
-                            <c:set var="clearTextConfirmPasswordErrors"><form:errors path="clearTextConfirmPassword"/></c:set>
-                            <td><span id="clearTextConfirmPassword" class="error">${clearTextConfirmPasswordErrors}</span></td>
-                        </tr>
-                    </table>
-                </div>
-            </c:if>
 
             <div class="submitButtons">
                 <span class="submitButton"><input type="submit" value="${submitButtonText}"/></span>

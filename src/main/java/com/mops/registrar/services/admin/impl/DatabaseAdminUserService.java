@@ -2,13 +2,11 @@ package com.mops.registrar.services.admin.impl;
 
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mops.registrar.entities.AdminUser;
 import com.mops.registrar.repositories.admin.AdminUserRepository;
 import com.mops.registrar.services.admin.AdminUserService;
-import com.mops.registrar.services.baseuser.AbstractBaseUserService;
 
 /**
  * An implementation of {@link AdminUserService} which uses the {@link AdminUserRepository} to interact with the
@@ -17,7 +15,7 @@ import com.mops.registrar.services.baseuser.AbstractBaseUserService;
  * @author dylants
  * 
  */
-public class DatabaseAdminUserService extends AbstractBaseUserService implements AdminUserService {
+public class DatabaseAdminUserService extends AbstractAdminUserService implements AdminUserService {
 
     @Autowired
     private AdminUserRepository adminUserRepository;
@@ -39,8 +37,6 @@ public class DatabaseAdminUserService extends AbstractBaseUserService implements
 
     @Override
     public AdminUser addAdminUser(AdminUser adminUser) {
-        // before writing the the database, process the password fields
-        processPassword(adminUser);
         return this.adminUserRepository.save(adminUser);
     }
 
@@ -51,15 +47,6 @@ public class DatabaseAdminUserService extends AbstractBaseUserService implements
          * copy the entityId into the new admin user, and save it.
          */
         adminUser.setEntityId(entityId);
-        // if the adminUser updated their password (in addition to anything else)
-        if (StringUtils.isNotBlank(adminUser.getClearTextPassword())) {
-            // process the password fields
-            processPassword(adminUser);
-        } else {
-            // else we should just copy the old adminUser's password hash over (no change was made)
-            AdminUser oldAdminUser = this.adminUserRepository.findByEntityId(entityId);
-            adminUser.setPasswordHash(oldAdminUser.getPasswordHash());
-        }
         return this.adminUserRepository.save(adminUser);
     }
 

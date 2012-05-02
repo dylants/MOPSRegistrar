@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mops.registrar.entities.AdminUser;
-import com.mops.registrar.entities.MOPSUser;
+import com.mops.registrar.entities.MopsUser;
 
 /**
- * Controller that handles logging in a {@link MOPSUser} or {@link AdminUser}
+ * Controller that handles logging in a {@link MopsUser} or {@link AdminUser}
  * 
  * @author dylants
  * 

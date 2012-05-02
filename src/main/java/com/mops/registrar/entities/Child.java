@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * A child of {@link MOPSUser}
+ * A child of {@link MopsUser}
  * 
  * @author dylants
  * 
@@ -58,10 +58,10 @@ public class Child extends BaseEntity {
     private String specialNeedsAndInstructionsAllergyInformation;
 
     /**
-     * Creates a {@link Child} linked to a parent {@link MOPSUser}
+     * Creates a {@link Child} linked to a parent {@link MopsUser}
      * 
      * @param mopsUserEntityId
-     *            The entity ID of the parent {@link MOPSUser}
+     *            The entity ID of the parent {@link MopsUser}
      */
     public Child(String mopsUserEntityId) {
         this.mopsUserEntityId = mopsUserEntityId;

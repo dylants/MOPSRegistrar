@@ -19,20 +19,17 @@
     </bean>
 
     <!-- The user repository -->
-    <mongo:repositories base-package="com.mops.registrar.repositories.user" mongo-template-ref="registrarDBMongoTemplate"
-        create-query-indexes="true">
+    <mongo:repositories base-package="com.mops.registrar.repositories.user" mongo-template-ref="registrarDBMongoTemplate">
         <mongo:repository id="userRepository" custom-impl-ref="customUserRepository"
-            mongo-template-ref="registrarDBMongoTemplate" create-query-indexes="true" />
+            mongo-template-ref="registrarDBMongoTemplate" />
     </mongo:repositories>
 
     <!-- Additional custom queries for the user repository -->
-    <bean id="customUserRepository" class="com.mops.registrar.repositories.user.impl.CustomMOPSUserRepositoryImpl" />
+    <bean id="customUserRepository" class="com.mops.registrar.repositories.user.impl.CustomUserRepositoryImpl" />
 
     <!-- The admin user repository -->
-    <mongo:repositories base-package="com.mops.registrar.repositories.admin" mongo-template-ref="registrarDBMongoTemplate"
-        create-query-indexes="true">
-        <mongo:repository id="adminUserRepository" mongo-template-ref="registrarDBMongoTemplate"
-            create-query-indexes="true" />
+    <mongo:repositories base-package="com.mops.registrar.repositories.admin" mongo-template-ref="registrarDBMongoTemplate">
+        <mongo:repository id="adminUserRepository" mongo-template-ref="registrarDBMongoTemplate" />
     </mongo:repositories>
 
     <bean id="application.userService" class="com.mops.registrar.services.user.impl.DatabaseUserService">

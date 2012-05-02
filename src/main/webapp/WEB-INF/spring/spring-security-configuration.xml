@@ -12,7 +12,7 @@
     <!-- The salt used when creating the hash of the password -->
     <beans:bean id="application.saltSource" class="org.springframework.security.authentication.dao.ReflectionSaltSource">
         <!-- Use the entityId as the salt since it will always be available and never change -->
-        <beans:property name="userPropertyToUse" value="salt" />
+        <beans:property name="userPropertyToUse" value="entityId" />
     </beans:bean>
 
     <!-- Our Registrar application UserDetailsService implementation -->
@@ -34,6 +34,7 @@
         <intercept-url pattern="/**/admin/**" access="hasRole('ROLE_ADMIN_USER')" />
         <!-- Any URL with "/user/profile" in the path is restricted to registered users -->
         <intercept-url pattern="/**/user/profile**" access="hasRole('ROLE_REGISTERED_USER')" />
+        <intercept-url pattern="/**/user/profile/**" access="hasRole('ROLE_REGISTERED_USER')" />
         <!-- Any URL (not matched by the above patterns) is restricted to admins, registered users, and anonymous (anyone) -->
         <intercept-url pattern="/**" access="hasAnyRole('ROLE_ADMIN_USER','ROLE_REGISTERED_USER','ROLE_ANONYMOUS')" />
         <!-- Enables form based login -->

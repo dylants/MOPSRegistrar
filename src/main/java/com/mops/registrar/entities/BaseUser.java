@@ -4,10 +4,7 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.UUID;
 
-import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.data.annotation.Transient;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
-import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -20,18 +17,10 @@ import com.mops.registrar.security.Authorities;
  * @author dylants
  * 
  */
-public abstract class BaseUser extends BaseEntity implements UserDetails, CredentialsContainer {
-
+public abstract class BaseUser extends BaseEntity implements UserDetails {
     private static final long serialVersionUID = 2970952793117692589L;
 
-    @NotBlank
     private String username = null;
-    @Transient
-    @NotBlank
-    private String clearTextPassword = null;
-    @Transient
-    @NotBlank
-    private String clearTextConfirmPassword = null;
     private String passwordHash = null;
     /*
      * Spring security elements
@@ -44,6 +33,7 @@ public abstract class BaseUser extends BaseEntity implements UserDetails, Creden
 
     /**
      * Default constructor (implies ANONYMOUS {@link GrantedAuthority})
+     * 
      */
     public BaseUser() {
         this(Sets.newHashSet(Authorities.ROLE_ANONYMOUS.getGrantedAuthority()));
@@ -77,11 +67,7 @@ public abstract class BaseUser extends BaseEntity implements UserDetails, Creden
      * This is Spring Security's {@link UserDetails} method, which should return the password we compare against and
      * never return null. Because of this, we'll return the password hash here instead of the actual password. The
      * {@link PasswordEncoder} will be used to compare, and will hash the user's entered password when verifying they
-     * match.<br/>
-     * <br/>
-     * Note: This does NOT return the actual password. See {@link BaseUser#getClearTextPassword()} for the actual
-     * password (which is not persisted).
-     * 
+     * match.
      */
     @Override
     public String getPassword() {
@@ -113,41 +99,12 @@ public abstract class BaseUser extends BaseEntity implements UserDetails, Creden
         return this.enabled;
     }
 
-    @Override
-    public void eraseCredentials() {
-        // clear both the password and confirm password (just in case)
-        this.clearTextPassword = null;
-        this.clearTextConfirmPassword = null;
-    }
-
     /**
-     * @return the clearTextPassword
+     * @param username
+     *            the username to set
      */
-    public String getClearTextPassword() {
-        return clearTextPassword;
-    }
-
-    /**
-     * @param clearTextPassword
-     *            the clearTextPassword to set
-     */
-    public void setClearTextPassword(String clearTextPassword) {
-        this.clearTextPassword = clearTextPassword;
-    }
-
-    /**
-     * @return the clearTextConfirmPassword
-     */
-    public String getClearTextConfirmPassword() {
-        return clearTextConfirmPassword;
-    }
-
-    /**
-     * @param clearTextConfirmPassword
-     *            the clearTextConfirmPassword to set
-     */
-    public void setClearTextConfirmPassword(String clearTextConfirmPassword) {
-        this.clearTextConfirmPassword = clearTextConfirmPassword;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
@@ -164,13 +121,4 @@ public abstract class BaseUser extends BaseEntity implements UserDetails, Creden
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
-
-    /**
-     * @param username
-     *            the username to set
-     */
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
 }

@@ -30,8 +30,8 @@ public class RegistrarUserDetailsService implements UserDetailsService {
          */
         UserDetails userDetails = null;
 
-        // in the case of MOPSUser's, the username is the email address
-        userDetails = this.userService.getUserByEmailAddress(username);
+        // look in the MopsUser repository
+        userDetails = this.userService.getUserByUsername(username);
         if (userDetails != null) {
             // we found it, return this one
             return userDetails;

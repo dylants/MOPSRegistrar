@@ -4,12 +4,18 @@
     "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
     
 <tiles-definitions>
-    
-    <definition name="user/userForm" extends="standardLayout">
-        <put-attribute name="body" value="/WEB-INF/views/user/userForm.jsp" />
+
+    <definition name="user/createAccount" extends="standardLayout">
+        <put-attribute name="title" value="Create Account"/>
+        <put-attribute name="body" value="/WEB-INF/views/user/createAccount.jsp" />
     </definition>
 
-    <definition name="user/registrationSuccess" extends="standardLayout">
+    <definition name="user/profile/registrationInformation" extends="standardLayout">
+        <put-attribute name="title" value="Registration Information"/>
+        <put-attribute name="body" value="/WEB-INF/views/user/registrationInformation.jsp" />
+    </definition>
+
+    <definition name="user/profile/registrationSuccess" extends="standardLayout">
         <put-attribute name="title" value="Registration Success"/>
         <put-attribute name="body" value="/WEB-INF/views/user/registrationSuccess.jsp" />
     </definition>

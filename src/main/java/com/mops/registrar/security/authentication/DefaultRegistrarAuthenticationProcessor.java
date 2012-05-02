@@ -14,7 +14,10 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 import org.springframework.stereotype.Service;
 
-import com.mops.registrar.entities.MOPSUser;
+import com.mops.registrar.entities.AdminUser;
+import com.mops.registrar.entities.MopsUser;
+import com.mops.registrar.services.admin.AdminUserService;
+import com.mops.registrar.services.user.UserService;
 
 /**
  * Default implementation of the {@link RegistrarAuthenticationProcessor}
@@ -28,9 +31,13 @@ public class DefaultRegistrarAuthenticationProcessor implements RegistrarAuthent
     private AuthenticationDetailsSource<HttpServletRequest, ?> authenticationDetailsSource = new WebAuthenticationDetailsSource();
     @Autowired
     private SessionAuthenticationStrategy sessionStrategy;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private AdminUserService adminUserService;
 
     @Override
-    public void loginNewlyRegisteredMOPSUser(HttpServletRequest request, HttpServletResponse response, MOPSUser mopsUser) {
+    public void loginNewlyRegisteredMOPSUser(HttpServletRequest request, HttpServletResponse response, MopsUser mopsUser) {
         /*
          * This uses generally the same logic as an AbstractAuthenticationProcessingFilter, however we know the
          * information provided is correct (since they've just registered this user) and can be used as an
@@ -56,17 +63,17 @@ public class DefaultRegistrarAuthenticationProcessor implements RegistrarAuthent
      * @param response
      *            The {@link HttpServletResponse}
      * @param mopsUser
-     *            The newly created {@link MOPSUser} used to build the {@link Authentication} token
+     *            The newly created {@link MopsUser} used to build the {@link Authentication} token
      * @return The authenticated {@link Authentication}
      */
     protected Authentication buildAuthenticationToken(HttpServletRequest request, HttpServletResponse response,
-            MOPSUser mopsUser) {
+            MopsUser mopsUser) {
         /*
-         * Since the user has just registered this MOPSUser object, we can authenticate it based on the information they
+         * Since the user has just registered this MopsUser object, we can authenticate it based on the information they
          * provided. So, use the user's information to build the authenticated Authentication token, using the
          * UsernamePasswordAuthenticationToken as our model.
          * 
-         * Note that even though the clear text password retreived from the MOPSUser at this point is most likely null,
+         * Note that even though the clear text password retrieved from the MopsUser at this point is most likely null,
          * we should not need to store it in the Authentication token. Since authentication has already taken place, we
          * would normally clear the credentials so as to not keep sensitive information around in the session. So we
          * just store null as the credentials in this Authentication token.
@@ -82,16 +89,48 @@ public class DefaultRegistrarAuthenticationProcessor implements RegistrarAuthent
     }
 
     @Override
-    public MOPSUser deriveMOPSUserFromPrincipal(Principal principal) {
+    public MopsUser deriveMopsUserFromPrincipal(Principal principal) {
         // first find out if it's of type Authentication
         if (principal instanceof Authentication) {
             // now get the principal from the... principal
             Authentication authentication = (Authentication) principal;
             Object authenticationPrincipal = authentication.getPrincipal();
-            // see if it's of type MOPSUser
-            if (authenticationPrincipal instanceof MOPSUser) {
-                MOPSUser mopsUser = (MOPSUser) authenticationPrincipal;
+            // see if it's of type MopsUser
+            if (authenticationPrincipal instanceof MopsUser) {
+                /*
+                 * If it is, it's best to pull the MopsUser from the database, rather than returning this one. Spring
+                 * Security can leave a stale MOPS user laying around, and just to make sure the users of this method
+                 * get the latest and greatest, pull it from the service using the entityId stored in this MOPS user.
+                 */
+                MopsUser mopsUser = (MopsUser) authenticationPrincipal;
+                String entityId = mopsUser.getEntityId();
+                mopsUser = this.userService.getUserByEntityId(entityId);
                 return mopsUser;
+            }
+        }
+
+        // else, doesn't exist, return null
+        return null;
+    }
+
+    @Override
+    public AdminUser deriveAdminUserFromPrincipal(Principal principal) {
+        // first find out if it's of type Authentication
+        if (principal instanceof Authentication) {
+            // now get the principal from the... principal
+            Authentication authentication = (Authentication) principal;
+            Object authenticationPrincipal = authentication.getPrincipal();
+            // see if it's of type MopsUser
+            if (authenticationPrincipal instanceof AdminUser) {
+                /*
+                 * If it is, it's best to pull the AdminUser from the database, rather than returning this one. Spring
+                 * Security can leave a stale Admin user laying around, and just to make sure the users of this method
+                 * get the latest and greatest, pull it from the service using the entityId stored in this Admin user.
+                 */
+                AdminUser adminUser = (AdminUser) authenticationPrincipal;
+                String entityId = adminUser.getEntityId();
+                adminUser = this.adminUserService.getAdminUserByEntityId(entityId);
+                return adminUser;
             }
         }
 
@@ -128,6 +167,36 @@ public class DefaultRegistrarAuthenticationProcessor implements RegistrarAuthent
      */
     public void setSessionStrategy(SessionAuthenticationStrategy sessionStrategy) {
         this.sessionStrategy = sessionStrategy;
+    }
+
+    /**
+     * @return the userService
+     */
+    public UserService getUserService() {
+        return userService;
+    }
+
+    /**
+     * @param userService
+     *            the userService to set
+     */
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    /**
+     * @return the adminUserService
+     */
+    public AdminUserService getAdminUserService() {
+        return adminUserService;
+    }
+
+    /**
+     * @param adminUserService
+     *            the adminUserService to set
+     */
+    public void setAdminUserService(AdminUserService adminUserService) {
+        this.adminUserService = adminUserService;
     }
 
 }

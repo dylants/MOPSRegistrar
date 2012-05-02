@@ -120,6 +120,10 @@ body {
     padding-right: 20px;
 }
 
+.error {
+    color: #ff0000;
+}
+
 .errorBlock {
     color: #000;
     background-color: #ffEEEE;
@@ -158,48 +162,57 @@ body {
     padding: 10px;
 }
 
-/* USER FORM */
-#userForm #nameAndAddress {
-    padding-left: 100px;
+/* CREATE ACCOUNT */
+#createAccount p {
+    padding: 5px;
 }
 
-#userForm #phoneNumbers {
-    padding-left: 35px;
+#create_account_table {
+    margin: 0pt auto;
 }
 
-#userForm #additionalRegistrationData #dataRow {
-    margin: 20px 0px 20px 0px;
-}
-
-#userForm #additionalRegistrationData #dataRow #dataQuestionAnswer {
-    margin: 5px 0px 5px 0px;
-}
-
-#userForm #registrationBreak {
-    border-bottom: 5px solid #FCFCFC;
-}
-
-#userForm #emailAndPassword {
-    padding-left: 15px;
-}
-
-#userForm .error {
-    color: #ff0000;
-}
-
-#user_form_table td {
-    padding-left: 4px;
-}
-
-#userForm .submitButton {
+#createAccount .submitButton {
     padding: 30px;
 }
 
-#userForm a:hover {
+#createAccount a:hover {
     text-decoration: none;
 }
 
-#userForm a:active {
+#createAccount a:active {
+    text-decoration: none;
+}
+
+/* REGISTRATION INFORMATION */
+#registrationInformation #nameAndAddress {
+    padding-left: 100px;
+}
+
+#registrationInformation #phoneNumbers {
+    padding-left: 35px;
+}
+
+#registrationInformation #additionalRegistrationData #dataRow {
+    margin: 20px 0px 20px 0px;
+}
+
+#registrationInformation #additionalRegistrationData #dataRow #dataQuestionAnswer {
+    margin: 5px 0px 5px 0px;
+}
+
+#registration_information_table td {
+    padding-left: 4px;
+}
+
+#registrationInformation .submitButton {
+    padding: 30px;
+}
+
+#registrationInformation a:hover {
+    text-decoration: none;
+}
+
+#registrationInformation a:active {
     text-decoration: none;
 }
 

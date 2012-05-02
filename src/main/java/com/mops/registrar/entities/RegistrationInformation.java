@@ -4,13 +4,12 @@ import java.util.Date;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * Represents the information filled out during registration of a {@link MOPSUser}
+ * Represents the information filled out during registration of a {@link MopsUser}
  * 
  * @author dylants
  * 
@@ -18,9 +17,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class RegistrationInformation {
 
     // information about the user
-    @NotBlank
-    @Pattern(regexp = ".+@.+\\.[a-z]+")
-    private String emailAddress = null;
     @NotBlank
     private String firstName = null;
     private String middleInitial = null;
@@ -44,21 +40,6 @@ public class RegistrationInformation {
     private String attendChurchLocation = null;
     private String howDidYouHearAboutMops = null;
     private String husbandsName = null;
-
-    /**
-     * @return the emailAddress
-     */
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    /**
-     * @param emailAddress
-     *            the emailAddress to set
-     */
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
 
     /**
      * @return the firstName

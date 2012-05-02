@@ -4,41 +4,40 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.mops.registrar.entities.MOPSUser;
+import com.mops.registrar.entities.MopsUser;
 import com.mops.registrar.entities.RegistrationInformation;
-import com.mops.registrar.repositories.user.MOPSUserRepository;
-import com.mops.registrar.services.baseuser.AbstractBaseUserService;
+import com.mops.registrar.repositories.user.UserRepository;
 import com.mops.registrar.services.user.UserService;
 
 /**
- * Persistent based {@link UserService} which utilizes the {@link MOPSUserRepository}
+ * Persistent based {@link UserService} which utilizes the {@link UserRepository}
  * 
  * @author dylants
  * 
  */
-public class DatabaseUserService extends AbstractBaseUserService implements UserService {
+public class DatabaseUserService extends AbstractUserService implements UserService {
 
     @Autowired
-    private MOPSUserRepository mopsUserRepository;
+    private UserRepository userRepository;
 
     @Override
-    public List<MOPSUser> getUsers() {
-        return this.mopsUserRepository.findAll();
+    public List<MopsUser> getUsers() {
+        return this.userRepository.findAll();
     }
 
     @Override
-    public MOPSUser getUserByEntityId(String entityId) {
-        return this.mopsUserRepository.findByEntityId(entityId);
+    public MopsUser getUserByEntityId(String entityId) {
+        return this.userRepository.findByEntityId(entityId);
     }
 
     @Override
-    public MOPSUser getUserByEmailAddress(String emailAddress) {
-        return this.mopsUserRepository.findByEmailAddress(emailAddress);
+    public MopsUser getUserByUsername(String username) {
+        return this.userRepository.findByUsername(username);
     }
 
     @Override
-    public MOPSUser getUserByFirstNameLastName(String firstName, String lastName) {
-        List<MOPSUser> mopsUsers = this.mopsUserRepository.findByFirstNameLastName(firstName, lastName);
+    public MopsUser getUserByFirstNameLastName(String firstName, String lastName) {
+        List<MopsUser> mopsUsers = this.userRepository.findByFirstNameLastName(firstName, lastName);
         // since we don't know much else, return the first one
         if ((mopsUsers != null) && (mopsUsers.size() > 0)) {
             return mopsUsers.get(0);
@@ -49,51 +48,50 @@ public class DatabaseUserService extends AbstractBaseUserService implements User
     }
 
     @Override
-    public MOPSUser addUser(MOPSUser mopsUser) {
-        // before writing the the database, process the password fields
-        processPassword(mopsUser);
-        return this.mopsUserRepository.save(mopsUser);
+    public MopsUser addUser(MopsUser mopsUser) {
+        return this.userRepository.save(mopsUser);
     }
 
     @Override
-    public MOPSUser updateEmailAddress(String entityId, String emailAddress) {
-        return this.mopsUserRepository.updateEmailAddress(entityId, emailAddress);
+    public MopsUser updateUsername(String entityId, String username) {
+        return this.userRepository.updateUsername(entityId, username);
     }
 
     @Override
-    public MOPSUser updatePassword(String entityId, String password) {
+    public MopsUser updatePassword(String entityId, String password) {
         // first we have to get the user
-        MOPSUser mopsUser = getUserByEntityId(entityId);
+        MopsUser mopsUser = getUserByEntityId(entityId);
 
         // then we generate the hash from the clear text password
         String passwordHash = generatePasswordHash(password, mopsUser);
 
         // finally we update the password hash
-        return this.mopsUserRepository.updatePasswordHash(entityId, passwordHash);
+        return this.userRepository.updatePasswordHash(entityId, passwordHash);
     }
 
     @Override
-    public MOPSUser updateRegistrationInformation(String entityId, RegistrationInformation registrationInformation) {
-        return this.mopsUserRepository.updateRegistrationInformation(entityId, registrationInformation);
+    public MopsUser updateRegistrationInformation(String entityId, RegistrationInformation registrationInformation) {
+        return this.userRepository.updateRegistrationInformation(entityId, registrationInformation);
     }
 
     @Override
-    public boolean verifyPassword(String password, MOPSUser mopsUser) {
+    public boolean verifyPassword(String password, MopsUser mopsUser) {
         return this.verifyBaseUserPassword(password, mopsUser);
     }
 
     /**
-     * @return the mopsUserRepository
+     * @return the userRepository
      */
-    public MOPSUserRepository getUserRepository() {
-        return mopsUserRepository;
+    public UserRepository getUserRepository() {
+        return userRepository;
     }
 
     /**
-     * @param mopsUserRepository
-     *            the mopsUserRepository to set
+     * @param userRepository
+     *            the userRepository to set
      */
-    public void setUserRepository(MOPSUserRepository mopsUserRepository) {
-        this.mopsUserRepository = mopsUserRepository;
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
+
 }

@@ -12,12 +12,11 @@
             <strong>Welcome to MOPS registration!</strong>
         </h1>
         <div id="information">
-            <p>If you're an existing user, please login by clicking the link below. Otherwise please register as a new user.</p>
+            <p>If you're an existing user, please login by clicking the link below. Otherwise please create an account.</p>
         </div>
 
         <div id="home_links">
-            <a href="${contextPath}/page/login">Login as an Existing User</a> <a href="${userRoot}/register">New
-                User Registration</a>
+            <a href="${contextPath}/page/login">Login as an Existing User</a> <a href="${userRoot}/createAccount">Create Account</a>
         </div>
     </sec:authorize>
     <sec:authorize access="!hasRole('ROLE_ANONYMOUS')">

@@ -12,7 +12,7 @@ import com.mops.registrar.services.admin.AdminUserService;
  * @author dylants
  * 
  */
-public class LocalAdminUserService implements AdminUserService {
+public class LocalAdminUserService extends AbstractAdminUserService implements AdminUserService {
 
     List<AdminUser> adminUsers = new ArrayList<AdminUser>();
 

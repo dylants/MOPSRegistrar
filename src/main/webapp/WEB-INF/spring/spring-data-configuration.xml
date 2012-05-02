@@ -15,12 +15,12 @@
 
     <!-- The user repository -->
     <mongo:repositories base-package="com.mops.registrar.repositories.user" mongo-template-ref="registrarDBMongoTemplate">
-        <mongo:repository id="mopsUserRepository" custom-impl-ref="customMOPSUserRepository"
+        <mongo:repository id="userRepository" custom-impl-ref="customUserRepository"
             mongo-template-ref="registrarDBMongoTemplate" />
     </mongo:repositories>
 
     <!-- Additional custom queries for the user repository -->
-    <bean id="customMOPSUserRepository" class="com.mops.registrar.repositories.user.impl.CustomMOPSUserRepositoryImpl" />
+    <bean id="customUserRepository" class="com.mops.registrar.repositories.user.impl.CustomUserRepositoryImpl" />
 
     <!-- The admin user repository -->
     <mongo:repositories base-package="com.mops.registrar.repositories.admin" mongo-template-ref="registrarDBMongoTemplate">

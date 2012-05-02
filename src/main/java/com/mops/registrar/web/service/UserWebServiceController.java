@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mops.registrar.entities.MOPSUser;
+import com.mops.registrar.entities.MopsUser;
 import com.mops.registrar.services.user.UserService;
 
 /**
- * A REST web service controller used to access the {@link MOPSUser}s
+ * A REST web service controller used to access the {@link MopsUser}s
  * 
  * @author dylants
  */
@@ -26,54 +26,54 @@ public class UserWebServiceController {
     private UserService userService = null;
 
     /**
-     * Returns all {@link MOPSUser}s available
+     * Returns all {@link MopsUser}s available
      * 
-     * @return all {@link MOPSUser}s available
+     * @return all {@link MopsUser}s available
      */
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     @ResponseBody
-    public List<MOPSUser> getUsers() {
+    public List<MopsUser> getUsers() {
         return this.userService.getUsers();
     }
 
     /**
-     * Returns the {@link MOPSUser} found by the unique <code>entityId</code>
+     * Returns the {@link MopsUser} found by the unique <code>entityId</code>
      * 
      * @param entityId
-     *            The {@link MOPSUser}'s unique entity ID
-     * @return The {@link MOPSUser} found, else {@literal null}
+     *            The {@link MopsUser}'s unique entity ID
+     * @return The {@link MopsUser} found, else {@literal null}
      */
     @RequestMapping(value = "/user/{entityId}", method = RequestMethod.GET)
     @ResponseBody
-    public MOPSUser getUser(@PathVariable("entityId") String entityId) {
+    public MopsUser getUser(@PathVariable("entityId") String entityId) {
         return this.userService.getUserByEntityId(entityId);
     }
 
     /**
-     * Returns the (first) {@link MOPSUser} found by <code>firstName</code> and <code>lastName</code>
+     * Returns the (first) {@link MopsUser} found by <code>firstName</code> and <code>lastName</code>
      * 
      * @param firstName
-     *            The {@link MOPSUser}s first name
+     *            The {@link MopsUser}s first name
      * @param lastName
-     *            The {@link MOPSUser}s last name
-     * @return The (first) {@link MOPSUser} found, else {@literal null}
+     *            The {@link MopsUser}s last name
+     * @return The (first) {@link MopsUser} found, else {@literal null}
      */
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     @ResponseBody
-    public MOPSUser getUser(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+    public MopsUser getUser(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
         return this.userService.getUserByFirstNameLastName(firstName, lastName);
     }
 
     /**
-     * Adds a {@link MOPSUser} to our {@link UserService}
+     * Adds a {@link MopsUser} to our {@link UserService}
      * 
      * @param mopsUser
-     *            The {@link MOPSUser} to add
-     * @return The constructed {@link MOPSUser}
+     *            The {@link MopsUser} to add
+     * @return The constructed {@link MopsUser}
      */
     @RequestMapping(value = "/user", method = RequestMethod.PUT)
     @ResponseBody
-    public MOPSUser addUser(@RequestBody MOPSUser mopsUser) {
+    public MopsUser addUser(@RequestBody MopsUser mopsUser) {
         this.userService.addUser(mopsUser);
         return mopsUser;
     }

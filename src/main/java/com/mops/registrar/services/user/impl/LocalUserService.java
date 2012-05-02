@@ -3,31 +3,30 @@ package com.mops.registrar.services.user.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mops.registrar.entities.MOPSUser;
+import com.mops.registrar.entities.MopsUser;
 import com.mops.registrar.entities.RegistrationInformation;
-import com.mops.registrar.services.baseuser.AbstractBaseUserService;
 import com.mops.registrar.services.user.UserService;
 
 /**
- * Local in-memory {@link UserService} using a simple {@link ArrayList} to store the {@link MOPSUser}s
+ * Local in-memory {@link UserService} using a simple {@link ArrayList} to store the {@link MopsUser}s
  * 
  * @author dylants
  * 
  */
-public class LocalUserService extends AbstractBaseUserService implements UserService {
+public class LocalUserService extends AbstractUserService implements UserService {
 
-    private List<MOPSUser> mopsUsers = new ArrayList<MOPSUser>();
+    private List<MopsUser> mopsUsers = new ArrayList<MopsUser>();
 
     @Override
-    public List<MOPSUser> getUsers() {
+    public List<MopsUser> getUsers() {
         return this.mopsUsers;
     }
 
     @Override
-    public MOPSUser getUserByEntityId(String entityId) {
-        MOPSUser returnUser = null;
+    public MopsUser getUserByEntityId(String entityId) {
+        MopsUser returnUser = null;
 
-        for (MOPSUser mopsUser : this.mopsUsers) {
+        for (MopsUser mopsUser : this.mopsUsers) {
             if (mopsUser.getEntityId().equals(entityId)) {
                 returnUser = mopsUser;
             }
@@ -37,11 +36,11 @@ public class LocalUserService extends AbstractBaseUserService implements UserSer
     }
 
     @Override
-    public MOPSUser getUserByEmailAddress(String emailAddress) {
-        MOPSUser returnUser = null;
+    public MopsUser getUserByUsername(String username) {
+        MopsUser returnUser = null;
 
-        for (MOPSUser mopsUser : this.mopsUsers) {
-            if (mopsUser.getRegistrationInformation().getEmailAddress().equals(emailAddress)) {
+        for (MopsUser mopsUser : this.mopsUsers) {
+            if (mopsUser.getUsername().equals(username)) {
                 returnUser = mopsUser;
             }
         }
@@ -50,10 +49,10 @@ public class LocalUserService extends AbstractBaseUserService implements UserSer
     }
 
     @Override
-    public MOPSUser getUserByFirstNameLastName(String firstName, String lastName) {
-        MOPSUser returnUser = null;
+    public MopsUser getUserByFirstNameLastName(String firstName, String lastName) {
+        MopsUser returnUser = null;
 
-        for (MOPSUser mopsUser : this.mopsUsers) {
+        for (MopsUser mopsUser : this.mopsUsers) {
             if (mopsUser.getRegistrationInformation().getFirstName().equals(firstName)
                     && mopsUser.getRegistrationInformation().getLastName().equals(lastName)) {
                 returnUser = mopsUser;
@@ -64,7 +63,7 @@ public class LocalUserService extends AbstractBaseUserService implements UserSer
     }
 
     @Override
-    public MOPSUser addUser(MOPSUser mopsUser) {
+    public MopsUser addUser(MopsUser mopsUser) {
         // only add the user if not null
         if (mopsUser != null) {
             this.mopsUsers.add(mopsUser);
@@ -75,37 +74,39 @@ public class LocalUserService extends AbstractBaseUserService implements UserSer
     }
 
     @Override
-    public MOPSUser updateEmailAddress(String entityId, String emailAddress) {
-        MOPSUser mopsUser = getUserByEntityId(entityId);
+    public MopsUser updateUsername(String entityId, String username) {
+        MopsUser mopsUser = getUserByEntityId(entityId);
         // sanity check
         if (mopsUser == null) {
             return null;
         }
 
-        // update the email address
-        mopsUser.getRegistrationInformation().setEmailAddress(emailAddress);
+        // update the username
+        mopsUser.setUsername(username);
 
         return mopsUser;
     }
 
     @Override
-    public MOPSUser updatePassword(String entityId, String password) {
-        MOPSUser mopsUser = getUserByEntityId(entityId);
+    public MopsUser updatePassword(String entityId, String password) {
+        MopsUser mopsUser = getUserByEntityId(entityId);
         // sanity check
         if (mopsUser == null) {
             return null;
         }
+
+        // generate the hash from the clear text password
+        String passwordHash = generatePasswordHash(password, mopsUser);
 
         // update the password
-        mopsUser.setClearTextPassword(password);
-        processPassword(mopsUser);
+        mopsUser.setPasswordHash(passwordHash);
 
         return mopsUser;
     }
 
     @Override
-    public MOPSUser updateRegistrationInformation(String entityId, RegistrationInformation registrationInformation) {
-        MOPSUser mopsUser = getUserByEntityId(entityId);
+    public MopsUser updateRegistrationInformation(String entityId, RegistrationInformation registrationInformation) {
+        MopsUser mopsUser = getUserByEntityId(entityId);
         // sanity check
         if (mopsUser == null) {
             return null;
@@ -118,7 +119,7 @@ public class LocalUserService extends AbstractBaseUserService implements UserSer
     }
 
     @Override
-    public boolean verifyPassword(String password, MOPSUser mopsUser) {
+    public boolean verifyPassword(String password, MopsUser mopsUser) {
         return this.verifyBaseUserPassword(password, mopsUser);
     }
 

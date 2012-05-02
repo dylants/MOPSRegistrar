@@ -57,4 +57,15 @@ public interface AdminUserService {
      * @return The updated {@link AdminUser}
      */
     public AdminUser updateAdminUser(String entityId, AdminUser adminUser);
+
+    /**
+     * Generates a password hash of the <code>clearTextPassword</code>
+     * 
+     * @param clearTextPassword
+     *            The clear text password
+     * @param adminUser
+     *            The {@link AdminUser} which owns this password
+     * @return The password hash
+     */
+    public String generatePasswordHash(String clearTextPassword, AdminUser adminUser);
 }

@@ -2,11 +2,11 @@ package com.mops.registrar.services.user;
 
 import java.util.List;
 
-import com.mops.registrar.entities.MOPSUser;
+import com.mops.registrar.entities.MopsUser;
 import com.mops.registrar.entities.RegistrationInformation;
 
 /**
- * Provides methods for interacting with the {@link MOPSUser}
+ * Provides methods for interacting with the {@link MopsUser}
  * 
  * @author dylants
  * 
@@ -14,94 +14,105 @@ import com.mops.registrar.entities.RegistrationInformation;
 public interface UserService {
 
     /**
-     * Returns all the available {@link MOPSUser}s
+     * Returns all the available {@link MopsUser}s
      * 
-     * @return All available {@link MOPSUser}s
+     * @return All available {@link MopsUser}s
      */
-    public List<MOPSUser> getUsers();
+    public List<MopsUser> getUsers();
 
     /**
-     * Returns the {@link MOPSUser} with the given <code>entityId</code>, or {@literal null} if none found.
+     * Returns the {@link MopsUser} with the given <code>entityId</code>, or {@literal null} if none found.
      * 
      * @param entityId
-     *            The {@link MOPSUser}'s entity ID (unique ID)
-     * @return The {@link MOPSUser} if found, else {@literal null}
+     *            The {@link MopsUser}'s entity ID (unique ID)
+     * @return The {@link MopsUser} if found, else {@literal null}
      */
-    public MOPSUser getUserByEntityId(String entityId);
+    public MopsUser getUserByEntityId(String entityId);
 
     /**
-     * Returns the {@link MOPSUser} with the given <code>emailAddress</code>, or {@literal null} if none found.
+     * Returns the {@link MopsUser} with the given <code>username</code>, or {@literal null} if none found.
      * 
-     * @param emailAddress
-     *            The {@link MOPSUser}'s email address
-     * @return The {@link MOPSUser} if found, else {@literal null}
+     * @param username
+     *            The {@link MopsUser}'s username (email address)
+     * @return The {@link MopsUser} if found, else {@literal null}
      */
-    public MOPSUser getUserByEmailAddress(String emailAddress);
+    public MopsUser getUserByUsername(String username);
 
     /**
-     * Returns the {@link MOPSUser} specified by the <code>firstName</code> and <code>lastName</code>, or
+     * Returns the {@link MopsUser} specified by the <code>firstName</code> and <code>lastName</code>, or
      * {@literal null} if none exist.
      * 
      * @param firstName
-     *            The {@link MOPSUser}s first name
+     *            The {@link MopsUser}s first name
      * @param lastName
-     *            The {@link MOPSUser}s last name
-     * @return The {@link MOPSUser} if found, else {@literal null}.
+     *            The {@link MopsUser}s last name
+     * @return The {@link MopsUser} if found, else {@literal null}.
      */
-    public MOPSUser getUserByFirstNameLastName(String firstName, String lastName);
+    public MopsUser getUserByFirstNameLastName(String firstName, String lastName);
 
     /**
-     * Adds a new {@link MOPSUser}
+     * Adds a new {@link MopsUser}
      * 
      * @param mopsUser
-     *            The {@link MOPSUser} to add
-     * @return the added {@link MOPSUser}
+     *            The {@link MopsUser} to add
+     * @return the added {@link MopsUser}
      */
-    public MOPSUser addUser(MOPSUser mopsUser);
+    public MopsUser addUser(MopsUser mopsUser);
 
     /**
-     * Updates the email address of an existing {@link MOPSUser}, specified by the <code>entityId</code>.
+     * Updates the username (email address) of an existing {@link MopsUser}, specified by the <code>entityId</code>.
      * 
      * @param entityId
-     *            The entity ID of the {@link MOPSUser} to update
-     * @param emailAddress
-     *            The updated email address
-     * @return The updated {@link MOPSUser}
+     *            The entity ID of the {@link MopsUser} to update
+     * @param username
+     *            The updated username (email address)
+     * @return The updated {@link MopsUser}
      */
-    public MOPSUser updateEmailAddress(String entityId, String emailAddress);
+    public MopsUser updateUsername(String entityId, String username);
 
     /**
-     * Updates the password of an existing {@link MOPSUser}, specified by the <code>entityId</code>.
+     * Updates the password of an existing {@link MopsUser}, specified by the <code>entityId</code>.
      * 
      * @param entityId
-     *            The entity ID of the {@link MOPSUser} to update
+     *            The entity ID of the {@link MopsUser} to update
      * @param password
      *            The updated password
-     * @return The updated {@link MOPSUser}
+     * @return The updated {@link MopsUser}
      */
-    public MOPSUser updatePassword(String entityId, String password);
+    public MopsUser updatePassword(String entityId, String password);
 
     /**
-     * Updates the {@link RegistrationInformation} of an existing {@link MOPSUser}, specified by the
+     * Updates the {@link RegistrationInformation} of an existing {@link MopsUser}, specified by the
      * <code>entityId</code>. This will replace the existing {@link RegistrationInformation} with the passed in
      * <code>registrationInformation</code>.
      * 
      * @param entityId
-     *            The entity ID of an existing {@link MOPSUser}
+     *            The entity ID of an existing {@link MopsUser}
      * @param registrationInformation
      *            The {@link RegistrationInformation} to update
-     * @return The updated {@link MOPSUser}
+     * @return The updated {@link MopsUser}
      */
-    public MOPSUser updateRegistrationInformation(String entityId, RegistrationInformation registrationInformation);
+    public MopsUser updateRegistrationInformation(String entityId, RegistrationInformation registrationInformation);
 
     /**
-     * Verifies the password matches that of the given {@link MOPSUser}
+     * Verifies the password matches that of the given {@link MopsUser}
      * 
      * @param password
      *            The password entered
      * @param mopsUser
-     *            The {@link MOPSUser} to check against
-     * @return true iff the password matches that of the given {@link MOPSUser}
+     *            The {@link MopsUser} to check against
+     * @return true iff the password matches that of the given {@link MopsUser}
      */
-    public boolean verifyPassword(String password, MOPSUser mopsUser);
+    public boolean verifyPassword(String password, MopsUser mopsUser);
+
+    /**
+     * Generates a password hash of the <code>clearTextPassword</code>
+     * 
+     * @param clearTextPassword
+     *            The clear text password
+     * @param mopsUser
+     *            The {@link MopsUser} which owns this password
+     * @return The password hash
+     */
+    public String generatePasswordHash(String clearTextPassword, MopsUser mopsUser);
 }
