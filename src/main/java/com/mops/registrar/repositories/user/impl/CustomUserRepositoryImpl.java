@@ -8,7 +8,6 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
-import com.mongodb.WriteResult;
 import com.mops.registrar.entities.MopsUser;
 import com.mops.registrar.entities.RegistrationInformation;
 import com.mops.registrar.repositories.user.CustomUserRepository;
@@ -60,13 +59,32 @@ public class CustomUserRepositoryImpl implements CustomUserRepository {
         Query findQuery = new Query(Criteria.where("_id").is(entityId));
         Update update = new Update();
         update.set(elementName, elementValue);
-        WriteResult writeResult = this.mongoTemplate.upsert(findQuery, update, MopsUser.class);
-        if (writeResult.getError() != null) {
-            // TODO log the writeResult
-            System.out.println(writeResult.getError());
-        }
+        MopsUser mopsUser = this.mongoTemplate.findAndModify(findQuery, update, MopsUser.class);
+        return mopsUser;
+    }
 
-        MopsUser mopsUser = this.mongoTemplate.findOne(findQuery, MopsUser.class);
+    @Override
+    public MopsUser addChildEntityId(String mopsUserEntityId, String childEntityId) {
+        return pushElement(mopsUserEntityId, "childrenEntityIds", childEntityId);
+    }
+
+    /**
+     * Using the MongoDB $push operation, this adds the <code>elementValue</code> to the existing (or creates a new)
+     * <code>elementName</code>, performing the operations on a {@link MopsUser} specified by the <code>entityId</code>.
+     * 
+     * @param entityId
+     *            The entity ID of the {@link MopsUser}
+     * @param elementName
+     *            The name of the element to push
+     * @param elementValue
+     *            The value of the element to push
+     * @return The updated {@link MopsUser}
+     */
+    protected MopsUser pushElement(String entityId, String elementName, Object elementValue) {
+        Query findQuery = new Query(Criteria.where("_id").is(entityId));
+        Update update = new Update();
+        update.push(elementName, elementValue);
+        MopsUser mopsUser = this.mongoTemplate.findAndModify(findQuery, update, MopsUser.class);
         return mopsUser;
     }
 

@@ -3,7 +3,6 @@ package com.mops.registrar.entities;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.google.common.collect.Sets;
@@ -13,7 +12,7 @@ import com.mops.registrar.security.Authorities;
  * A {@link MopsUser} contains a RegistrationInformation object, which contains the {@link MopsUser}'s first name, last
  * name, and additional data collected during the registration process. The {@link MopsUser} also extends
  * {@link BaseUser} object, which acts as the {@link UserDetails} for Spring Security. Finally, the {@link MopsUser}
- * links all the {@link Child} objects owned by the {@link MopsUser}.
+ * links to all the {@link Child} objects owned by the {@link MopsUser}, using the entity IDs as the keys.
  * 
  * @author dylants
  */
@@ -22,8 +21,7 @@ public class MopsUser extends BaseUser implements Comparable<MopsUser> {
     private static final long serialVersionUID = 4203546994668744168L;
 
     private RegistrationInformation registrationInformation = new RegistrationInformation();
-    @DBRef
-    private Set<Child> children = new HashSet<Child>();
+    private Set<String> childrenEntityIds = new HashSet<String>();
 
     /**
      * Creates a new {@link MopsUser}
@@ -67,16 +65,6 @@ public class MopsUser extends BaseUser implements Comparable<MopsUser> {
     }
 
     /**
-     * Adds a {@link Child} to the {@link Set}
-     * 
-     * @param child
-     *            The {@link Child} to add
-     */
-    public void addChild(Child child) {
-        this.children.add(child);
-    }
-
-    /**
      * @return the registrationInformation
      */
     public RegistrationInformation getRegistrationInformation() {
@@ -92,18 +80,18 @@ public class MopsUser extends BaseUser implements Comparable<MopsUser> {
     }
 
     /**
-     * @return the children
+     * @return the childrenEntityIds
      */
-    public Set<Child> getChildren() {
-        return children;
+    public Set<String> getChildrenEntityIds() {
+        return childrenEntityIds;
     }
 
     /**
-     * @param children
-     *            the children to set
+     * @param childrenEntityIds
+     *            the childrenEntityIds to set
      */
-    public void setChildren(Set<Child> children) {
-        this.children = children;
+    public void setChildrenEntityIds(Set<String> childrenEntityIds) {
+        this.childrenEntityIds = childrenEntityIds;
     }
 
 }

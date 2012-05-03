@@ -15,9 +15,9 @@ public class MopsUserTest {
         Assert.assertEquals("authorities must match",
                 Sets.newHashSet(Authorities.ROLE_REGISTERED_USER.getGrantedAuthority()), mopsUser.getAuthorities());
         Assert.assertNotNull("registration information must not be null", mopsUser.getRegistrationInformation());
-        Assert.assertNotNull("children must not be null", mopsUser.getChildren());
+        Assert.assertNotNull("children entity ids must not be null", mopsUser.getChildrenEntityIds());
+        Assert.assertTrue("children entity ids must be empty", mopsUser.getChildrenEntityIds().size() == 0);
     }
-
     @Test
     public void testComparable() {
         MopsUser mopsUser1 = new MopsUser();

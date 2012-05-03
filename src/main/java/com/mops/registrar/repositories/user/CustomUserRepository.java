@@ -2,6 +2,7 @@ package com.mops.registrar.repositories.user;
 
 import java.util.List;
 
+import com.mops.registrar.entities.Child;
 import com.mops.registrar.entities.MopsUser;
 import com.mops.registrar.entities.RegistrationInformation;
 
@@ -60,4 +61,15 @@ public interface CustomUserRepository {
      * @return The updated {@link MopsUser}
      */
     public MopsUser updatePasswordHash(String entityId, String passwordHash);
+
+    /**
+     * Adds a {@link Child} entity ID to the existing set of entity IDs contained within this {@link MopsUser}.
+     * 
+     * @param mopsUserEntityId
+     *            The entity ID of the {@link MopsUser} to update
+     * @param childEntityId
+     *            The entity ID of the {@link Child} that should be added to our existing set
+     * @return The updated {@link MopsUser}
+     */
+    public MopsUser addChildEntityId(String mopsUserEntityId, String childEntityId);
 }
