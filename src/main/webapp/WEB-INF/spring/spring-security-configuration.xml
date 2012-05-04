@@ -35,6 +35,8 @@
         <!-- Any URL with "/user/profile" in the path is restricted to registered users -->
         <intercept-url pattern="/**/user/profile**" access="hasRole('ROLE_REGISTERED_USER')" />
         <intercept-url pattern="/**/user/profile/**" access="hasRole('ROLE_REGISTERED_USER')" />
+        <!-- For now restrict the REST service layer to Admin only access -->
+        <intercept-url pattern="/**/service/**" access="hasRole('ROLE_ADMIN_USER')"/>
         <!-- Any URL (not matched by the above patterns) is restricted to admins, registered users, and anonymous (anyone) -->
         <intercept-url pattern="/**" access="hasAnyRole('ROLE_ADMIN_USER','ROLE_REGISTERED_USER','ROLE_ANONYMOUS')" />
         <!-- Enables form based login -->
