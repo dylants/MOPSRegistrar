@@ -12,6 +12,7 @@
         <p>Click on the link below to update your personal profile or MOPPETS related information</p>
 
         <div id="user_profile_links">
-            <a href="${userProfileRoot}/registrationInformation">Edit Registration Information</a> <a href="#">Edit MOPPETS Information</a>
+            <a href="${userProfileRoot}/registrationInformation">Edit Registration Information</a>
+            <a href="${userProfileRoot}/child">View MOPPETS Information</a>
         </div>
 </div>

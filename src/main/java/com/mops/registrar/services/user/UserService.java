@@ -2,6 +2,7 @@ package com.mops.registrar.services.user;
 
 import java.util.List;
 
+import com.mops.registrar.entities.Child;
 import com.mops.registrar.entities.MopsUser;
 import com.mops.registrar.entities.RegistrationInformation;
 
@@ -37,18 +38,6 @@ public interface UserService {
      * @return The {@link MopsUser} if found, else {@literal null}
      */
     public MopsUser getUserByUsername(String username);
-
-    /**
-     * Returns the {@link MopsUser} specified by the <code>firstName</code> and <code>lastName</code>, or
-     * {@literal null} if none exist.
-     * 
-     * @param firstName
-     *            The {@link MopsUser}s first name
-     * @param lastName
-     *            The {@link MopsUser}s last name
-     * @return The {@link MopsUser} if found, else {@literal null}.
-     */
-    public MopsUser getUserByFirstNameLastName(String firstName, String lastName);
 
     /**
      * Adds a new {@link MopsUser}
@@ -115,4 +104,15 @@ public interface UserService {
      * @return The password hash
      */
     public String generatePasswordHash(String clearTextPassword, MopsUser mopsUser);
+
+    /**
+     * Adds a {@link Child} entity ID to the existing set of entity IDs contained within this {@link MopsUser}.
+     * 
+     * @param mopsUserEntityId
+     *            The entity ID of the {@link MopsUser} to update
+     * @param childEntityId
+     *            The entity ID of the {@link Child} that should be added to our existing set
+     * @return The updated {@link MopsUser}
+     */
+    public MopsUser addChildEntityId(String mopsUserEntityId, String childEntityId);
 }

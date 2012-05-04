@@ -3,6 +3,7 @@ package com.mops.registrar.web.page;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,18 +39,30 @@ public class RegistrarHomeController {
          * If the user is logged in, we display some information. To check if this is the case, key off the Principal.
          * In the case the user is logged in, the Principal will be of type Authentication
          */
-        // First look for a MopsUser
-        MopsUser mopsUser = this.registrarAuthenticationProcessor.deriveMopsUserFromPrincipal(principal);
-        if (mopsUser != null) {
-            // add the first name
-            // TODO allow for null first name
-            model.addAttribute("firstName", mopsUser.getRegistrationInformation().getFirstName());
-        } else {
-            // Else see if we can find the AdminUser
-            AdminUser adminUser = this.registrarAuthenticationProcessor.deriveAdminUserFromPrincipal(principal);
-            if (adminUser != null) {
+        if (principal != null) {
+            MopsUser mopsUser = null;
+            try {
+                // First look for a MopsUser
+                mopsUser = this.registrarAuthenticationProcessor.deriveMopsUserFromPrincipal(principal);
+            } catch (AccessDeniedException ade) {
+                // ignore since we're just looking to test...
+            }
+            if (mopsUser != null) {
                 // add the first name
-                model.addAttribute("firstName", adminUser.getUsername());
+                // TODO allow for null first name
+                model.addAttribute("firstName", mopsUser.getRegistrationInformation().getFirstName());
+            } else {
+                AdminUser adminUser = null;
+                try {
+                    // Else see if we can find the AdminUser
+                    adminUser = this.registrarAuthenticationProcessor.deriveAdminUserFromPrincipal(principal);
+                } catch (AccessDeniedException ade) {
+                    // ignore since we're just looking to test...
+                }
+                if (adminUser != null) {
+                    // add the first name
+                    model.addAttribute("firstName", adminUser.getUsername());
+                }
             }
         }
 

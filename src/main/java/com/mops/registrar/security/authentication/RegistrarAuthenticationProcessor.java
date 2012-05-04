@@ -5,6 +5,8 @@ import java.security.Principal;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.access.AccessDeniedException;
+
 import com.mops.registrar.entities.AdminUser;
 import com.mops.registrar.entities.MopsUser;
 
@@ -30,22 +32,28 @@ public interface RegistrarAuthenticationProcessor {
     public void loginNewlyRegisteredMOPSUser(HttpServletRequest request, HttpServletResponse response, MopsUser mopsUser);
 
     /**
-     * Locates and returns the {@link MopsUser} object stored within the supplied {@link Principal}, else returns
-     * {@literal null} if none is found
+     * Locates and returns the {@link MopsUser} object stored within the supplied {@link Principal}
      * 
      * @param principal
      *            The {@link Principal} of the current user
-     * @return The {@link MopsUser} object, else {@literal null} if none foundO
+     * @return The {@link MopsUser} object
+     * @throws AccessDeniedException
+     *             If the {@link MopsUser} is not found (since where we call this we're relying on the {@link MopsUser}
+     *             to exist, else there was some sort of authorization failure. This allows us to fall back to the login
+     *             page, if for some reason a user was able to get to a page which utilized this code.
      */
-    public MopsUser deriveMopsUserFromPrincipal(Principal principal);
+    public MopsUser deriveMopsUserFromPrincipal(Principal principal) throws AccessDeniedException;
 
     /**
-     * Locates and returns the {@link AdminUser} object stored within the supplied {@link Principal}, else returns
-     * {@literal null} if none is found
+     * Locates and returns the {@link AdminUser} object stored within the supplied {@link Principal}
      * 
      * @param principal
      *            The {@link Principal} of the current user
-     * @return The {@link AdminUser} object, else {@literal null} if none foundO
+     * @return The {@link AdminUser} object
+     * @throws AccessDeniedException
+     *             If the {@link AdminUser} is not found (since where we call this we're relying on the {@link AdminUser}
+     *             to exist, else there was some sort of authorization failure. This allows us to fall back to the login
+     *             page, if for some reason a user was able to get to a page which utilized this code.
      */
-    public AdminUser deriveAdminUserFromPrincipal(Principal principal);
+    public AdminUser deriveAdminUserFromPrincipal(Principal principal) throws AccessDeniedException;
 }

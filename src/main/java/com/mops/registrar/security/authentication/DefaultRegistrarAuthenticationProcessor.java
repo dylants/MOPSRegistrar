@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationDetailsSource;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -89,7 +90,7 @@ public class DefaultRegistrarAuthenticationProcessor implements RegistrarAuthent
     }
 
     @Override
-    public MopsUser deriveMopsUserFromPrincipal(Principal principal) {
+    public MopsUser deriveMopsUserFromPrincipal(Principal principal) throws AccessDeniedException {
         // first find out if it's of type Authentication
         if (principal instanceof Authentication) {
             // now get the principal from the... principal
@@ -109,12 +110,12 @@ public class DefaultRegistrarAuthenticationProcessor implements RegistrarAuthent
             }
         }
 
-        // else, doesn't exist, return null
-        return null;
+        // else, doesn't exist, throw AccessDeniedException so we fail out in those calls
+        throw new AccessDeniedException("Unable to locate MopsUser in Principal");
     }
 
     @Override
-    public AdminUser deriveAdminUserFromPrincipal(Principal principal) {
+    public AdminUser deriveAdminUserFromPrincipal(Principal principal) throws AccessDeniedException {
         // first find out if it's of type Authentication
         if (principal instanceof Authentication) {
             // now get the principal from the... principal
@@ -134,8 +135,8 @@ public class DefaultRegistrarAuthenticationProcessor implements RegistrarAuthent
             }
         }
 
-        // else, doesn't exist, return null
-        return null;
+        // else, doesn't exist, throw AccessDeniedException so we fail out in those calls
+        throw new AccessDeniedException("Unable to locate AdminUser in Principal");
     }
 
     /**

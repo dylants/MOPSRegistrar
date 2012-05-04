@@ -14,7 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author dylants
  * 
  */
-public class Child extends BaseEntity {
+public class Child extends BaseEntity implements Comparable<Child> {
 
     // this points us back at the parent of this child
     private String mopsUserEntityId;
@@ -58,6 +58,11 @@ public class Child extends BaseEntity {
     private String specialNeedsAndInstructionsAllergyInformation;
 
     /**
+     * Default constructor (for Spring)
+     */
+    public Child() {}
+
+    /**
      * Creates a {@link Child} linked to a parent {@link MopsUser}
      * 
      * @param mopsUserEntityId
@@ -65,6 +70,16 @@ public class Child extends BaseEntity {
      */
     public Child(String mopsUserEntityId) {
         this.mopsUserEntityId = mopsUserEntityId;
+    }
+
+    @Override
+    public int compareTo(Child child) {
+        // sanity check
+        if ((this.dateOfBirth == null) || (child.getDateOfBirth() == null)) {
+            return 0;
+        }
+
+        return this.dateOfBirth.compareTo(child.getDateOfBirth());
     }
 
     /**

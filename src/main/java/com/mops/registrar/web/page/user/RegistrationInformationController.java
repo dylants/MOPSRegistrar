@@ -26,6 +26,8 @@ import com.mops.registrar.services.user.UserService;
 @Controller
 @RequestMapping(value = "user/profile/registrationInformation")
 public class RegistrationInformationController {
+    private static final String REGISTRATION_INFORMATION_MODEL_NAME = "registrationInformation";
+
     @Autowired
     private UserService userService;
     @Autowired
@@ -44,11 +46,6 @@ public class RegistrationInformationController {
     public String registrationInformation(Principal principal, Model model) {
         // get the MopsUser from the principal
         MopsUser mopsUser = this.registrarAuthenticationProcessor.deriveMopsUserFromPrincipal(principal);
-        if (mopsUser == null) {
-            // if we're here, something went wrong, send them back to home
-            // TODO logging
-            return "home";
-        }
 
         // show them the registration information page
         return buildRegistrationInformationPage(model, mopsUser.getRegistrationInformation());
@@ -70,21 +67,16 @@ public class RegistrationInformationController {
      */
     @RequestMapping(method = RequestMethod.POST)
     public String processRegistrationInformation(
-            @Valid @ModelAttribute("registrationInformation") RegistrationInformation registrationInformation,
+            @Valid @ModelAttribute(REGISTRATION_INFORMATION_MODEL_NAME) RegistrationInformation registrationInformation,
             BindingResult bindingResult, Model model, Principal principal) {
-        // get the MopsUser from the principal
-        MopsUser mopsUser = this.registrarAuthenticationProcessor.deriveMopsUserFromPrincipal(principal);
-        if (mopsUser == null) {
-            // if we're here, something went wrong, send them back to home
-            // TODO logging
-            return "home";
-        }
-
         // cover binding errors (invalid input)
         if (bindingResult.hasErrors()) {
             // show the page again (so they can fix the errors)
             return buildRegistrationInformationPage(model, registrationInformation);
         }
+
+        // get the MopsUser from the principal
+        MopsUser mopsUser = this.registrarAuthenticationProcessor.deriveMopsUserFromPrincipal(principal);
 
         // find this user's entity ID
         String entityId = mopsUser.getEntityId();
@@ -112,7 +104,7 @@ public class RegistrationInformationController {
             isNew = true;
         }
         model.addAttribute("isNew", isNew);
-        model.addAttribute("registrationInformation", registrationInformation);
+        model.addAttribute(REGISTRATION_INFORMATION_MODEL_NAME, registrationInformation);
         return "user/profile/registrationInformation";
     }
 

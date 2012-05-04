@@ -36,18 +36,6 @@ public class DatabaseUserService extends AbstractUserService implements UserServ
     }
 
     @Override
-    public MopsUser getUserByFirstNameLastName(String firstName, String lastName) {
-        List<MopsUser> mopsUsers = this.userRepository.findByFirstNameLastName(firstName, lastName);
-        // since we don't know much else, return the first one
-        if ((mopsUsers != null) && (mopsUsers.size() > 0)) {
-            return mopsUsers.get(0);
-        } else {
-            // none found
-            return null;
-        }
-    }
-
-    @Override
     public MopsUser addUser(MopsUser mopsUser) {
         return this.userRepository.save(mopsUser);
     }
@@ -77,6 +65,11 @@ public class DatabaseUserService extends AbstractUserService implements UserServ
     @Override
     public boolean verifyPassword(String password, MopsUser mopsUser) {
         return this.verifyBaseUserPassword(password, mopsUser);
+    }
+
+    @Override
+    public MopsUser addChildEntityId(String mopsUserEntityId, String childEntityId) {
+        return this.userRepository.addChildEntityId(mopsUserEntityId, childEntityId);
     }
 
     /**

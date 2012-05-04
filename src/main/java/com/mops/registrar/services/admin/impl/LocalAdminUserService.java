@@ -28,6 +28,7 @@ public class LocalAdminUserService extends AbstractAdminUserService implements A
         for (AdminUser adminUser : this.adminUsers) {
             if (adminUser.getEntityId().equals(entityId)) {
                 returnAdminUser = adminUser;
+                break;
             }
         }
 
@@ -41,6 +42,7 @@ public class LocalAdminUserService extends AbstractAdminUserService implements A
         for (AdminUser adminUser : this.adminUsers) {
             if (adminUser.getUsername().equals(username)) {
                 returnAdminUser = adminUser;
+                break;
             }
         }
 

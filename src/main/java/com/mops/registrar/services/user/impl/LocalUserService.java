@@ -29,6 +29,7 @@ public class LocalUserService extends AbstractUserService implements UserService
         for (MopsUser mopsUser : this.mopsUsers) {
             if (mopsUser.getEntityId().equals(entityId)) {
                 returnUser = mopsUser;
+                break;
             }
         }
 
@@ -42,20 +43,7 @@ public class LocalUserService extends AbstractUserService implements UserService
         for (MopsUser mopsUser : this.mopsUsers) {
             if (mopsUser.getUsername().equals(username)) {
                 returnUser = mopsUser;
-            }
-        }
-
-        return returnUser;
-    }
-
-    @Override
-    public MopsUser getUserByFirstNameLastName(String firstName, String lastName) {
-        MopsUser returnUser = null;
-
-        for (MopsUser mopsUser : this.mopsUsers) {
-            if (mopsUser.getRegistrationInformation().getFirstName().equals(firstName)
-                    && mopsUser.getRegistrationInformation().getLastName().equals(lastName)) {
-                returnUser = mopsUser;
+                break;
             }
         }
 
@@ -121,6 +109,20 @@ public class LocalUserService extends AbstractUserService implements UserService
     @Override
     public boolean verifyPassword(String password, MopsUser mopsUser) {
         return this.verifyBaseUserPassword(password, mopsUser);
+    }
+
+    @Override
+    public MopsUser addChildEntityId(String mopsUserEntityId, String childEntityId) {
+        MopsUser mopsUser = getUserByEntityId(mopsUserEntityId);
+        // sanity check
+        if (mopsUser == null) {
+            return null;
+        }
+
+        // add the child entity ID
+        mopsUser.getChildrenEntityIds().add(childEntityId);
+
+        return mopsUser;
     }
 
 }

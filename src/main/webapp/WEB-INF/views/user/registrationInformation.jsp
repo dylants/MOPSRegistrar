@@ -8,7 +8,6 @@
     <c:when test="${isNew}">
         <c:set var="heading" value="Registration Information"/>
         <c:set var="submitButtonText" value="Register"/>
-        <c:set var="cancelUrl" value="${contextPath}/page/home"/>
     </c:when>
     <c:otherwise>
         <c:set var="heading" value="Edit Registration Information"/>
@@ -18,9 +17,6 @@
         </sec:authorize>
         <sec:authorize access="hasRole('ROLE_REGISTERED_USER')">
             <c:set var="cancelUrl" value="${contextPath}/page/user/profile"/>
-        </sec:authorize>
-        <sec:authorize access="hasRole('ROLE_ANONYMOUS')">
-            <c:set var="cancelUrl" value="${contextPath}/page/home"/>
         </sec:authorize>
     </c:otherwise>
 </c:choose>
@@ -57,7 +53,7 @@
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <c:set var="lastNameErrors"><form:errors path="lastName"/></c:set>
-                        <td><span id="lastName" class="error">${lastNameErrors}</span></td>
+                        <td><span id="lastNameErrors" class="error">${lastNameErrors}</span></td>
                     </tr>
                 </table>
                 <table id="registration_information_table">
@@ -154,7 +150,10 @@
 
             <div class="submitButtons">
                 <span class="submitButton"><input type="submit" value="${submitButtonText}"/></span>
-                <span class="submitButton"><a href="${cancelUrl}"> <input type="button" value="Cancel"/></a></span>
+                <!-- Only allow cancel on an edit (not on a new) -->
+                <c:if test="${not isNew}">
+                    <span class="submitButton"><a href="${cancelUrl}"> <input type="button" value="Cancel"/></a></span>
+                </c:if>
             </div>
 		</form:form>
 	

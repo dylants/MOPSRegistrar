@@ -13,6 +13,8 @@
         <bean id="application.userService" class="com.mops.registrar.services.user.impl.LocalUserService" />
         <!-- Service used to interact with AdminUser's -->
         <bean id="application.adminUserService" class="com.mops.registrar.services.admin.impl.LocalAdminUserService" />
+        <!-- Service used to interact with Child entities -->
+        <bean id="application.childUserService" class="com.mops.registrar.services.user.impl.LocalUserService"/>
     </beans>
 
     <!-- Beans loaded in production (running with a database) -->
@@ -24,6 +26,8 @@
         <bean id="application.userService" class="com.mops.registrar.services.user.impl.DatabaseUserService" />
         <!-- Service used to interact with AdminUser's -->
         <bean id="application.adminUserService" class="com.mops.registrar.services.admin.impl.DatabaseAdminUserService" />
+        <!-- Service used to interact with Child entities -->
+        <bean id="application.childUserService" class="com.mops.registrar.services.child.impl.DatabaseChildService"/>
     </beans>
 
 </beans>

@@ -29,15 +29,9 @@ public class UserProfileController {
     public String profile(Principal principal, Model model) {
         // attempt to get the MopsUser
         MopsUser mopsUser = this.registrarAuthenticationProcessor.deriveMopsUserFromPrincipal(principal);
-        if (mopsUser != null) {
-            // TODO allow for null first and last name
-            model.addAttribute("user", mopsUser);
-            return "user/profile";
-        }
-
-        // if we're here, something went wrong, send them back to home
-        // TODO logging
-        return "home";
+        // TODO allow for null first and last name
+        model.addAttribute("user", mopsUser);
+        return "user/profile";
     }
 
     /**

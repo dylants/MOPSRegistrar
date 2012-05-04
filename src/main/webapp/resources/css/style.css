@@ -84,6 +84,10 @@ body {
     width: 605px;
 }
 
+.smallText {
+    font-size: smaller;
+}
+
 /* HEADER */
 #header {
     background-image: url(../img/bg_header.png);
@@ -223,6 +227,40 @@ body {
 
 #user_profile_links a {
     padding: 10px;
+}
+
+/* CHILD FORM */
+#childForm #child_table {
+    margin: 0pt auto;
+}
+
+#motherInformation {
+    border: 2pt solid white;
+}
+
+#motherNameAddress {
+    padding-top: 10px;
+/*     padding-left: 110px; */
+}
+
+#motherPhone {
+/*     padding-left: 200px; */
+}
+
+#fatherInformation {
+    border: 2pt solid white;
+}
+
+#fatherNameAndPhone {
+/*     padding-left: 100px; */
+}
+
+#childForm .submitButtons a:hover {
+    text-decoration: none;
+}
+
+#childForm .submitButtons a:active {
+    text-decoration: none;
 }
 
 /* ADMIN HOME */

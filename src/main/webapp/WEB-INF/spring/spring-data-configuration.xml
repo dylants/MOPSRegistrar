@@ -31,4 +31,13 @@
     <!-- Additional custom queries for the admin user repository -->
     <bean id="customAdminUserRepository" class="com.mops.registrar.repositories.admin.impl.CustomAdminUserRepositoryImpl" />
 
+    <!-- The child repository -->
+    <mongo:repositories base-package="com.mops.registrar.repositories.child" mongo-template-ref="registrarDBMongoTemplate">
+        <mongo:repository id="childRepository" custom-impl-ref="customChildRepository"
+            mongo-template-ref="registrarDBMongoTemplate" />
+    </mongo:repositories>
+
+    <!-- Additional custom queries for the child repository -->
+    <bean id="customChildRepository" class="com.mops.registrar.repositories.child.impl.CustomChildRepositoryImpl" />
+
 </beans>

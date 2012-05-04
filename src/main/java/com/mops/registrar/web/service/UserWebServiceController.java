@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mops.registrar.entities.MopsUser;
@@ -47,21 +46,6 @@ public class UserWebServiceController {
     @ResponseBody
     public MopsUser getUser(@PathVariable("entityId") String entityId) {
         return this.userService.getUserByEntityId(entityId);
-    }
-
-    /**
-     * Returns the (first) {@link MopsUser} found by <code>firstName</code> and <code>lastName</code>
-     * 
-     * @param firstName
-     *            The {@link MopsUser}s first name
-     * @param lastName
-     *            The {@link MopsUser}s last name
-     * @return The (first) {@link MopsUser} found, else {@literal null}
-     */
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
-    @ResponseBody
-    public MopsUser getUser(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
-        return this.userService.getUserByFirstNameLastName(firstName, lastName);
     }
 
     /**

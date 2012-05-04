@@ -10,7 +10,7 @@
     <c:if test="${not empty errorMessage}">
         <div class="errorBlock">${errorMessage}</div>
     </c:if>
-    <form action="${contextPath}/j_spring_security_check" method="POST">
+    <form name="loginForm" action="${contextPath}/j_spring_security_check" method="POST">
         <div class="usernameAndPassword">
             <table>
                 <tr>
@@ -27,5 +27,9 @@
             <span class="submitButton"><input name="submit" type="submit" value="Login"/></span>
         </div>
     </form>
+
+    <script type="text/javascript">
+    document.forms['loginForm'].elements['j_username'].focus();
+    </script>
 
 </div>
