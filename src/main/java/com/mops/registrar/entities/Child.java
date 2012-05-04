@@ -1,11 +1,12 @@
 package com.mops.registrar.entities;
 
-import java.util.Date;
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.joda.time.LocalDate;
+import org.joda.time.Months;
+import org.joda.time.Years;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -15,6 +16,8 @@ import org.springframework.format.annotation.DateTimeFormat;
  * 
  */
 public class Child extends BaseEntity implements Comparable<Child> {
+    protected static final String YEARS_OLD = "years old";
+    protected static final String MONTHS_OLD = "months old";
 
     // this points us back at the parent of this child
     private String mopsUserEntityId;
@@ -28,7 +31,7 @@ public class Child extends BaseEntity implements Comparable<Child> {
     private String lastName;
     @NotNull
     @DateTimeFormat(pattern = "MM/dd/yyyy")
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     // information about the father (we know the mother from the MOPS user)
     @NotBlank
@@ -60,7 +63,8 @@ public class Child extends BaseEntity implements Comparable<Child> {
     /**
      * Default constructor (for Spring)
      */
-    public Child() {}
+    public Child() {
+    }
 
     /**
      * Creates a {@link Child} linked to a parent {@link MopsUser}
@@ -80,6 +84,32 @@ public class Child extends BaseEntity implements Comparable<Child> {
         }
 
         return this.dateOfBirth.compareTo(child.getDateOfBirth());
+    }
+
+    /**
+     * Returns the age of the {@link Child}, using months for less than 2, years 2 and up.
+     * 
+     * @return The age of the {@link Child}, using months for less than 2, years 2 and up.
+     */
+    public String getAge() {
+        // sanity check
+        if (this.dateOfBirth == null) {
+            return null;
+        }
+
+        // let's see what date is now
+        LocalDate now = new LocalDate();
+        // then get the years between this Child's birth and now
+        Years ageInYears = Years.yearsBetween(this.dateOfBirth, now);
+        // if the age is less than 2 years old
+        if (ageInYears.isLessThan(Years.TWO)) {
+            // get the months old instead
+            Months ageInMonths = Months.monthsBetween(this.dateOfBirth, now);
+            return ageInMonths.getMonths() + " " + MONTHS_OLD;
+        } else {
+            // else get the years old
+            return ageInYears.getYears() + " " + YEARS_OLD;
+        }
     }
 
     /**
@@ -145,7 +175,7 @@ public class Child extends BaseEntity implements Comparable<Child> {
     /**
      * @return the dateOfBirth
      */
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
@@ -153,7 +183,7 @@ public class Child extends BaseEntity implements Comparable<Child> {
      * @param dateOfBirth
      *            the dateOfBirth to set
      */
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

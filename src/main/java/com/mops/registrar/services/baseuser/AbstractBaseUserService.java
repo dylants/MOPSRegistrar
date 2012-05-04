@@ -21,6 +21,15 @@ public abstract class AbstractBaseUserService {
     @Autowired
     protected SaltSource saltSource;
 
+    /**
+     * Verifies the password is valid for this {@link BaseUser}
+     * 
+     * @param password
+     *            The password to verify
+     * @param baseUser
+     *            The {@link BaseUser} to verify the password against
+     * @return true iff the password is valid for this {@link BaseUser}
+     */
     protected boolean verifyBaseUserPassword(String password, BaseUser baseUser) {
         /*
          * So we're not storing the actual password, but a hash. Because of this, we must verify the password the user
