@@ -2,16 +2,7 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
-<html>
-<head>
-<title>MOPS Registrar</title>
-</head>
-
-<body>
-
-    <a href="${contextPath}/page/home">MOPS Registration Home</a>
-    <br />
-
-</body>
-
-</html>
+<%
+    String redirectURL = "page/home";
+    response.sendRedirect(redirectURL);
+%>
