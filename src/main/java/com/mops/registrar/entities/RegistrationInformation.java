@@ -1,5 +1,6 @@
 package com.mops.registrar.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.validation.Valid;
@@ -14,7 +15,9 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author dylants
  * 
  */
-public class RegistrationInformation {
+public class RegistrationInformation implements Serializable {
+
+    private static final long serialVersionUID = 2531120783702330139L;
 
     // information about the user
     @NotBlank

@@ -1,5 +1,6 @@
 package com.mops.registrar.entities;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
 
@@ -16,7 +17,7 @@ import com.mops.registrar.security.Authorities;
  * @author dylants
  * 
  */
-public abstract class BaseUser extends BaseEntity implements UserDetails {
+public abstract class BaseUser extends BaseEntity implements UserDetails, Serializable {
     private static final long serialVersionUID = 2970952793117692589L;
 
     private String username = null;

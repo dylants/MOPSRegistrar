@@ -1,5 +1,6 @@
 package com.mops.registrar.entities;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
@@ -10,7 +11,9 @@ import org.springframework.data.annotation.Id;
  * @author dylants
  * 
  */
-public abstract class BaseEntity {
+public abstract class BaseEntity implements Serializable {
+
+    private static final long serialVersionUID = 5516054816840998629L;
 
     @Id
     private String entityId = null;

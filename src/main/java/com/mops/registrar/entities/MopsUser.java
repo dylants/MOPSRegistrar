@@ -1,5 +1,6 @@
 package com.mops.registrar.entities;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +17,7 @@ import com.mops.registrar.security.Authorities;
  * 
  * @author dylants
  */
-public class MopsUser extends BaseUser implements Comparable<MopsUser> {
+public class MopsUser extends BaseUser implements Comparable<MopsUser>, Serializable {
 
     private static final long serialVersionUID = 4203546994668744168L;
 
