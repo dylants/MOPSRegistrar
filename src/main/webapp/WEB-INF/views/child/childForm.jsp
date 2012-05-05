@@ -9,7 +9,7 @@
         <c:set var="heading" value="Add MOPPET"/>
         <c:set var="registrationInformationURL" value="${contextPath}/page/user/profile/registrationInformation"/>
         <c:set var="submitButtonText" value="Add"/>
-        <c:set var="cancelUrl" value="${contextPath}/page/user/profile"/>
+        <c:set var="cancelUrl" value="${contextPath}/page/user/profile/child"/>
     </c:when>
     <c:otherwise>
         <c:set var="heading" value="Edit MOPPET Registration Information"/>
@@ -19,7 +19,7 @@
             <c:set var="cancelUrl" value="${contextPath}/page/admin/home"/>
         </sec:authorize>
         <sec:authorize access="hasRole('ROLE_REGISTERED_USER')">
-            <c:set var="cancelUrl" value="${contextPath}/page/user/profile"/>
+            <c:set var="cancelUrl" value="${contextPath}/page/user/profile/child"/>
         </sec:authorize>
     </c:otherwise>
 </c:choose>
@@ -108,7 +108,6 @@
                 </div>
             </div>
             
-            <br/>
             <!-- Father Information -->
             
             <div id="fatherInformation">
@@ -153,6 +152,110 @@
                     </table>
                 </div>
             </div>
+
+            <!-- Family Doctor -->
+            
+            <div id="familyDoctor">
+                Family Doctor<br/><br/>
+                <div id="doctorNamePhoneAndAddress">
+                    <table id="child_table">
+                        <tr>
+                            <td>Doctor Name:</td>
+                            <td><form:input path="doctorName" cssClass="longerText" /></td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Phone Number:</td>
+                            <td><form:input path="doctorPhoneNumber" cssClass="mediumText" /></td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <c:set var="doctorNameErrors"><form:errors path="doctorName"/></c:set>
+                            <td><span id="doctorName.errors" class="error">${doctorNameErrors}</span></td>
+                            <td>&nbsp;</td>
+                            <c:set var="doctorPhoneNumberErrors"><form:errors path="doctorPhoneNumber"/></c:set>
+                            <td><span id="doctorPhoneNumber.errors" class="error">${doctorPhoneNumberErrors}</span></td>
+                        </tr>
+                    </table>
+                    <table id="child_table">
+                        <tr>
+                            <td>Street Address:</td>
+                            <td><form:input path="doctorAddress.streetAddress" cssClass="xtralongText" /></td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <c:set var="doctorStreetAddressErrors"><form:errors path="doctorAddress.streetAddress"/></c:set>
+                            <td><span id="doctorStreetAddress.errors" class="error">${doctorStreetAddressErrors}</span></td>
+                        </tr>
+                    </table>
+                    <table id="child_table">
+                        <tr>
+                            <td>City:</td>
+                            <td><form:input path="doctorAddress.city" cssClass="longText" /></td>
+                            <td>&nbsp;&nbsp;State:</td>
+                            <td><form:input path="doctorAddress.state" cssClass="longText" /></td>
+                            <td>&nbsp;Zip Code:</td>
+                            <td><form:input path="doctorAddress.zipCode" cssClass="longText" /></td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <c:set var="doctorCityErrors"><form:errors path="doctorAddress.city"/></c:set>
+                            <td><span id="doctorCity.errors" class="error">${doctorCityErrors}</span></td>
+                            <td>&nbsp;</td>
+                            <c:set var="doctorStateErrors"><form:errors path="doctorAddress.state"/></c:set>
+                            <td><span id="doctorState.errors" class="error">${doctorStateErrors}</span></td>
+                            <td>&nbsp;</td>
+                            <c:set var="doctorZipCodeErrors"><form:errors path="doctorAddress.zipCode"/></c:set>
+                            <td><span id="doctorZipCode.errors" class="error">${doctorZipCodeErrors}</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Emergency Contact -->
+            
+            <div id="emergencyContact">
+                Emergency Contact<br/><br/>
+                <div id="additionalEmergencyContact">
+                    <table id="child_table">
+                        <tr>
+                            <td>Name:</td>
+                            <td><form:input path="additionalEmergencyContactName" cssClass="longerText" /></td>
+                            <td>&nbsp;Phone Number:</td>
+                            <td><form:input path="additionalEmergencyContactPhoneNumber" cssClass="mediumText" /></td>
+                            <td>&nbsp;Relationship:</td>
+                            <td><form:input path="additionalEmergencyContactRelationship" cssClass="longText" /></td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <c:set var="additionalEmergencyContactNameErrors"><form:errors path="additionalEmergencyContactName"/></c:set>
+                            <td><span id="additionalEmergencyContactName.errors" class="error">${additionalEmergencyContactNameErrors}</span></td>
+                            <td>&nbsp;</td>
+                            <c:set var="additionalEmergencyContactPhoneNumberErrors"><form:errors path="additionalEmergencyContactPhoneNumber"/></c:set>
+                            <td><span id="additionalEmergencyContactPhoneNumber.errors" class="error">${additionalEmergencyContactPhoneNumberErrors}</span></td>
+                            <td>&nbsp;</td>
+                            <c:set var="dadditionalEmergencyContactRelationshipErrors"><form:errors path="additionalEmergencyContactRelationship"/></c:set>
+                            <td><span id="additionalEmergencyContactRelationship.errors" class="error">${additionalEmergencyContactRelationshipErrors}</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Additional Information -->
+            
+            <div id="additionalInformation">
+                Additional Information<br/><br/>
+                <div id="dataRow">
+                    Siblings (names and birth dates):<br/>
+                    <form:textarea path="siblingsNameAndBirthDate" cssClass="xtralongText"/>
+                </div>
+                <div id="dataRow">
+                    Favorite toys, songs, games, foods:<br/>
+                    <form:textarea path="favoriteToysSongsGamesFoods" cssClass="xtralongText"/>
+                </div>
+                <div id="dataRow">
+                    Special needs and instructions; allergies:<br/>
+                    <form:textarea path="specialNeedsAndInstructionsAllergyInformation" cssClass="xtralongText"/>
+                </div>
+            </div>
+
 
             <div class="submitButtons">
                 <span class="submitButton"><input type="submit" value="${submitButtonText}"/></span>

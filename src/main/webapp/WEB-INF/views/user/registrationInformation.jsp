@@ -58,12 +58,12 @@
                 </table>
                 <table id="registration_information_table">
     				<tr>
-    					<td>Home Address:</td>
+    					<td>Street Address:</td>
     					<td><form:input	path="address.streetAddress" cssClass="xtralongText" /></td>
     				</tr>
-                    <c:set var="streetAddressErrors"><form:errors path="address.streetAddress"/></c:set>
                     <tr>
                         <td>&nbsp;</td>
+                        <c:set var="streetAddressErrors"><form:errors path="address.streetAddress"/></c:set>
                         <td><span id="streetAddress.errors" class="error">${streetAddressErrors}</span></td>
                     </tr>
                 </table>

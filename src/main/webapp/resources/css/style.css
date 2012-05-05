@@ -80,6 +80,10 @@ body {
     width: 180px;
 }
 
+.longerText {
+    width: 360px;
+}
+
 .xtralongText {
     width: 605px;
 }
@@ -230,40 +234,42 @@ body {
 }
 
 /* CHILD HOME */
-#child_list_table {
+#childHome p {
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+#childHome #child_list_table {
 	margin: 0pt auto;
 }
 
-#child_list_table th,#child_list_table td {
+#childHome #child_list_table th, #childHome #child_list_table td {
     padding: 8px;
 }
 
-#child_list_table tr.column_names {
+#childHome #child_list_table tr.column_names {
     background-color: #ACCCFF
 }
 
-#child_list_table tr.odd {
+#childHome #child_list_table tr.odd {
     background-color: #E5E5E5
 }
 
-#child_list_table tr.even {
+#childHome #child_list_table tr.even {
     background-color: #C1C1C1
 }
 
-#child_list_table a:link {
+#childHome #child_list_table a:link, #childHome #child_list_table a:visited, #childHome #child_list_table a:active, #childHome #child_list_table a:hover {
     color: blue;
 }
 
-#child_list_table a:visited {
-    color: blue;
+#childHome #child_home_links {
+    padding-top: 30px;
+    padding-bottom: 10px;
 }
 
-#child_list_table a:active {
-    color: blue;
-}
-
-#child_list_table a:hover {
-    color: blue;
+#childHome #child_home_links a {
+    padding: 10px;
 }
 
 /* CHILD FORM */
@@ -271,25 +277,35 @@ body {
     margin: 0pt auto;
 }
 
-#motherInformation {
+#childForm #motherInformation {
+    padding-top: 3px;
     border: 2pt solid white;
 }
 
-#motherNameAddress {
+#childForm #motherInformation a:link, #childForm #motherInformation a:visited, #childForm #motherInformation a:active, #childForm #motherInformation a:hover {
+    color: blue;
+}
+
+#childForm #motherNameAddress {
     padding-top: 10px;
-/*     padding-left: 110px; */
 }
 
-#motherPhone {
-/*     padding-left: 200px; */
-}
-
-#fatherInformation {
+#childForm #fatherInformation, #childForm #familyDoctor, #childForm #emergencyContact, #childForm #additionalInformation {
+    padding-top: 3px;
     border: 2pt solid white;
+    margin-top: 20px;
 }
 
-#fatherNameAndPhone {
-/*     padding-left: 100px; */
+#childForm #additionalInformation {
+    padding-bottom: 10px;
+}
+
+#childForm #additionalInformation #dataRow {
+    padding-bottom: 10px;
+}
+
+#childForm .submitButtons {
+    padding-top: 10px;
 }
 
 #childForm .submitButtons a:hover {
@@ -298,6 +314,10 @@ body {
 
 #childForm .submitButtons a:active {
     text-decoration: none;
+}
+
+#childForm .submitButton {
+    padding: 10px;
 }
 
 /* ADMIN HOME */
