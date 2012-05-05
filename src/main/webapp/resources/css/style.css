@@ -229,6 +229,43 @@ body {
     padding: 10px;
 }
 
+/* CHILD HOME */
+#child_list_table {
+	margin: 0pt auto;
+}
+
+#child_list_table th,#child_list_table td {
+    padding: 8px;
+}
+
+#child_list_table tr.column_names {
+    background-color: #ACCCFF
+}
+
+#child_list_table tr.odd {
+    background-color: #E5E5E5
+}
+
+#child_list_table tr.even {
+    background-color: #C1C1C1
+}
+
+#child_list_table a:link {
+    color: blue;
+}
+
+#child_list_table a:visited {
+    color: blue;
+}
+
+#child_list_table a:active {
+    color: blue;
+}
+
+#child_list_table a:hover {
+    color: blue;
+}
+
 /* CHILD FORM */
 #childForm #child_table {
     margin: 0pt auto;

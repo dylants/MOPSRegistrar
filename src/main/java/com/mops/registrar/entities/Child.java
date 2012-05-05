@@ -1,5 +1,7 @@
 package com.mops.registrar.entities;
 
+import java.util.Date;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -31,7 +33,7 @@ public class Child extends BaseEntity implements Comparable<Child> {
     private String lastName;
     @NotNull
     @DateTimeFormat(pattern = "MM/dd/yyyy")
-    private LocalDate dateOfBirth;
+    private Date dateOfBirth;
 
     // information about the father (we know the mother from the MOPS user)
     @NotBlank
@@ -100,11 +102,11 @@ public class Child extends BaseEntity implements Comparable<Child> {
         // let's see what date is now
         LocalDate now = new LocalDate();
         // then get the years between this Child's birth and now
-        Years ageInYears = Years.yearsBetween(this.dateOfBirth, now);
+        Years ageInYears = Years.yearsBetween(new LocalDate(this.dateOfBirth), now);
         // if the age is less than 2 years old
         if (ageInYears.isLessThan(Years.TWO)) {
             // get the months old instead
-            Months ageInMonths = Months.monthsBetween(this.dateOfBirth, now);
+            Months ageInMonths = Months.monthsBetween(new LocalDate(this.dateOfBirth), now);
             return ageInMonths.getMonths() + " " + MONTHS_OLD;
         } else {
             // else get the years old
@@ -175,7 +177,7 @@ public class Child extends BaseEntity implements Comparable<Child> {
     /**
      * @return the dateOfBirth
      */
-    public LocalDate getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
@@ -183,7 +185,7 @@ public class Child extends BaseEntity implements Comparable<Child> {
      * @param dateOfBirth
      *            the dateOfBirth to set
      */
-    public void setDateOfBirth(LocalDate dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

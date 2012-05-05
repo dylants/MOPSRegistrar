@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:p="http://www.springframework.org/schema/p" 
-    xmlns:mongo="http://www.springframework.org/schema/data/mongo"
-    xmlns:mvc="http://www.springframework.org/schema/mvc" 
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p" xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
     xsi:schemaLocation="http://www.springframework.org/schema/beans 
     http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
@@ -25,7 +23,8 @@
     </mongo:repositories>
 
     <!-- Additional custom queries for the user repository -->
-    <bean id="customUserRepository" class="com.mops.registrar.repositories.user.impl.CustomUserRepositoryImpl" />
+    <bean id="customUserRepository" class="com.mops.registrar.repositories.user.impl.CustomUserRepositoryImpl"
+        p:mongoTemplate-ref="registrarDBMongoTemplate" />
 
     <!-- The admin user repository -->
     <mongo:repositories base-package="com.mops.registrar.repositories.admin" mongo-template-ref="registrarDBMongoTemplate">
@@ -34,19 +33,33 @@
     </mongo:repositories>
 
     <!-- Additional custom queries for the admin user repository -->
-    <bean id="customAdminUserRepository" class="com.mops.registrar.repositories.admin.impl.CustomAdminUserRepositoryImpl" />
+    <bean id="customAdminUserRepository" class="com.mops.registrar.repositories.admin.impl.CustomAdminUserRepositoryImpl"
+        p:mongoTemplate-ref="registrarDBMongoTemplate" />
+
+    <!-- The child repository -->
+    <mongo:repositories base-package="com.mops.registrar.repositories.child" mongo-template-ref="registrarDBMongoTemplate">
+        <mongo:repository id="childRepository" custom-impl-ref="customChildRepository"
+            mongo-template-ref="registrarDBMongoTemplate" />
+    </mongo:repositories>
+
+    <!-- Additional custom queries for the child repository -->
+    <bean id="customChildRepository" class="com.mops.registrar.repositories.child.impl.CustomChildRepositoryImpl"
+        p:mongoTemplate-ref="registrarDBMongoTemplate" />
 
     <bean id="application.userService" class="com.mops.registrar.services.user.impl.DatabaseUserService">
-        <property name="userRepository" ref="userRepository"/>
-        <property name="passwordEncoder" ref="application.passwordEncoder"/>
-        <property name="saltSource" ref="application.saltSource"/>
+        <property name="userRepository" ref="userRepository" />
+        <property name="passwordEncoder" ref="application.passwordEncoder" />
+        <property name="saltSource" ref="application.saltSource" />
     </bean>
 
     <bean id="application.adminUserService" class="com.mops.registrar.services.admin.impl.DatabaseAdminUserService">
-        <property name="adminUserRepository" ref="adminUserRepository"/>
-        <property name="passwordEncoder" ref="application.passwordEncoder"/>
-        <property name="saltSource" ref="application.saltSource"/>
+        <property name="adminUserRepository" ref="adminUserRepository" />
+        <property name="passwordEncoder" ref="application.passwordEncoder" />
+        <property name="saltSource" ref="application.saltSource" />
     </bean>
+
+    <bean id="application.childUserService" class="com.mops.registrar.services.child.impl.DatabaseChildService"
+        p:childRepository-ref="childRepository" />
 
     <bean id="application.passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
 

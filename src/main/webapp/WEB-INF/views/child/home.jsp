@@ -9,8 +9,9 @@
 
         <h1>MOPPETS Registration</h1>
 
-        <a href="${childHome}/add">Add a child to MOPPETS</a>
-        <br/>
+        <c:if test="${empty children}">
+            <p>No MOPPETS registered</p>
+        </c:if>
 
         <c:if test="${not empty children}">
             <table id="child_list_table" class="sortable">
@@ -18,6 +19,7 @@
                     <th><a href="#">First Name</a></th>
                     <th><a href="#">M.I.</a></th>
                     <th><a href="#">Last Name</a></th>
+                    <th><a href="#">Age</a></th>
                     <th><a href="#">Date of Birth</a></th>
                 </tr>
                 <c:forEach var="child" items="${children}" varStatus="loopStatus">
@@ -26,12 +28,15 @@
                         <td><a href="${editUrl}">${child.firstName}</a></td>
                         <td>${child.middleInitial}</td>
                         <td>${child.lastName}</td>
+                        <td>${child.age}</td>
                         <td><spring:eval expression="child.dateOfBirth" /></td>
                     </tr>
                 </c:forEach>
             </table>
         </c:if>
     
+        <br/>
+        <a href="${childHome}/add">Add a child to MOPPETS</a>
         <br/>
         <a href="${userProfile}">Return to Profile</a>
 

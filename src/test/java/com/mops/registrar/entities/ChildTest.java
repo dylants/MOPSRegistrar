@@ -11,7 +11,7 @@ public class ChildTest {
         Child child = new Child();
         LocalDate now = new LocalDate();
         LocalDate dateOfBirth = new LocalDate(now.minusYears(1));
-        child.setDateOfBirth(dateOfBirth);
+        child.setDateOfBirth(dateOfBirth.toDate());
 
         Assert.assertEquals("child must be 12 months old", "12 " + Child.MONTHS_OLD, child.getAge());
     }
@@ -21,7 +21,7 @@ public class ChildTest {
         Child child = new Child();
         LocalDate now = new LocalDate();
         LocalDate dateOfBirth = new LocalDate(now.minusYears(3));
-        child.setDateOfBirth(dateOfBirth);
+        child.setDateOfBirth(dateOfBirth.toDate());
 
         Assert.assertEquals("child must be 3 years old", "3 " + Child.YEARS_OLD, child.getAge());
     }
@@ -32,8 +32,8 @@ public class ChildTest {
         Child childTwo = new Child();
 
         LocalDate now = new LocalDate();
-        childOne.setDateOfBirth(new LocalDate(now.minusYears(4)));
-        childTwo.setDateOfBirth(new LocalDate(now.minusYears(3)));
+        childOne.setDateOfBirth(new LocalDate(now.minusYears(4)).toDate());
+        childTwo.setDateOfBirth(new LocalDate(now.minusYears(3)).toDate());
 
         Assert.assertTrue("childOne is older than childTwo, so the dateOfBirth is less than the other",
                 childOne.compareTo(childTwo) < 0);
