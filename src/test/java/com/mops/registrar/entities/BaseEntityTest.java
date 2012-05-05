@@ -22,6 +22,8 @@ public class BaseEntityTest {
     }
 
     private class TestBaseEntity extends BaseEntity {
+        private static final long serialVersionUID = 1L;
+
         protected TestBaseEntity() {
         }
 

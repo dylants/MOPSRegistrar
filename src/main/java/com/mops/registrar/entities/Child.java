@@ -1,5 +1,6 @@
 package com.mops.registrar.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.validation.Valid;
@@ -17,7 +18,9 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author dylants
  * 
  */
-public class Child extends BaseEntity implements Comparable<Child> {
+public class Child extends BaseEntity implements Comparable<Child>, Serializable {
+    private static final long serialVersionUID = -7034848080054411428L;
+
     protected static final String YEARS_OLD = "years old";
     protected static final String MONTHS_OLD = "months old";
 
