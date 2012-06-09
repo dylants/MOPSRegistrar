@@ -23,7 +23,7 @@ import com.mops.registrar.services.user.UserService;
  */
 @Controller
 @RequestMapping(value = "/admin/user/edit/{entityId}")
-public class EditUserController {
+public class AdminEditUserController {
     @Autowired
     private UserService userService = null;
 
@@ -85,7 +85,7 @@ public class EditUserController {
      */
     protected String buildRegistrationInformationPage(Model model, RegistrationInformation registrationInformation) {
         model.addAttribute("registrationInformation", registrationInformation);
-        return "user/registrationInformation";
+        return "user/profile/registrationInformation";
     }
 
     /**

@@ -42,7 +42,7 @@ public class MopsUser extends BaseUser implements Comparable<MopsUser>, Serializ
             String myLastName = this.registrationInformation.getLastName();
             String yourLastName = mopsUser.getRegistrationInformation().getLastName();
 
-            if (myLastName != null) {
+            if ((myLastName != null) && (yourLastName != null)) {
                 return myLastName.compareTo(yourLastName);
             } else {
                 // unknown

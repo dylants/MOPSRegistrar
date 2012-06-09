@@ -63,6 +63,8 @@ public class EditChildController {
      * 
      * @param principal
      *            The current {@link Principal}
+     * @param entityId
+     *            the entity ID of the {@link Child} to edit
      * @param child
      *            The {@link Child} to edit
      * @param bindingResult
@@ -72,8 +74,8 @@ public class EditChildController {
      * @return The next page to display
      */
     @RequestMapping(method = RequestMethod.POST)
-    public String processEditChild(Principal principal, @Valid @ModelAttribute(CHILD_MODEL_NAME) Child child,
-            BindingResult bindingResult, Model model) {
+    public String processEditChild(Principal principal, @PathVariable("entityId") String entityId,
+            @Valid @ModelAttribute(CHILD_MODEL_NAME) Child child, BindingResult bindingResult, Model model) {
         // get the current user
         MopsUser mopsUser = this.registrarAuthenticationProcessor.deriveMopsUserFromPrincipal(principal);
 
@@ -83,7 +85,8 @@ public class EditChildController {
             return buildEditChildPage(mopsUser, child, model);
         }
 
-        // TODO child service to edit the child
+        // update the Child
+        this.childService.updateChild(entityId, child);
 
         // go back to the child home page
         return "redirect:/page/user/profile/child";

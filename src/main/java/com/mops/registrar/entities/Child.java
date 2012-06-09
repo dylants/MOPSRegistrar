@@ -30,7 +30,6 @@ public class Child extends BaseEntity implements Comparable<Child>, Serializable
     // information about the Child
     @NotBlank
     private String firstName;
-    @NotBlank
     private String middleInitial;
     @NotBlank
     private String lastName;
@@ -41,24 +40,27 @@ public class Child extends BaseEntity implements Comparable<Child>, Serializable
     // information about the father (we know the mother from the MOPS user)
     @NotBlank
     private String fatherFirstName;
-    @NotBlank
     private String fatherMiddleInitial;
     @NotBlank
     private String fatherLastName;
     @NotBlank
     private String fatherEmergencyContactPhoneNumber;
-    private boolean fatherLiveAtHome;
+    // default this to true (per request)
+    private boolean fatherLiveAtHome = true;
 
     // medical information
     @NotBlank
     private String doctorName;
-    @Valid
-    private Address doctorAddress;
     @NotBlank
     private String doctorPhoneNumber;
+    @Valid
+    private Address doctorAddress;
 
+    @NotBlank
     private String additionalEmergencyContactName;
+    @NotBlank
     private String additionalEmergencyContactPhoneNumber;
+    @NotBlank
     private String additionalEmergencyContactRelationship;
 
     private String siblingsNameAndBirthDate;

@@ -82,10 +82,13 @@ public class RegistrationInformationController {
         String entityId = mopsUser.getEntityId();
         // update the user in our registry, which will return us the updated user
         mopsUser = this.userService.updateRegistrationInformation(entityId, registrationInformation);
-        // add it to the model for the jsp
-        model.addAttribute("user", mopsUser);
-        // show edit success page
-        return "user/profile";
+
+//        // add it to the model for the jsp
+//        model.addAttribute("user", mopsUser);
+//        // show edit success page
+//        return "user/profile";
+        // redirect to the profile page
+        return "redirect:/page/user/profile";
     }
 
     /**

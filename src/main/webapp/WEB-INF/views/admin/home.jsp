@@ -13,7 +13,8 @@
         From either the List or Search pages, you can edit contents of the User.</p>
 
         <div id="admin_links">    
-            <a href="${adminRoot}/user/list">List Registered Users</a>
+            <a href="${adminRoot}/user/list">List Registered MOPS Users</a>
+            <a href="${adminRoot}/child/list">List MOPPETS</a>
             <a href="#">Search for a User</a>
         </div>
     

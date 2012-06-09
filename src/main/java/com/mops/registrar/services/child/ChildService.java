@@ -38,4 +38,23 @@ public interface ChildService {
      * @return The added {@link Child}
      */
     public Child addChild(Child child);
+
+    /**
+     * Returns all the {@link Child} entities contained in the repository.
+     * 
+     * @return All {@link Child} entities available
+     */
+    public Set<Child> findAllChildren();
+
+    /**
+     * Updates the {@link Child} entity specified by the <code>entityId</code>. This will replace the existing data
+     * stored within the {@link Child} entity with the passed in <code>child</code>.
+     * 
+     * @param entityId
+     *            The entity ID of the {@link Child} to update
+     * @param child
+     *            The updated {@link Child} entity information
+     * @return The updated {@link Child}
+     */
+    public Child updateChild(String entityId, Child child);
 }

@@ -19,7 +19,7 @@ import com.mops.registrar.services.user.UserService;
  * 
  */
 public class MockUserRepository implements UserRepository {
-    List<MopsUser> mockRepository = new ArrayList<MopsUser>();
+    private List<MopsUser> mockRepository = new ArrayList<MopsUser>();
 
     @Override
     public List<MopsUser> save(Iterable<? extends MopsUser> entities) {

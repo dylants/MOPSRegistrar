@@ -169,9 +169,9 @@
                             <td>&nbsp;</td>
                             <c:set var="doctorNameErrors"><form:errors path="doctorName"/></c:set>
                             <td><span id="doctorName.errors" class="error">${doctorNameErrors}</span></td>
-                            <td>&nbsp;</td>
                             <c:set var="doctorPhoneNumberErrors"><form:errors path="doctorPhoneNumber"/></c:set>
-                            <td><span id="doctorPhoneNumber.errors" class="error">${doctorPhoneNumberErrors}</span></td>
+                            <td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span id="doctorPhoneNumber.errors" class="error">${doctorPhoneNumberErrors}</span></td>
                         </tr>
                     </table>
                     <table id="child_table">
@@ -227,11 +227,10 @@
                             <td>&nbsp;</td>
                             <c:set var="additionalEmergencyContactNameErrors"><form:errors path="additionalEmergencyContactName"/></c:set>
                             <td><span id="additionalEmergencyContactName.errors" class="error">${additionalEmergencyContactNameErrors}</span></td>
-                            <td>&nbsp;</td>
                             <c:set var="additionalEmergencyContactPhoneNumberErrors"><form:errors path="additionalEmergencyContactPhoneNumber"/></c:set>
-                            <td><span id="additionalEmergencyContactPhoneNumber.errors" class="error">${additionalEmergencyContactPhoneNumberErrors}</span></td>
+                            <td colspan="2">&nbsp;<span id="additionalEmergencyContactPhoneNumber.errors" class="error">${additionalEmergencyContactPhoneNumberErrors}</span></td>
                             <td>&nbsp;</td>
-                            <c:set var="dadditionalEmergencyContactRelationshipErrors"><form:errors path="additionalEmergencyContactRelationship"/></c:set>
+                            <c:set var="additionalEmergencyContactRelationshipErrors"><form:errors path="additionalEmergencyContactRelationship"/></c:set>
                             <td><span id="additionalEmergencyContactRelationship.errors" class="error">${additionalEmergencyContactRelationshipErrors}</span></td>
                         </tr>
                     </table>

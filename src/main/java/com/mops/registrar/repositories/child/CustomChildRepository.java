@@ -20,4 +20,16 @@ public interface CustomChildRepository {
      * @return A {@link Set} of {@link Child} elements that contain an entity ID specified in the <code>entityIds</code>
      */
     public Set<Child> findAllChildrenByEntityId(Set<String> entityIds);
+
+    /**
+     * Updates the {@link Child} entity specified by the <code>entityId</code> with the information found in
+     * <code>child</code>.
+     * 
+     * @param entityId
+     *            The endity ID of the {@link Child} to update
+     * @param child
+     *            The information to update
+     * @return The updated {@link Child}
+     */
+    public Child updateChild(String entityId, Child child);
 }

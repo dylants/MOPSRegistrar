@@ -1,5 +1,6 @@
 package com.mops.registrar.services.child.impl;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,16 @@ public class DatabaseChildService implements ChildService {
     @Override
     public Child addChild(Child child) {
         return this.childRepository.save(child);
+    }
+
+    @Override
+    public Set<Child> findAllChildren() {
+        return new HashSet<Child>(this.childRepository.findAll());
+    }
+
+    @Override
+    public Child updateChild(String entityId, Child child) {
+        return this.childRepository.updateChild(entityId, child);
     }
 
     /**

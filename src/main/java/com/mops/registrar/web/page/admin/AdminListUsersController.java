@@ -20,7 +20,7 @@ import com.mops.registrar.services.user.UserService;
  */
 @Controller
 @RequestMapping(value = "/admin/user/list")
-public class ListUsersController {
+public class AdminListUsersController {
     @Autowired
     private UserService userService = null;
 
@@ -38,8 +38,22 @@ public class ListUsersController {
         // by default, sort the list by last name
         Collections.sort(mopsUsers);
 
-        model.addAttribute("users", mopsUsers);
+        model.addAttribute("mopsUsers", mopsUsers);
         return "admin/user/list";
     }
 
+    /**
+     * @return the userService
+     */
+    public UserService getUserService() {
+        return userService;
+    }
+
+    /**
+     * @param userService
+     *            the userService to set
+     */
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 }

@@ -15,6 +15,11 @@
         <put-attribute name="body" value="/WEB-INF/views/admin/user/list.jsp" />
     </definition>
 
+    <definition name="admin/child/list" extends="standardLayout">
+        <put-attribute name="title" value="MOPS Registration MOPPETS List"/>
+        <put-attribute name="body" value="/WEB-INF/views/admin/child/list.jsp" />
+    </definition>
+
     <definition name="admin/user/editSuccess" extends="standardLayout">
         <put-attribute name="title" value="Registration Information Updated"/>
         <put-attribute name="body" value="/WEB-INF/views/admin/user/editSuccess.jsp" />
