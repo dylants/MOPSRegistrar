@@ -1,5 +1,7 @@
 package com.mops.registrar.entities;
 
+import java.io.Serializable;
+
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
@@ -8,7 +10,9 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author dylants
  * 
  */
-public class Address {
+public class Address implements Serializable {
+
+    private static final long serialVersionUID = -4417818291082477019L;
 
     @NotBlank
     protected String streetAddress;
