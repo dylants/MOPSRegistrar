@@ -18,7 +18,7 @@
     </beans>
 
     <!-- Beans loaded in production (running with a database) -->
-    <beans profile="production">
+    <beans profile="production,cloud">
         <!-- We'll need the beans in the spring-data-configuration for database user service -->
         <import resource="spring-data-configuration.xml" />
 
