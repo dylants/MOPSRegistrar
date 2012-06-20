@@ -52,6 +52,8 @@ public class AdminListUsersExcelView extends AbstractExcelView {
         createCell(header, 8, "Home Phone", headerStyle);
         createCell(header, 9, "Cell Phone", headerStyle);
         createCell(header, 10, "Date of Birth", headerStyle);
+        createCell(header, 11, "Amount Paid", headerStyle);
+        createCell(header, 12, "Additional Notes", headerStyle);
 
         header.setHeightInPoints(14);
 
@@ -81,6 +83,8 @@ public class AdminListUsersExcelView extends AbstractExcelView {
             createCell(row, 8, mopsUser.getRegistrationInformation().getHomePhoneNumber(), dataStyle);
             createCell(row, 9, mopsUser.getRegistrationInformation().getCellPhoneNumber(), dataStyle);
             createCell(row, 10, dateFormat.format(mopsUser.getRegistrationInformation().getDateOfBirth()), dataStyle);
+            createCell(row, 11, mopsUser.getRegistrationInformation().getAmountPaid(), dataStyle);
+            createCell(row, 12, mopsUser.getRegistrationInformation().getAdditionalNotes(), dataStyle);
 
             row.setHeightInPoints(14);
 
@@ -100,6 +104,8 @@ public class AdminListUsersExcelView extends AbstractExcelView {
         sheet.autoSizeColumn(8);
         sheet.autoSizeColumn(9);
         sheet.autoSizeColumn(10);
+        sheet.autoSizeColumn(11);
+        sheet.autoSizeColumn(12);
     }
 
     /**

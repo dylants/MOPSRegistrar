@@ -46,7 +46,7 @@ public class RegistrationInformation implements Serializable {
 
     // admin only data
     private String amountPaid;
-    private String notes;
+    private String additionalNotes;
 
     /**
      * @return the firstName
@@ -274,17 +274,17 @@ public class RegistrationInformation implements Serializable {
     }
 
     /**
-     * @return the notes
+     * @return the additionalNotes
      */
-    public String getNotes() {
-        return notes;
+    public String getAdditionalNotes() {
+        return additionalNotes;
     }
 
     /**
-     * @param notes
-     *            the notes to set
+     * @param additionalNotes
+     *            the additionalNotes to set
      */
-    public void setNotes(String notes) {
-        this.notes = notes;
+    public void setAdditionalNotes(String additionalNotes) {
+        this.additionalNotes = additionalNotes;
     }
 }

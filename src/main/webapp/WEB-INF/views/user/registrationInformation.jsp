@@ -155,7 +155,7 @@
                     </div>
                     <div id="dataRow">
                         Additional Notes<br/>
-                        <form:textarea path="notes" cssClass="xtralongText"/>
+                        <form:textarea path="additionalNotes" cssClass="xtralongText"/>
                     </div>
                 </div>
             </sec:authorize>
