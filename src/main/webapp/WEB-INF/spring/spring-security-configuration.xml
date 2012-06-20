@@ -31,14 +31,14 @@
     <!-- (see: https://jira.springsource.org/browse/SEC-1909 for more details) -->
     <http authentication-manager-ref="application.authenticationManager" use-expressions="true">
         <!-- Any URL with "/admin/" in the path is restricted to ROLE_ADMIN_USER -->
-        <intercept-url pattern="/**/admin/**" access="hasRole('ROLE_ADMIN_USER')" />
+        <intercept-url pattern="/**/admin/**" access="hasRole('ROLE_ADMIN_USER')" requires-channel="https"/>
         <!-- Any URL with "/user/profile" in the path is restricted to registered users -->
-        <intercept-url pattern="/**/user/profile**" access="hasRole('ROLE_REGISTERED_USER')" />
-        <intercept-url pattern="/**/user/profile/**" access="hasRole('ROLE_REGISTERED_USER')" />
+        <intercept-url pattern="/**/user/profile**" access="hasRole('ROLE_REGISTERED_USER')" requires-channel="https"/>
+        <intercept-url pattern="/**/user/profile/**" access="hasRole('ROLE_REGISTERED_USER')" requires-channel="https"/>
         <!-- For now restrict the REST service layer to Admin only access -->
         <intercept-url pattern="/**/service/**" access="hasRole('ROLE_ADMIN_USER')"/>
         <!-- Any URL (not matched by the above patterns) is restricted to admins, registered users, and anonymous (anyone) -->
-        <intercept-url pattern="/**" access="hasAnyRole('ROLE_ADMIN_USER','ROLE_REGISTERED_USER','ROLE_ANONYMOUS')" />
+        <intercept-url pattern="/**" access="hasAnyRole('ROLE_ADMIN_USER','ROLE_REGISTERED_USER','ROLE_ANONYMOUS')" requires-channel="https"/>
         <!-- Enables form based login -->
         <form-login default-target-url="/page/home" login-page="/page/login" authentication-failure-url="/page/login?error"/>
         <!-- Enables the logout function -->
