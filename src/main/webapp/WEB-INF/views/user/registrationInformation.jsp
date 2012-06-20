@@ -145,6 +145,21 @@
                     Husband's Name (if applicable): <form:input path="husbandsName" cssClass="longText"/>
                 </div>
             </div>
+            
+            <!-- Admin Only Data -->
+            <sec:authorize access="hasRole('ROLE_ADMIN_USER')">
+                <div id="adminOnlyData">
+                    <span id="adminOnlyDataText">Administrator Only</span>
+                    <div id="dataRow">
+                        Amount Paid: <form:input path="amountPaid" cssClass="longText"/>
+                    </div>
+                    <div id="dataRow">
+                        Additional Notes<br/>
+                        <form:textarea path="notes" cssClass="xtralongText"/>
+                    </div>
+                </div>
+            </sec:authorize>
+            <!-- End Admin Only Data -->
 
             <!-- End Registration Information -->
 

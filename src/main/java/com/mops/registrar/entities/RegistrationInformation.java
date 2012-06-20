@@ -44,6 +44,10 @@ public class RegistrationInformation implements Serializable {
     private String howDidYouHearAboutMops = null;
     private String husbandsName = null;
 
+    // admin only data
+    private String amountPaid;
+    private String notes;
+
     /**
      * @return the firstName
      */
@@ -254,4 +258,33 @@ public class RegistrationInformation implements Serializable {
         this.husbandsName = husbandsName;
     }
 
+    /**
+     * @return the amountPaid
+     */
+    public String getAmountPaid() {
+        return amountPaid;
+    }
+
+    /**
+     * @param amountPaid
+     *            the amountPaid to set
+     */
+    public void setAmountPaid(String amountPaid) {
+        this.amountPaid = amountPaid;
+    }
+
+    /**
+     * @return the notes
+     */
+    public String getNotes() {
+        return notes;
+    }
+
+    /**
+     * @param notes
+     *            the notes to set
+     */
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 }

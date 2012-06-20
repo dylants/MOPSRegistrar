@@ -208,8 +208,27 @@ body {
     margin: 5px 0px 5px 0px;
 }
 
+#registrationInformation #adminOnlyData {
+    padding-top: 3px;
+    border: 2pt solid white;
+    margin-top: 20px;
+    padding-bottom: 10px;
+}
+
+#registrationInformation #adminOnlyData #adminOnlyDataText {
+    font-weight: bold;
+}
+
+#registrationInformation #adminOnlyData #dataRow {
+    margin: 20px 0px 20px 0px;
+}
+
 #registration_information_table td {
     padding-left: 4px;
+}
+
+#registrationInformation .submitButtons {
+    padding-top: 10px;
 }
 
 #registrationInformation .submitButton {
