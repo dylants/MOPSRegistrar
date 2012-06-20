@@ -23,8 +23,8 @@
                     <th><a href="#">City</a></th>
                     <th><a href="#">State</a></th>
                     <th><a href="#">Zip</a></th>
-                    <th><a href="#">Home Phone Number</a></th>
-                    <th><a href="#">Cell Phone Number</a></th>
+                    <th><a href="#">Home Phone</a></th>
+                    <th><a href="#">Cell Phone</a></th>
                     <th><a href="#">Date of Birth</a></th>
                     <th><a href="#">MOPPETS</a></th>
 				</tr>
@@ -53,9 +53,12 @@
 				</c:forEach>
 			</table>
 		</c:if>
-    
+
         <br/>
-        <a href="${adminRoot}/home">Return to Admin Home</a>
+        <div id="admin_links">    
+            <a href="${adminRoot}/user/list/MOPSUsers.xls">Excel Format</a>
+            <a href="${adminRoot}/home">Return to Admin Home</a>
+        </div>
 
     </div>
 

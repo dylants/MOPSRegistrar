@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mops.registrar.entities.MopsUser;
 import com.mops.registrar.services.user.UserService;
@@ -40,6 +41,21 @@ public class AdminListUsersController {
 
         model.addAttribute("mopsUsers", mopsUsers);
         return "admin/user/list";
+    }
+
+    /**
+     * This method will take the table data and prepare an Excel view for export
+     * 
+     * @return The {@link ModelAndView} used to export the table to Excel
+     */
+    @RequestMapping(value = "/MOPSUsers.xls", method = RequestMethod.GET)
+    public ModelAndView listUsersInExcel() {
+        List<MopsUser> mopsUsers = this.userService.getUsers();
+
+        // by default, sort the list by last name
+        Collections.sort(mopsUsers);
+
+        return new ModelAndView("adminListUsersExcelView", "mopsUsers", mopsUsers);
     }
 
     /**
