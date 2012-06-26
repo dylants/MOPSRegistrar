@@ -44,26 +44,26 @@ public class RegistrarHomeController {
             try {
                 // First look for a MopsUser
                 mopsUser = this.registrarAuthenticationProcessor.deriveMopsUserFromPrincipal(principal);
+                // add the first name
+                model.addAttribute("firstName", mopsUser.getRegistrationInformation().getFirstName());
             } catch (AccessDeniedException ade) {
                 // ignore since we're just looking to test...
             }
-            if (mopsUser != null) {
-                // add the first name
-                // TODO allow for null first name
-                model.addAttribute("firstName", mopsUser.getRegistrationInformation().getFirstName());
-            } else {
+
+            // if we didn't find it
+            if (mopsUser == null) {
                 AdminUser adminUser = null;
                 try {
                     // Else see if we can find the AdminUser
                     adminUser = this.registrarAuthenticationProcessor.deriveAdminUserFromPrincipal(principal);
+                    // add the first name
+                    model.addAttribute("firstName", adminUser.getUsername());
                 } catch (AccessDeniedException ade) {
                     // ignore since we're just looking to test...
                 }
-                if (adminUser != null) {
-                    // add the first name
-                    model.addAttribute("firstName", adminUser.getUsername());
-                }
             }
+
+            // TODO allow for null first name
         }
 
         return "home";

@@ -5,11 +5,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import com.mops.registrar.entities.AdminUser;
+import com.mops.registrar.entities.MopsUser;
 import com.mops.registrar.services.admin.AdminUserService;
 import com.mops.registrar.services.user.UserService;
 
 /**
- * A {@link UserDetailsService} for our Registrar Application
+ * A {@link UserDetailsService} for our Registrar Application. Currently this is used to load up a {@link UserDetails}
+ * object from both the {@link MopsUser} repository as well as the {@link AdminUser} repository.
  * 
  * @author dylants
  * 
@@ -48,4 +51,33 @@ public class RegistrarUserDetailsService implements UserDetailsService {
         throw new UsernameNotFoundException("Username: \"" + username + "\" not found");
     }
 
+    /**
+     * @return the userService
+     */
+    public UserService getUserService() {
+        return userService;
+    }
+
+    /**
+     * @param userService
+     *            the userService to set
+     */
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    /**
+     * @return the adminUserService
+     */
+    public AdminUserService getAdminUserService() {
+        return adminUserService;
+    }
+
+    /**
+     * @param adminUserService
+     *            the adminUserService to set
+     */
+    public void setAdminUserService(AdminUserService adminUserService) {
+        this.adminUserService = adminUserService;
+    }
 }
