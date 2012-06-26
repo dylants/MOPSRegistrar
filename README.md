@@ -4,7 +4,7 @@
 
 This application provides a registration service for a "Mothers of Preschoolers" (MOPS) branch.  It does
 this by providing a web layer which allows users to sign up, enter in their registration information, as 
-well as and enter in registration information for each of their children that attend MOPS.  The application
+well as the registration information for each of their children that attend MOPS.  The application
 also provides "Admin user" functionality, to allow administrators the ability to view and edit all the 
 registered users along with their children.
 
